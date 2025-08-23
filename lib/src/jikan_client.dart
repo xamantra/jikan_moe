@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
 
-import 'anime/anime_full.dart';
-import 'anime/endpoints_anime.dart' as anime;
+import 'anime/index.dart';
+import 'endpoints_anime.dart' as anime;
 
 const String _jikanV4BaseUrl = 'https://api.jikan.moe/v4';
 
@@ -13,5 +13,9 @@ class JikanClient {
 
   JikanClient({http.Client? client}) : _client = client ?? http.Client();
 
+  /// https://docs.api.jikan.moe/#tag/anime/operation/getAnimeFullById
   Future<AnimeFullData> getAnimeFullById(int id) => anime.getAnimeFullById(this, id);
+
+  /// https://docs.api.jikan.moe/#tag/anime/operation/getAnimeById
+  Future<AnimeData> getAnimeById(int id) => anime.getAnimeById(this, id);
 }

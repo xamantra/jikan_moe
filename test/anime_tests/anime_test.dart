@@ -2,12 +2,12 @@ import 'package:test/test.dart';
 import 'dart:io';
 
 import 'package:jikan_moe/src/jikan_client.dart';
-import 'package:jikan_moe/src/anime/anime_full.dart';
+import 'package:jikan_moe/src/anime/anime_data.dart';
 
 import '../queue.dart';
 
 void main() {
-  group('JikanClient getAnimeFullById Tests', () {
+  group('JikanClient getAnimeById Tests', () {
     late JikanClient client;
 
     setUp(() {
@@ -48,12 +48,12 @@ void main() {
       // Process requests sequentially using the queue
       for (final id in testIds) {
         try {
-          final result = await queue.add(() => client.getAnimeFullById(id));
+          final result = await queue.add(() => client.getAnimeById(id));
 
-          // Test: Should return AnimeFullData type
-          expect(result, isA<AnimeFullData>(), reason: 'ID $id should return AnimeFullData');
+          // Test: Should return AnimeData type
+          expect(result, isA<AnimeData>(), reason: 'ID $id should return AnimeData');
 
-          print('✓ ID $id: Successfully parsed AnimeFullData');
+          print('✓ ID $id: Successfully parsed AnimeData');
           processedCount++;
         } on HttpException catch (e) {
           // Test: HttpException should pass (expected API error)

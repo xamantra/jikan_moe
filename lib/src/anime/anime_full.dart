@@ -140,6 +140,13 @@ class AnimeImages {
   factory AnimeImages.fromJson(Map<String, dynamic> json) {
     return AnimeImages(jpg: AnimeImageUrls.fromJson(json['jpg']), webp: AnimeImageUrls.fromJson(json['webp']));
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'jpg': jpg.toJson(),
+      'webp': webp.toJson(),
+    };
+  }
 }
 
 class AnimeImageUrls {
@@ -151,6 +158,14 @@ class AnimeImageUrls {
 
   factory AnimeImageUrls.fromJson(Map<String, dynamic> json) {
     return AnimeImageUrls(imageUrl: json['image_url'], smallImageUrl: json['small_image_url'], largeImageUrl: json['large_image_url']);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'image_url': imageUrl,
+      'small_image_url': smallImageUrl,
+      'large_image_url': largeImageUrl,
+    };
   }
 }
 
@@ -166,6 +181,15 @@ class AnimeTrailer {
   factory AnimeTrailer.fromJson(Map<String, dynamic> json) {
     return AnimeTrailer(youtubeId: json['youtube_id'], url: json['url'], embedUrl: json['embed_url'], images: AnimeTrailerImages.fromJson(json['images']));
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'youtube_id': youtubeId,
+      'url': url,
+      'embed_url': embedUrl,
+      'images': images.toJson(),
+    };
+  }
 }
 
 class AnimeTrailerImages {
@@ -180,6 +204,16 @@ class AnimeTrailerImages {
   factory AnimeTrailerImages.fromJson(Map<String, dynamic> json) {
     return AnimeTrailerImages(imageUrl: json['image_url'], smallImageUrl: json['small_image_url'], mediumImageUrl: json['medium_image_url'], largeImageUrl: json['large_image_url'], maximumImageUrl: json['maximum_image_url']);
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'image_url': imageUrl,
+      'small_image_url': smallImageUrl,
+      'medium_image_url': mediumImageUrl,
+      'large_image_url': largeImageUrl,
+      'maximum_image_url': maximumImageUrl,
+    };
+  }
 }
 
 // Title model
@@ -191,6 +225,13 @@ class AnimeTitle {
 
   factory AnimeTitle.fromJson(Map<String, dynamic> json) {
     return AnimeTitle(type: json['type'], title: json['title']);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'type': type,
+      'title': title,
+    };
   }
 }
 
@@ -206,6 +247,15 @@ class AnimeAired {
   factory AnimeAired.fromJson(Map<String, dynamic> json) {
     return AnimeAired(from: json['from'] != null ? DateTime.parse(json['from']) : null, to: json['to'] != null ? DateTime.parse(json['to']) : null, prop: AnimeAiredProp.fromJson(json['prop']), string: json['string']);
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'from': from?.toIso8601String(),
+      'to': to?.toIso8601String(),
+      'prop': prop.toJson(),
+      'string': string,
+    };
+  }
 }
 
 class AnimeAiredProp {
@@ -216,6 +266,13 @@ class AnimeAiredProp {
 
   factory AnimeAiredProp.fromJson(Map<String, dynamic> json) {
     return AnimeAiredProp(from: json['from'] != null ? AnimeAiredDate.fromJson(json['from']) : null, to: json['to'] != null ? AnimeAiredDate.fromJson(json['to']) : null);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'from': from?.toJson(),
+      'to': to?.toJson(),
+    };
   }
 }
 
@@ -228,6 +285,14 @@ class AnimeAiredDate {
 
   factory AnimeAiredDate.fromJson(Map<String, dynamic> json) {
     return AnimeAiredDate(day: json['day'], month: json['month'], year: json['year']);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'day': day,
+      'month': month,
+      'year': year,
+    };
   }
 }
 
@@ -243,6 +308,15 @@ class AnimeBroadcast {
   factory AnimeBroadcast.fromJson(Map<String, dynamic> json) {
     return AnimeBroadcast(day: json['day'], time: json['time'], timezone: json['timezone'], string: json['string']);
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'day': day,
+      'time': time,
+      'timezone': timezone,
+      'string': string,
+    };
+  }
 }
 
 // Producer model
@@ -257,6 +331,15 @@ class AnimeProducer {
   factory AnimeProducer.fromJson(Map<String, dynamic> json) {
     return AnimeProducer(malId: json['mal_id'], type: json['type'], name: json['name'], url: json['url']);
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'mal_id': malId,
+      'type': type,
+      'name': name,
+      'url': url,
+    };
+  }
 }
 
 // Genre model
@@ -270,6 +353,15 @@ class AnimeGenre {
 
   factory AnimeGenre.fromJson(Map<String, dynamic> json) {
     return AnimeGenre(malId: json['mal_id'], type: json['type'], name: json['name'], url: json['url']);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'mal_id': malId,
+      'type': type,
+      'name': name,
+      'url': url,
+    };
   }
 }
 
