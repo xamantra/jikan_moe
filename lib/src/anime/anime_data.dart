@@ -94,7 +94,7 @@ class AnimeData {
       source: json['source'],
       episodes: json['episodes'],
       status: json['status'],
-      airing: json['airing'],
+      airing: json['airing'] ?? false,
       aired: AnimeAired.fromJson(json['aired']),
       duration: json['duration'],
       rating: json['rating'],
