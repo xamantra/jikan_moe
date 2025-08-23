@@ -2,17 +2,16 @@ import 'package:test/test.dart';
 import 'dart:io';
 
 import 'package:jikan_moe/src/jikan_client.dart';
-import 'package:jikan_moe/src/anime/anime_data.dart';
+import 'package:jikan_moe/src/anime/anime_characters.dart';
 
 import '../queue.dart';
 
 void main() {
-  group('JikanClient getAnimeById Tests', () {
+  group('JikanClient getAnimeCharacters Tests', () {
     late JikanClient client;
 
     setUp(() {
       client = JikanClient();
-      // Create a queue with 1 second delay between requests
     });
 
     tearDown(() {
@@ -48,12 +47,12 @@ void main() {
       // Process requests sequentially using the queue
       for (final id in testIds) {
         try {
-          final result = await queue.add(() => client.getAnimeById(id));
+          final result = await queue.add(() => client.getAnimeCharacters(id));
 
-          // Test: Should return AnimeData type
-          expect(result, isA<AnimeData>(), reason: 'ID $id should return AnimeData');
+          // Test: Should return List<AnimeCharacter> type
+          expect(result, isA<List<AnimeCharacter>>(), reason: 'ID $id should return List<AnimeCharacter>');
 
-          print('✓ ID $id: Successfully parsed AnimeData');
+          print('✓ ID $id: Successfully parsed ${result.length} characters');
           processedCount++;
         } on HttpException catch (e) {
           // Test: HttpException should pass (expected API error)
@@ -69,5 +68,5 @@ void main() {
       print('Completed processing $processedCount out of $testCount IDs');
       expect(processedCount, equals(testCount), reason: 'All IDs should be processed');
     });
-  });
+  }, timeout: Timeout(Duration(minutes: 5)));
 }
