@@ -21,4 +21,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/anime/operation/getAnimeCharacters
   Future<List<AnimeCharacter>> getAnimeCharacters(int id) => anime.getAnimeCharacters(this, id);
+
+  /// https://docs.api.jikan.moe/#tag/anime/operation/getAnimeStaff
+  Future<List<AnimeStaff>> getAnimeStaff(int id) => anime.getAnimeStaff(this, id);
 }
