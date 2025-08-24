@@ -428,6 +428,13 @@ class AnimeExternal {
   factory AnimeExternal.fromJson(Map<String, dynamic> json) {
     return AnimeExternal(name: json['name'], url: json['url']);
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'url': url,
+    };
+  }
 }
 
 // Streaming model

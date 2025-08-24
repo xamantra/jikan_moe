@@ -309,3 +309,20 @@ Future<AnimeThemesData> getAnimeThemes(JikanClient client, int id) async {
     rethrow;
   }
 }
+
+Future<List<AnimeExternal>> getAnimeExternal(JikanClient client, int id) async {
+  try {
+    final response = await client.httpClient.get(Uri.parse('${client.jikanV4BaseUrl}/anime/$id/external'));
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      return AnimeExternalResult.fromJson(jsonData as Map<String, dynamic>).data;
+    } else {
+      throw HttpException(response.body);
+    }
+  } catch (e, trace) {
+    if (e is! HttpException) {
+      print('$getAnimeExternal: $trace');
+    }
+    rethrow;
+  }
+}

@@ -127,6 +127,10 @@ void main() {
           expect(themesResult, isA<AnimeThemesData>(), reason: 'ID $id should return AnimeThemesData');
           print('✓ ID $id: Successfully parsed ${themesResult.toLength()} for ${result.title}');
 
+          final externalResult = await queue.add(() => client.getAnimeExternal(id));
+          expect(externalResult, isA<List<AnimeExternal>>(), reason: 'ID $id should return List<AnimeExternal>');
+          print('✓ ID $id: Successfully parsed ${externalResult.length} AnimeExternal for ${result.title}');
+
           processedCount++;
         } on HttpException catch (e) {
           // Test: HttpException should pass (expected API error)

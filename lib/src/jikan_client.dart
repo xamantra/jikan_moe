@@ -68,4 +68,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/anime/operation/getAnimeThemes
   Future<AnimeThemesData> getAnimeThemes(int id) => anime.getAnimeThemes(this, id);
+
+  /// https://docs.api.jikan.moe/#tag/anime/operation/getAnimeExternal
+  Future<List<AnimeExternal>> getAnimeExternal(int id) => anime.getAnimeExternal(this, id);
 }
