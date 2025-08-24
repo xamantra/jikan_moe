@@ -142,6 +142,9 @@ class JikanClient {
     endDate: endDate,
   );
 
+  /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaById
+  Future<MangaData> getMangaById(int id) => manga.getMangaById(this, id);
+
   /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaFullById
   Future<MangaFullData> getMangaFullById(int id) => manga.getMangaFullById(this, id);
 }

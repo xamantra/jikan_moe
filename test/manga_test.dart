@@ -6,9 +6,9 @@ import 'package:jikan_moe/src/jikan_client.dart';
 
 import 'queue.dart';
 
-/// This test should cover all anime endpoints.
+/// This test should cover all manga endpoints.
 void main() {
-  group('JikanClient anime tests', () {
+  group('JikanClient manga tests', () {
     late JikanClient client;
 
     setUp(() {
@@ -32,6 +32,10 @@ void main() {
       70345,
       143441,
       16765,
+      123281,
+      133779,
+      335,
+      758,
     ];
 
     test('should handle ${testIds.length} specific manga IDs with queue-based rate limiting', () async {
@@ -43,8 +47,12 @@ void main() {
       // Process requests sequentially using the queue
       for (final id in testIds) {
         try {
-          final result = await queue.add(() => client.getMangaFullById(id));
-          expect(result, isA<MangaFullData>(), reason: 'ID $id should return MangaFullData');
+          final fullResult = await queue.add(() => client.getMangaFullById(id));
+          expect(fullResult, isA<MangaFullData>(), reason: 'ID $id should return MangaFullData');
+          print('✓ ID $id: Successfully parsed ${fullResult.title} (FULL)');
+
+          final result = await queue.add(() => client.getMangaById(id));
+          expect(result, isA<MangaData>(), reason: 'ID $id should return MangaData');
           print('✓ ID $id: Successfully parsed ${result.title}');
 
           processedCount++;
