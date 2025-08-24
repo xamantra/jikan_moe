@@ -56,7 +56,6 @@ Future<List<MangaCharacter>> getMangaCharacters(JikanClient client, int id) asyn
 }
 
 // TODO //
-// {{baseUrl}}/manga/:id/news?page=1
 // {{baseUrl}}/manga/:id/forum?filter=episode ("all" "episode" "other")
 // {{baseUrl}}/manga/:id/pictures
 // {{baseUrl}}/manga/:id/statistics
@@ -68,3 +67,20 @@ Future<List<MangaCharacter>> getMangaCharacters(JikanClient client, int id) asyn
 // {{baseUrl}}/manga/:id/external
 
 // ADD NEW METHODS BELOW //
+
+Future<MangaNews> getMangaNews(JikanClient client, int id, {int page = 1}) async {
+  try {
+    final response = await client.httpClient.get(Uri.parse('${client.jikanV4BaseUrl}/manga/$id/news?page=$page'));
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      return MangaNews.fromJson(jsonData as Map<String, dynamic>);
+    } else {
+      throw HttpException(response.body);
+    }
+  } catch (e, trace) {
+    if (e is! HttpException) {
+      print('$getMangaNews: $trace');
+    }
+    rethrow;
+  }
+}
