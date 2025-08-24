@@ -1,8 +1,8 @@
+import 'package:jikan_moe/src/anime/index.dart';
 import 'package:test/test.dart';
 import 'dart:io';
 
 import 'package:jikan_moe/src/jikan_client.dart';
-import 'package:jikan_moe/src/anime/anime_data.dart';
 
 import '../queue.dart';
 
@@ -52,7 +52,12 @@ void main() {
           // Test: Should return AnimeData type
           expect(result, isA<AnimeData>(), reason: 'ID $id should return AnimeData');
 
-          print('✓ ID $id: Successfully parsed AnimeData');
+          print('✓ ID $id: Successfully parsed ${result.title}');
+
+          final newsResult = await queue.add(() => client.getAnimeNews(id));
+          expect(newsResult, isA<AnimeNews>(), reason: 'ID $id should return AnimeNews');
+          print('✓ ID $id: Successfully parsed ${newsResult.data.length} AnimeNews for ${result.title}');
+
           processedCount++;
         } on HttpException catch (e) {
           // Test: HttpException should pass (expected API error)
@@ -68,5 +73,5 @@ void main() {
       print('Completed processing $processedCount out of $testCount IDs');
       expect(processedCount, equals(testCount), reason: 'All IDs should be processed');
     });
-  });
+  }, timeout: const Timeout(Duration(minutes: 50)));
 }
