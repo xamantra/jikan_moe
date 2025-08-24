@@ -180,3 +180,20 @@ Future<MangaUserUpdates> getMangaUserUpdates(JikanClient client, int id, {int pa
     rethrow;
   }
 }
+
+Future<MangaReviews> getMangaReviews(JikanClient client, int id, {int page = 1, bool preliminary = true, bool spoilers = false}) async {
+  try {
+    final response = await client.httpClient.get(Uri.parse('${client.jikanV4BaseUrl}/manga/$id/reviews?page=$page&preliminary=$preliminary&spoilers=$spoilers'));
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      return MangaReviews.fromJson(jsonData as Map<String, dynamic>);
+    } else {
+      throw HttpException(response.body);
+    }
+  } catch (e, trace) {
+    if (e is! HttpException) {
+      print('$getMangaReviews: $trace');
+    }
+    rethrow;
+  }
+}
