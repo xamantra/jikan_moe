@@ -19,6 +19,50 @@ void main() {
       client.httpClient.close();
     });
 
+    test('should handle anime search', () async {
+      final result = await queue.add(
+        () => client.getAnimeSearch(q: 'naruto'),
+      );
+      expect(result, isA<AnimeSearchResponse>(), reason: 'should return AnimeSearchResponse');
+      print('✓ AnimeSearchResponse: Successfully parsed ${result.data.length} AnimeSearch for <q: naruto>');
+
+      final typeTV = await queue.add(() => client.getAnimeSearch(type: 'tv'));
+      expect(typeTV, isA<AnimeSearchResponse>(), reason: 'should return AnimeSearchResponse');
+      print('✓ AnimeSearchResponse: Successfully parsed ${typeTV.data.length} AnimeSearch for <type: tv>');
+
+      final minMaxScore = await queue.add(() => client.getAnimeSearch(minScore: 6, maxScore: 7.5));
+      expect(minMaxScore, isA<AnimeSearchResponse>(), reason: 'should return AnimeSearchResponse');
+      print('✓ AnimeSearchResponse: Successfully parsed ${minMaxScore.data.length} AnimeSearch for <minScore: 6, maxScore: 7.5>');
+
+      final airing = await queue.add(() => client.getAnimeSearch(status: 'airing'));
+      expect(airing, isA<AnimeSearchResponse>(), reason: 'should return AnimeSearchResponse');
+      print('✓ AnimeSearchResponse: Successfully parsed ${airing.data.length} AnimeSearch for <status: airing>');
+
+      final complete = await queue.add(() => client.getAnimeSearch(status: 'complete'));
+      expect(complete, isA<AnimeSearchResponse>(), reason: 'should return AnimeSearchResponse');
+      print('✓ AnimeSearchResponse: Successfully parsed ${complete.data.length} AnimeSearch for <status: complete>');
+
+      final upcoming = await queue.add(() => client.getAnimeSearch(status: 'upcoming'));
+      expect(upcoming, isA<AnimeSearchResponse>(), reason: 'should return AnimeSearchResponse');
+      print('✓ AnimeSearchResponse: Successfully parsed ${upcoming.data.length} AnimeSearch for <status: upcoming>');
+
+      final gRating = await queue.add(() => client.getAnimeSearch(rating: 'g'));
+      expect(gRating, isA<AnimeSearchResponse>(), reason: 'should return AnimeSearchResponse');
+      print('✓ AnimeSearchResponse: Successfully parsed ${gRating.data.length} AnimeSearch for <rating: g>');
+
+      final rxRating = await queue.add(() => client.getAnimeSearch(rating: 'rx', sfw: false));
+      expect(rxRating, isA<AnimeSearchResponse>(), reason: 'should return AnimeSearchResponse');
+      print('✓ AnimeSearchResponse: Successfully parsed ${rxRating.data.length} AnimeSearch for <rating: rx>');
+
+      final sfw = await queue.add(() => client.getAnimeSearch(sfw: false));
+      expect(sfw, isA<AnimeSearchResponse>(), reason: 'should return AnimeSearchResponse');
+      print('✓ AnimeSearchResponse: Successfully parsed ${sfw.data.length} AnimeSearch for <sfw: false>');
+
+      final dateRange = await queue.add(() => client.getAnimeSearch(startDate: '2022-01-01', endDate: '2024-12-31'));
+      expect(dateRange, isA<AnimeSearchResponse>(), reason: 'should return AnimeSearchResponse');
+      print('✓ AnimeSearchResponse: Successfully parsed ${dateRange.data.length} AnimeSearch for <startDate: 2022-01-01, endDate: 2024-12-31>');
+    });
+
     final List<int> testIds = [
       59267,
       58772,

@@ -74,4 +74,65 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/anime/operation/getAnimeStreaming
   Future<List<AnimeStreaming>> getAnimeStreaming(int id) => anime.getAnimeStreaming(this, id);
+
+  /// https://docs.api.jikan.moe/#tag/anime/operation/getAnimeSearch
+  ///
+  /// - _unapproved_ - This is a flag. When supplied it will include entries which are unapproved. Unapproved entries on MyAnimeList are those that are user submitted and have not yet been approved by MAL to show up on other pages. They will have their own specifc pages and are often removed resulting in a 404 error. You do not need to pass a value to it. e.g usage: `?unapproved`
+  /// - _q_ - Search query.
+  /// - _type_ - "tv" "movie" "ova" "special" "ona" "music" "cm" "pv" "tv_special"
+  /// - _minScore_ - Set a minimum score for results.
+  /// - _maxScore_ - Set a maximum score for results.
+  /// - _status_ - "airing" "complete" "upcoming"
+  /// - _rating_ - "g" "pg" "pg13" "r17" "r" "rx"
+  /// - _sfw_ - Filter results to only include safe for work content.
+  /// - _genres_ - Filter by genre(s) IDs. Can pass multiple with a comma as a delimiter. e.g 1,2,3
+  /// - _genresExclude_ - Exclude genre(s) IDs. Can pass multiple with a comma as a delimiter. e.g 1,2,3
+  /// - _orderBy_ - "mal_id" "title" "start_date" "end_date" "episodes" "score" "scored_by" "rank" "popularity" "members" "favorites"
+  /// - _sort_ - "desc" "asc"
+  /// - _letter_ - Return entries starting with the given letter
+  /// - _producers_ - Filter by producer(s) IDs. Can pass multiple with a comma as a delimiter. e.g 1,2,3
+  /// - _startDate_ - Filter by starting date. Format: YYYY-MM-DD. e.g `2022`, `2005-05`, `2005-01-01`
+  /// - _endDate_ - Filter by ending date. Format: YYYY-MM-DD. e.g `2022`, `2005-05`, `2005-01-01`
+  Future<AnimeSearchResponse> getAnimeSearch({
+    bool unapproved = false,
+    int? page = 1,
+    int? limit = 25,
+    String? q,
+    String? type,
+    double? score,
+    double? minScore,
+    double? maxScore,
+    String? status,
+    String? rating,
+    bool? sfw = true,
+    String? genres,
+    String? genresExclude,
+    String? orderBy,
+    String? sort,
+    String? letter,
+    String? producers,
+    String? startDate,
+    String? endDate,
+  }) => anime.getAnimeSearch(
+    this,
+    unapproved: unapproved,
+    page: page,
+    limit: limit,
+    q: q,
+    type: type,
+    score: score,
+    minScore: minScore,
+    maxScore: maxScore,
+    status: status,
+    rating: rating,
+    sfw: sfw,
+    genres: genres,
+    genresExclude: genresExclude,
+    orderBy: orderBy,
+    sort: sort,
+    letter: letter,
+    producers: producers,
+    startDate: startDate,
+    endDate: endDate,
+  );
 }

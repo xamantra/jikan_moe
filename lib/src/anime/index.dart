@@ -11,6 +11,7 @@ export "anime_pictures.dart";
 export "anime_recommendations.dart";
 export "anime_relations.dart";
 export "anime_reviews.dart";
+export "anime_search.dart";
 export "anime_staff.dart";
 export "anime_statistics.dart";
 export "anime_streaming.dart";
