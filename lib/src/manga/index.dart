@@ -6,6 +6,7 @@ export "manga_more_info.dart";
 export "manga_news.dart";
 export "manga_pictures.dart";
 export "manga_recommendations.dart";
+export "manga_relations.dart";
 export "manga_reviews.dart";
 export "manga_statistics.dart";
 export "manga_user_updates.dart";

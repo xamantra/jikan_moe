@@ -178,6 +178,7 @@ class JikanClient {
   Future<MangaReviews> getMangaReviews(int id, {int page = 1, bool preliminary = true, bool spoilers = false}) => manga.getMangaReviews(this, id, page: page, preliminary: preliminary, spoilers: spoilers);
 
   /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaRelations
+  Future<List<MangaRelation>> getMangaRelations(int id) => manga.getMangaRelations(this, id);
 
   /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaExternal
 
