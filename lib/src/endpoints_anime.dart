@@ -88,3 +88,20 @@ Future<AnimeEpisodes> getAnimeEpisodes(JikanClient client, int id, {int page = 1
     rethrow;
   }
 }
+
+Future<AnimeEpisode> getAnimeEpisodeById(JikanClient client, int id, {required int episode}) async {
+  try {
+    final response = await client.httpClient.get(Uri.parse('${client.jikanV4BaseUrl}/anime/$id/episodes/$episode'));
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      return AnimeEpisode.fromJson(jsonData['data'] as Map<String, dynamic>);
+    } else {
+      throw HttpException(response.body);
+    }
+  } catch (e, trace) {
+    if (e is! HttpException) {
+      print('$getAnimeEpisodeById: $trace');
+    }
+    rethrow;
+  }
+}

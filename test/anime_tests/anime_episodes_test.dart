@@ -1,8 +1,8 @@
+import 'package:jikan_moe/src/anime/index.dart';
 import 'package:test/test.dart';
 import 'dart:io';
 
 import 'package:jikan_moe/src/jikan_client.dart';
-import 'package:jikan_moe/src/anime/anime_episodes.dart';
 
 import '../queue.dart';
 
@@ -48,6 +48,23 @@ void main() {
       for (final id in testIds) {
         try {
           final result = await queue.add(() => client.getAnimeEpisodes(id));
+
+          if (result.data.isNotEmpty) {
+            try {
+              final randomEpisode = (result.data..shuffle()).first;
+              final episodeResult = await queue.add(() => client.getAnimeEpisodeById(id, episode: randomEpisode.malId));
+              expect(episodeResult, isA<AnimeEpisode>(), reason: 'ID $id: Should return AnimeEpisode');
+              print('✓ ID $id: Successfully parsed ${episodeResult.title}');
+            } on HttpException catch (e) {
+              // Test: HttpException should pass (expected API error)
+              expect(e, isA<HttpException>(), reason: 'ID $id: Should throw HttpException for API errors');
+              print('✓ ID $id: Expected HttpException - ${e.message}');
+              processedCount++;
+            } catch (e) {
+              // Test: Any other exception should fail (parsing errors, etc.)
+              fail('ID $id: Unexpected error type: ${e.runtimeType} - $e');
+            }
+          }
 
           // Test: Should return AnimeEpisodes type
           expect(result, isA<AnimeEpisodes>(), reason: 'ID $id should return AnimeEpisodes');
