@@ -147,4 +147,29 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaFullById
   Future<MangaFullData> getMangaFullById(int id) => manga.getMangaFullById(this, id);
+
+  /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaCharacters
+  Future<List<MangaCharacter>> getMangaCharacters(int id) => manga.getMangaCharacters(this, id);
+
+  /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaNews
+  
+  /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaTopics
+
+  /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaPictures
+  
+  /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaStatistics
+  
+  /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaMoreInfo
+  
+  /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaRecommendations
+  
+  /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaUserUpdates
+  
+  /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaReviews
+  
+  /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaRelations
+  
+  /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaExternal
+  
+  /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaSearch
 }
