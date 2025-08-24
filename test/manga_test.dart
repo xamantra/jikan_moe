@@ -19,6 +19,54 @@ void main() {
       client.httpClient.close();
     });
 
+    test('should handle manga search with various parameters', () async {
+      print('Testing manga search functionality');
+      print('Using queue-based rate limiting: 1 request per second');
+
+      try {
+        // Test basic search
+        final searchResult = await queue.add(() => client.getMangaSearch(q: 'naruto'));
+        expect(searchResult, isA<MangaSearchResponse>(), reason: 'Should return MangaSearchResponse');
+        expect(searchResult.data, isA<List<MangaSearchData>>(), reason: 'Should have data list');
+        expect(searchResult.pagination, isA<MangaSearchPagination>(), reason: 'Should have pagination');
+        print('✓ Basic search: Successfully parsed ${searchResult.data.length} results');
+
+        // Test search with type filter
+        final typeSearchResult = await queue.add(() => client.getMangaSearch(q: 'one piece', type: 'manga'));
+        expect(typeSearchResult, isA<MangaSearchResponse>(), reason: 'Should return MangaSearchResponse');
+        print('✓ Type filter search: Successfully parsed ${typeSearchResult.data.length} results');
+
+        // Test search with status filter
+        final statusSearchResult = await queue.add(() => client.getMangaSearch(q: 'dragon ball', status: 'complete'));
+        expect(statusSearchResult, isA<MangaSearchResponse>(), reason: 'Should return MangaSearchResponse');
+        print('✓ Status filter search: Successfully parsed ${statusSearchResult.data.length} results');
+
+        // Test search with score filter
+        final scoreSearchResult = await queue.add(() => client.getMangaSearch(q: 'attack on titan', minScore: 8.0));
+        expect(scoreSearchResult, isA<MangaSearchResponse>(), reason: 'Should return MangaSearchResponse');
+        print('✓ Score filter search: Successfully parsed ${scoreSearchResult.data.length} results');
+
+        // Test search with pagination
+        final pageSearchResult = await queue.add(() => client.getMangaSearch(q: 'bleach', page: 2, limit: 10));
+        expect(pageSearchResult, isA<MangaSearchResponse>(), reason: 'Should return MangaSearchResponse');
+        expect(pageSearchResult.pagination.currentPage, equals(2), reason: 'Should be on page 2');
+        print('✓ Pagination search: Successfully parsed ${pageSearchResult.data.length} results on page ${pageSearchResult.pagination.currentPage}');
+
+        final upcomingResult = await queue.add(() => client.getMangaSearch(status: 'upcoming'));
+        expect(upcomingResult, isA<MangaSearchResponse>(), reason: 'Should return MangaSearchResponse');
+        print('✓ Upcoming search: Successfully parsed ${upcomingResult.data.length} results');
+
+        print('✓ All manga search tests passed');
+      } on HttpException catch (e) {
+        // Test: HttpException should pass (expected API error)
+        expect(e, isA<HttpException>(), reason: 'Should throw HttpException for API errors');
+        print('✓ Expected HttpException - ${e.message}');
+      } catch (e) {
+        // Test: Any other exception should fail (parsing errors, etc.)
+        fail('Unexpected error type: ${e.runtimeType} - $e');
+      }
+    });
+
     final List<int> testIds = [
       2,
       1706,

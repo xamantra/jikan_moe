@@ -55,13 +55,6 @@ Future<List<MangaCharacter>> getMangaCharacters(JikanClient client, int id) asyn
   }
 }
 
-// TODO //
-// {{baseUrl}}/manga/:id/reviews?page=1&preliminary=true&spoilers=false
-// {{baseUrl}}/manga/:id/relations
-// {{baseUrl}}/manga/:id/external
-
-// ADD NEW METHODS IN BOTTOM //
-
 Future<MangaNews> getMangaNews(JikanClient client, int id, {int page = 1}) async {
   try {
     final response = await client.httpClient.get(Uri.parse('${client.jikanV4BaseUrl}/manga/$id/news?page=$page'));
@@ -227,6 +220,66 @@ Future<List<MangaExternal>> getMangaExternal(JikanClient client, int id) async {
   } catch (e, trace) {
     if (e is! HttpException) {
       print('$getMangaExternal: $trace');
+    }
+    rethrow;
+  }
+}
+
+Future<MangaSearchResponse> getMangaSearch(
+  JikanClient client, {
+  bool unapproved = false,
+  int? page = 1,
+  int? limit = 25,
+  String? q,
+  String? type,
+  double? score,
+  double? minScore,
+  double? maxScore,
+  String? status,
+  bool? sfw = true,
+  String? genres,
+  String? genresExclude,
+  String? orderBy,
+  String? sort,
+  String? letter,
+  String? magazines,
+  String? startDate,
+  String? endDate,
+}) async {
+  try {
+    final queryParams = <String, String>{
+      if (page != null) 'page': page.toString(),
+      if (limit != null) 'limit': limit.toString(),
+      if (q != null) 'q': q,
+      if (type != null) 'type': type,
+      if (score != null) 'score': score.toString(),
+      if (minScore != null) 'min_score': minScore.toString(),
+      if (maxScore != null) 'max_score': maxScore.toString(),
+      if (status != null) 'status': status,
+      if (sfw != null) 'sfw': sfw.toString(),
+      if (genres != null) 'genres': genres,
+      if (genresExclude != null) 'genres_exclude': genresExclude,
+      if (orderBy != null) 'order_by': orderBy,
+      if (sort != null) 'sort': sort,
+      if (letter != null) 'letter': letter,
+      if (magazines != null) 'magazines': magazines,
+      if (startDate != null) 'start_date': startDate,
+      if (endDate != null) 'end_date': endDate,
+    };
+    var encodedQueryParams = Uri(queryParameters: queryParams).query;
+    if (unapproved) {
+      encodedQueryParams += 'unapproved&$encodedQueryParams';
+    }
+    final response = await client.httpClient.get(Uri.parse('${client.jikanV4BaseUrl}/manga?$encodedQueryParams'));
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      return MangaSearchResponse.fromJson(jsonData as Map<String, dynamic>);
+    } else {
+      throw HttpException(response.body);
+    }
+  } catch (e, trace) {
+    if (e is! HttpException) {
+      print('$getMangaSearch: $trace');
     }
     rethrow;
   }
