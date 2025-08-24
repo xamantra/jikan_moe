@@ -375,6 +375,13 @@ class AnimeRelation {
   factory AnimeRelation.fromJson(Map<String, dynamic> json) {
     return AnimeRelation(relation: json['relation'], entry: (json['entry'] as List).map((entry) => AnimeRelationEntry.fromJson(entry)).toList());
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'relation': relation,
+      'entry': entry.map((e) => e.toJson()).toList(),
+    };
+  }
 }
 
 class AnimeRelationEntry {
@@ -387,6 +394,15 @@ class AnimeRelationEntry {
 
   factory AnimeRelationEntry.fromJson(Map<String, dynamic> json) {
     return AnimeRelationEntry(malId: json['mal_id'], type: json['type'], name: json['name'], url: json['url']);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'mal_id': malId,
+      'type': type,
+      'name': name,
+      'url': url,
+    };
   }
 }
 

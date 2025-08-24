@@ -62,4 +62,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/anime/operation/getAnimeReviews
   Future<AnimeReviews> getAnimeReviews(int id, {int page = 1, bool preliminary = true, bool spoilers = false}) => anime.getAnimeReviews(this, id, page: page, preliminary: preliminary, spoilers: spoilers);
+
+  /// https://docs.api.jikan.moe/#tag/anime/operation/getAnimeRelations
+  Future<List<AnimeRelation>> getAnimeRelations(int id) => anime.getAnimeRelations(this, id);
 }
