@@ -67,6 +67,10 @@ void main() {
           expect(forumResult, isA<List<MangaForumTopic>>(), reason: 'ID $id should return List<MangaForumTopic>');
           print('✓ ID $id: Successfully parsed ${forumResult.length} MangaForum topics for ${result.title}');
 
+          final picturesResult = await queue.add(() => client.getMangaPictures(id));
+          expect(picturesResult, isA<List<MangaImages>>(), reason: 'ID $id should return List<MangaImages>');
+          print('✓ ID $id: Successfully parsed ${picturesResult.length} MangaPictures for ${result.title}');
+
           processedCount++;
         } on HttpException catch (e) {
           // Test: HttpException should pass (expected API error)

@@ -160,6 +160,7 @@ class JikanClient {
   Future<List<MangaForumTopic>> getMangaTopics(int id, {String filter = "all"}) => manga.getMangaTopics(this, id, filter: filter);
 
   /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaPictures
+  Future<List<MangaImages>> getMangaPictures(int id) => manga.getMangaPictures(this, id);
 
   /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaStatistics
 

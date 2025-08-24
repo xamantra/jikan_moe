@@ -56,7 +56,6 @@ Future<List<MangaCharacter>> getMangaCharacters(JikanClient client, int id) asyn
 }
 
 // TODO //
-// {{baseUrl}}/manga/:id/pictures
 // {{baseUrl}}/manga/:id/statistics
 // {{baseUrl}}/manga/:id/moreinfo
 // {{baseUrl}}/manga/:id/recommendations
@@ -65,7 +64,7 @@ Future<List<MangaCharacter>> getMangaCharacters(JikanClient client, int id) asyn
 // {{baseUrl}}/manga/:id/relations
 // {{baseUrl}}/manga/:id/external
 
-// ADD NEW METHODS BELOW. NEW IN BOTTOM //
+// ADD NEW METHODS IN BOTTOM //
 
 Future<MangaNews> getMangaNews(JikanClient client, int id, {int page = 1}) async {
   try {
@@ -96,6 +95,23 @@ Future<List<MangaForumTopic>> getMangaTopics(JikanClient client, int id, {String
   } catch (e, trace) {
     if (e is! HttpException) {
       print('$getMangaTopics: $trace');
+    }
+    rethrow;
+  }
+}
+
+Future<List<MangaImages>> getMangaPictures(JikanClient client, int id) async {
+  try {
+    final response = await client.httpClient.get(Uri.parse('${client.jikanV4BaseUrl}/manga/$id/pictures'));
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      return MangaPicturesResponse.fromJson(jsonData as Map<String, dynamic>).data;
+    } else {
+      throw HttpException(response.body);
+    }
+  } catch (e, trace) {
+    if (e is! HttpException) {
+      print('$getMangaPictures: $trace');
     }
     rethrow;
   }
