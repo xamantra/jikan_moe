@@ -71,4 +71,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/anime/operation/getAnimeExternal
   Future<List<AnimeExternal>> getAnimeExternal(int id) => anime.getAnimeExternal(this, id);
+
+  /// https://docs.api.jikan.moe/#tag/anime/operation/getAnimeStreaming
+  Future<List<AnimeStreaming>> getAnimeStreaming(int id) => anime.getAnimeStreaming(this, id);
 }

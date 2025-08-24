@@ -13,6 +13,7 @@ export "anime_relations.dart";
 export "anime_reviews.dart";
 export "anime_staff.dart";
 export "anime_statistics.dart";
+export "anime_streaming.dart";
 export "anime_themes.dart";
 export "anime_user_updates.dart";
 export "anime_videos.dart";

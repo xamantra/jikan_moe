@@ -447,4 +447,11 @@ class AnimeStreaming {
   factory AnimeStreaming.fromJson(Map<String, dynamic> json) {
     return AnimeStreaming(name: json['name'], url: json['url']);
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'url': url,
+    };
+  }
 }

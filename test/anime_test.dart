@@ -131,6 +131,10 @@ void main() {
           expect(externalResult, isA<List<AnimeExternal>>(), reason: 'ID $id should return List<AnimeExternal>');
           print('✓ ID $id: Successfully parsed ${externalResult.length} AnimeExternal for ${result.title}');
 
+          final streamingResult = await queue.add(() => client.getAnimeStreaming(id));
+          expect(streamingResult, isA<List<AnimeStreaming>>(), reason: 'ID $id should return List<AnimeStreaming>');
+          print('✓ ID $id: Successfully parsed ${streamingResult.length} AnimeStreaming for ${result.title}');
+
           processedCount++;
         } on HttpException catch (e) {
           // Test: HttpException should pass (expected API error)
