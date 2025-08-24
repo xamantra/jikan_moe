@@ -19,27 +19,26 @@ void main() {
       client.httpClient.close();
     });
 
-    const int testCount = 15;
+    final List<int> testIds = [
+      59267,
+      58772,
+      60028,
+      61200,
+      58929,
+      52991,
+      5114,
+      21,
+      9253,
+      28977,
+      59845,
+      53447,
+      58913,
+      44042,
+      59062,
+      42310,
+    ];
 
-    test('should handle $testCount specific anime IDs with queue-based rate limiting', () async {
-      final List<int> testIds = [
-        59267,
-        58772,
-        60028,
-        61200,
-        58929,
-        52991,
-        5114,
-        21,
-        9253,
-        28977,
-        59845,
-        53447,
-        58913,
-        44042,
-        59062,
-      ];
-
+    test('should handle ${testIds.length} specific anime IDs with queue-based rate limiting', () async {
       print('Testing anime IDs: $testIds');
       print('Using queue-based rate limiting: 1 request per second');
 
@@ -86,6 +85,12 @@ void main() {
           expect(forumResult, isA<List<AnimeForumTopic>>(), reason: 'ID $id should return List<AnimeForumTopic>');
           print('✓ ID $id: Successfully parsed ${forumResult.length} AnimeForumTopic for ${result.title}');
 
+          final videosResult = await queue.add(() => client.getAnimeVideos(id));
+          expect(videosResult, isA<AnimeVideosData>(), reason: 'ID $id should return AnimeVideosData');
+          print('✓ ID $id: Successfully parsed ${videosResult.episodes.length} EpisodeVideo for ${result.title}');
+          print('✓ ID $id: Successfully parsed ${videosResult.promo.length} PromoVideo for ${result.title}');
+          print('✓ ID $id: Successfully parsed ${videosResult.musicVideos.length} MusicVideo for ${result.title}');
+
           processedCount++;
         } on HttpException catch (e) {
           // Test: HttpException should pass (expected API error)
@@ -98,8 +103,8 @@ void main() {
         }
       }
 
-      print('Completed processing $processedCount out of $testCount IDs');
-      expect(processedCount, equals(testCount), reason: 'All IDs should be processed');
+      print('Completed processing $processedCount out of ${testIds.length} IDs');
+      expect(processedCount, equals(testIds.length), reason: 'All IDs should be processed');
     });
   }, timeout: const Timeout(Duration(minutes: 60)));
 }

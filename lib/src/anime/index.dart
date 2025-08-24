@@ -6,3 +6,4 @@ export "anime_forum.dart";
 export "anime_full.dart";
 export "anime_news.dart";
 export "anime_staff.dart";
+export "anime_videos.dart";
