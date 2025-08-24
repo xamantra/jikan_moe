@@ -33,4 +33,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/anime/operation/getAnimeNews
   Future<AnimeNews> getAnimeNews(int id, {int page = 1}) => anime.getAnimeNews(this, id, page: page);
+
+  /// https://docs.api.jikan.moe/#tag/anime/operation/getAnimeForum
+  Future<List<AnimeForumTopic>> getAnimeForum(int id) => anime.getAnimeForum(this, id);
 }

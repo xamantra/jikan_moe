@@ -58,6 +58,10 @@ void main() {
           expect(newsResult, isA<AnimeNews>(), reason: 'ID $id should return AnimeNews');
           print('✓ ID $id: Successfully parsed ${newsResult.data.length} AnimeNews for ${result.title}');
 
+          final forumResult = await queue.add(() => client.getAnimeForum(id));
+          expect(forumResult, isA<List<AnimeForumTopic>>(), reason: 'ID $id should return List<AnimeForumTopic>');
+          print('✓ ID $id: Successfully parsed ${forumResult.length} AnimeForumTopic for ${result.title}');
+
           processedCount++;
         } on HttpException catch (e) {
           // Test: HttpException should pass (expected API error)
