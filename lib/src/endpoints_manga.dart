@@ -116,3 +116,20 @@ Future<List<MangaImages>> getMangaPictures(JikanClient client, int id) async {
     rethrow;
   }
 }
+
+Future<MangaStatisticsData> getMangaStatistics(JikanClient client, int id) async {
+  try {
+    final response = await client.httpClient.get(Uri.parse('${client.jikanV4BaseUrl}/manga/$id/statistics'));
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      return MangaStatistics.fromJson(jsonData as Map<String, dynamic>).data;
+    } else {
+      throw HttpException(response.body);
+    }
+  } catch (e, trace) {
+    if (e is! HttpException) {
+      print('$getMangaStatistics: $trace');
+    }
+    rethrow;
+  }
+}
