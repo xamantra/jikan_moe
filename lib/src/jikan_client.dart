@@ -166,6 +166,7 @@ class JikanClient {
   Future<MangaStatisticsData> getMangaStatistics(int id) => manga.getMangaStatistics(this, id);
 
   /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaMoreInfo
+  Future<MangaMoreInfoData> getMangaMoreInfo(int id) => manga.getMangaMoreInfo(this, id);
 
   /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaRecommendations
 

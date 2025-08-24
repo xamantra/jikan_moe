@@ -75,6 +75,10 @@ void main() {
           expect(statisticsResult, isA<MangaStatisticsData>(), reason: 'ID $id should return MangaStatisticsData');
           print('✓ ID $id: Successfully parsed MangaStatistics for ${result.title} (reading: ${statisticsResult.reading}, completed: ${statisticsResult.completed}, total: ${statisticsResult.total})');
 
+          final moreInfoResult = await queue.add(() => client.getMangaMoreInfo(id));
+          expect(moreInfoResult, isA<MangaMoreInfoData>(), reason: 'ID $id should return MangaMoreInfoData');
+          print('✓ ID $id: Successfully parsed MangaMoreInfo for ${result.title}');
+
           processedCount++;
         } on HttpException catch (e) {
           // Test: HttpException should pass (expected API error)
