@@ -56,7 +56,6 @@ Future<List<MangaCharacter>> getMangaCharacters(JikanClient client, int id) asyn
 }
 
 // TODO //
-// {{baseUrl}}/manga/:id/forum?filter=episode ("all" "episode" "other")
 // {{baseUrl}}/manga/:id/pictures
 // {{baseUrl}}/manga/:id/statistics
 // {{baseUrl}}/manga/:id/moreinfo
@@ -66,7 +65,7 @@ Future<List<MangaCharacter>> getMangaCharacters(JikanClient client, int id) asyn
 // {{baseUrl}}/manga/:id/relations
 // {{baseUrl}}/manga/:id/external
 
-// ADD NEW METHODS BELOW //
+// ADD NEW METHODS BELOW. NEW IN BOTTOM //
 
 Future<MangaNews> getMangaNews(JikanClient client, int id, {int page = 1}) async {
   try {
@@ -80,6 +79,23 @@ Future<MangaNews> getMangaNews(JikanClient client, int id, {int page = 1}) async
   } catch (e, trace) {
     if (e is! HttpException) {
       print('$getMangaNews: $trace');
+    }
+    rethrow;
+  }
+}
+
+Future<List<MangaForumTopic>> getMangaTopics(JikanClient client, int id, {String filter = "all"}) async {
+  try {
+    final response = await client.httpClient.get(Uri.parse('${client.jikanV4BaseUrl}/manga/$id/forum?filter=$filter'));
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      return MangaForum.fromJson(jsonData as Map<String, dynamic>).data;
+    } else {
+      throw HttpException(response.body);
+    }
+  } catch (e, trace) {
+    if (e is! HttpException) {
+      print('$getMangaTopics: $trace');
     }
     rethrow;
   }

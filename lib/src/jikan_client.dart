@@ -155,22 +155,25 @@ class JikanClient {
   Future<MangaNews> getMangaNews(int id, {int page = 1}) => manga.getMangaNews(this, id, page: page);
 
   /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaTopics
+  ///
+  /// filter: `all`, `episode`, `other`
+  Future<List<MangaForumTopic>> getMangaTopics(int id, {String filter = "all"}) => manga.getMangaTopics(this, id, filter: filter);
 
   /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaPictures
-  
+
   /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaStatistics
-  
+
   /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaMoreInfo
-  
+
   /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaRecommendations
-  
+
   /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaUserUpdates
-  
+
   /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaReviews
-  
+
   /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaRelations
-  
+
   /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaExternal
-  
+
   /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaSearch
 }
