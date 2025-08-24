@@ -11,6 +11,10 @@ class JikanClient {
   http.Client get httpClient => _client;
   String get jikanV4BaseUrl => _jikanV4BaseUrl;
 
+  // Singleton instance
+  static JikanClient? _instance;
+  static JikanClient get instance => _instance ??= JikanClient();
+
   JikanClient({http.Client? client}) : _client = client ?? http.Client();
 
   /// https://docs.api.jikan.moe/#tag/anime/operation/getAnimeFullById
