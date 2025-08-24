@@ -41,4 +41,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/anime/operation/getAnimeVideos
   Future<AnimeVideosData> getAnimeVideos(int id) => anime.getAnimeVideos(this, id);
+
+  /// https://docs.api.jikan.moe/#tag/anime/operation/getAnimeVideosEpisodes
+  Future<AnimeVideosEpisodes> getAnimeVideosEpisodes(int id, {int page = 1}) => anime.getAnimeVideosEpisodes(this, id, page: page);
 }
