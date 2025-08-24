@@ -4,10 +4,11 @@ import 'dart:io';
 
 import 'package:jikan_moe/src/jikan_client.dart';
 
-import '../queue.dart';
+import 'queue.dart';
 
+/// This test should cover all anime endpoints.
 void main() {
-  group('JikanClient getAnimeById Tests', () {
+  group('JikanClient anime tests', () {
     late JikanClient client;
 
     setUp(() {
@@ -54,6 +55,29 @@ void main() {
 
           print('✓ ID $id: Successfully parsed ${result.title}');
 
+          final fullResult = await queue.add(() => client.getAnimeFullById(id));
+          expect(fullResult, isA<AnimeFullData>(), reason: 'ID $id should return AnimeFullData');
+          print('✓ ID $id: Successfully parsed ${fullResult.title} (FULL)');
+
+          final charactersResult = await queue.add(() => client.getAnimeCharacters(id));
+          expect(charactersResult, isA<List<AnimeCharacter>>(), reason: 'ID $id should return List<AnimeCharacter>');
+          print('✓ ID $id: Successfully parsed ${charactersResult.length} AnimeCharacter for ${result.title}');
+
+          final staffResult = await queue.add(() => client.getAnimeStaff(id));
+          expect(staffResult, isA<List<AnimeStaff>>(), reason: 'ID $id should return List<AnimeStaff>');
+          print('✓ ID $id: Successfully parsed ${staffResult.length} AnimeStaff for ${result.title}');
+
+          final episodesResult = await queue.add(() => client.getAnimeEpisodes(id));
+          expect(episodesResult, isA<AnimeEpisodes>(), reason: 'ID $id should return AnimeEpisodes');
+          print('✓ ID $id: Successfully parsed ${episodesResult.data.length} AnimeEpisodes for ${result.title}');
+
+          if (episodesResult.data.isNotEmpty) {
+            final randomEpisode = (episodesResult.data..shuffle()).first;
+            final episodeResult = await queue.add(() => client.getAnimeEpisodeById(id, episode: randomEpisode.malId));
+            expect(episodeResult, isA<AnimeEpisode>(), reason: 'ID $id should return AnimeEpisode');
+            print('✓ ID $id: Successfully parsed ${episodeResult.title} for ${randomEpisode.title}');
+          }
+
           final newsResult = await queue.add(() => client.getAnimeNews(id));
           expect(newsResult, isA<AnimeNews>(), reason: 'ID $id should return AnimeNews');
           print('✓ ID $id: Successfully parsed ${newsResult.data.length} AnimeNews for ${result.title}');
@@ -77,5 +101,5 @@ void main() {
       print('Completed processing $processedCount out of $testCount IDs');
       expect(processedCount, equals(testCount), reason: 'All IDs should be processed');
     });
-  }, timeout: const Timeout(Duration(minutes: 50)));
+  }, timeout: const Timeout(Duration(minutes: 60)));
 }
