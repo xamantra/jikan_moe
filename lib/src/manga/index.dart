@@ -1,5 +1,6 @@
 export "manga_characters.dart";
 export "manga_data.dart";
+export "manga_external.dart";
 export "manga_forum.dart";
 export "manga_full.dart";
 export "manga_more_info.dart";

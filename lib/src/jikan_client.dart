@@ -181,6 +181,7 @@ class JikanClient {
   Future<List<MangaRelation>> getMangaRelations(int id) => manga.getMangaRelations(this, id);
 
   /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaExternal
+  Future<List<MangaExternal>> getMangaExternal(int id) => manga.getMangaExternal(this, id);
 
   /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaSearch
 }
