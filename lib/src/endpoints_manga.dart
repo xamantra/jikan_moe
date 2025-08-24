@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'jikan_client.dart';
+import 'lib_extras.dart';
 import 'manga/index.dart';
 
 Future<MangaData> getMangaById(JikanClient client, int id) async {
@@ -11,10 +11,10 @@ Future<MangaData> getMangaById(JikanClient client, int id) async {
       final jsonData = jsonDecode(response.body);
       return MangaDataResponse.fromJson(jsonData as Map<String, dynamic>).data;
     } else {
-      throw HttpException(response.body);
+      throw JikanException(response.body);
     }
   } catch (e, trace) {
-    if (e is! HttpException) {
+    if (e is! JikanException) {
       print('$getMangaById: $trace');
     }
     rethrow;
@@ -28,10 +28,10 @@ Future<MangaFullData> getMangaFullById(JikanClient client, int id) async {
       final jsonData = jsonDecode(response.body);
       return MangaFullResponse.fromJson(jsonData as Map<String, dynamic>).data;
     } else {
-      throw HttpException(response.body);
+      throw JikanException(response.body);
     }
   } catch (e, trace) {
-    if (e is! HttpException) {
+    if (e is! JikanException) {
       print('$getMangaFullById: $trace');
     }
     rethrow;
@@ -45,10 +45,10 @@ Future<List<MangaCharacter>> getMangaCharacters(JikanClient client, int id) asyn
       final jsonData = jsonDecode(response.body);
       return MangaCharactersResponse.fromJson(jsonData as Map<String, dynamic>).data;
     } else {
-      throw HttpException(response.body);
+      throw JikanException(response.body);
     }
   } catch (e, trace) {
-    if (e is! HttpException) {
+    if (e is! JikanException) {
       print('$getMangaCharacters: $trace');
     }
     rethrow;
@@ -62,10 +62,10 @@ Future<MangaNews> getMangaNews(JikanClient client, int id, {int page = 1}) async
       final jsonData = jsonDecode(response.body);
       return MangaNews.fromJson(jsonData as Map<String, dynamic>);
     } else {
-      throw HttpException(response.body);
+      throw JikanException(response.body);
     }
   } catch (e, trace) {
-    if (e is! HttpException) {
+    if (e is! JikanException) {
       print('$getMangaNews: $trace');
     }
     rethrow;
@@ -79,10 +79,10 @@ Future<List<MangaForumTopic>> getMangaTopics(JikanClient client, int id, {String
       final jsonData = jsonDecode(response.body);
       return MangaForum.fromJson(jsonData as Map<String, dynamic>).data;
     } else {
-      throw HttpException(response.body);
+      throw JikanException(response.body);
     }
   } catch (e, trace) {
-    if (e is! HttpException) {
+    if (e is! JikanException) {
       print('$getMangaTopics: $trace');
     }
     rethrow;
@@ -96,10 +96,10 @@ Future<List<MangaImages>> getMangaPictures(JikanClient client, int id) async {
       final jsonData = jsonDecode(response.body);
       return MangaPicturesResponse.fromJson(jsonData as Map<String, dynamic>).data;
     } else {
-      throw HttpException(response.body);
+      throw JikanException(response.body);
     }
   } catch (e, trace) {
-    if (e is! HttpException) {
+    if (e is! JikanException) {
       print('$getMangaPictures: $trace');
     }
     rethrow;
@@ -113,10 +113,10 @@ Future<MangaStatisticsData> getMangaStatistics(JikanClient client, int id) async
       final jsonData = jsonDecode(response.body);
       return MangaStatistics.fromJson(jsonData as Map<String, dynamic>).data;
     } else {
-      throw HttpException(response.body);
+      throw JikanException(response.body);
     }
   } catch (e, trace) {
-    if (e is! HttpException) {
+    if (e is! JikanException) {
       print('$getMangaStatistics: $trace');
     }
     rethrow;
@@ -130,10 +130,10 @@ Future<MangaMoreInfoData> getMangaMoreInfo(JikanClient client, int id) async {
       final jsonData = jsonDecode(response.body);
       return MangaMoreInfoResponse.fromJson(jsonData as Map<String, dynamic>).data;
     } else {
-      throw HttpException(response.body);
+      throw JikanException(response.body);
     }
   } catch (e, trace) {
-    if (e is! HttpException) {
+    if (e is! JikanException) {
       print('$getMangaMoreInfo: $trace');
     }
     rethrow;
@@ -147,10 +147,10 @@ Future<List<MangaRecommendation>> getMangaRecommendations(JikanClient client, in
       final jsonData = jsonDecode(response.body);
       return MangaRecommendations.fromJson(jsonData as Map<String, dynamic>).data;
     } else {
-      throw HttpException(response.body);
+      throw JikanException(response.body);
     }
   } catch (e, trace) {
-    if (e is! HttpException) {
+    if (e is! JikanException) {
       print('$getMangaRecommendations: $trace');
     }
     rethrow;
@@ -164,10 +164,10 @@ Future<MangaUserUpdates> getMangaUserUpdates(JikanClient client, int id, {int pa
       final jsonData = jsonDecode(response.body);
       return MangaUserUpdates.fromJson(jsonData as Map<String, dynamic>);
     } else {
-      throw HttpException(response.body);
+      throw JikanException(response.body);
     }
   } catch (e, trace) {
-    if (e is! HttpException) {
+    if (e is! JikanException) {
       print('$getMangaUserUpdates: $trace');
     }
     rethrow;
@@ -181,10 +181,10 @@ Future<MangaReviews> getMangaReviews(JikanClient client, int id, {int page = 1, 
       final jsonData = jsonDecode(response.body);
       return MangaReviews.fromJson(jsonData as Map<String, dynamic>);
     } else {
-      throw HttpException(response.body);
+      throw JikanException(response.body);
     }
   } catch (e, trace) {
-    if (e is! HttpException) {
+    if (e is! JikanException) {
       print('$getMangaReviews: $trace');
     }
     rethrow;
@@ -198,10 +198,10 @@ Future<List<MangaRelation>> getMangaRelations(JikanClient client, int id) async 
       final jsonData = jsonDecode(response.body);
       return MangaRelationsResponse.fromJson(jsonData as Map<String, dynamic>).data;
     } else {
-      throw HttpException(response.body);
+      throw JikanException(response.body);
     }
   } catch (e, trace) {
-    if (e is! HttpException) {
+    if (e is! JikanException) {
       print('$getMangaRelations: $trace');
     }
     rethrow;
@@ -215,10 +215,10 @@ Future<List<MangaExternal>> getMangaExternal(JikanClient client, int id) async {
       final jsonData = jsonDecode(response.body);
       return MangaExternalResult.fromJson(jsonData as Map<String, dynamic>).data;
     } else {
-      throw HttpException(response.body);
+      throw JikanException(response.body);
     }
   } catch (e, trace) {
-    if (e is! HttpException) {
+    if (e is! JikanException) {
       print('$getMangaExternal: $trace');
     }
     rethrow;
@@ -275,10 +275,10 @@ Future<MangaSearchResponse> getMangaSearch(
       final jsonData = jsonDecode(response.body);
       return MangaSearchResponse.fromJson(jsonData as Map<String, dynamic>);
     } else {
-      throw HttpException(response.body);
+      throw JikanException(response.body);
     }
   } catch (e, trace) {
-    if (e is! HttpException) {
+    if (e is! JikanException) {
       print('$getMangaSearch: $trace');
     }
     rethrow;

@@ -1,8 +1,6 @@
+import 'package:jikan_moe/jikan_moe.dart';
 import 'package:jikan_moe/src/manga/index.dart';
 import 'package:test/test.dart';
-import 'dart:io';
-
-import 'package:jikan_moe/src/jikan_client.dart';
 
 import 'queue.dart';
 
@@ -57,10 +55,10 @@ void main() {
         print('✓ Upcoming search: Successfully parsed ${upcomingResult.data.length} results');
 
         print('✓ All manga search tests passed');
-      } on HttpException catch (e) {
-        // Test: HttpException should pass (expected API error)
-        expect(e, isA<HttpException>(), reason: 'Should throw HttpException for API errors');
-        print('✓ Expected HttpException - ${e.message}');
+      } on JikanException catch (e) {
+        // Test: JikanException should pass (expected API error)
+        expect(e, isA<JikanException>(), reason: 'Should throw JikanException for API errors');
+        print('✓ Expected JikanException - ${e.message}');
       } catch (e) {
         // Test: Any other exception should fail (parsing errors, etc.)
         fail('Unexpected error type: ${e.runtimeType} - $e');
@@ -148,10 +146,10 @@ void main() {
           print('✓ ID $id: Successfully parsed ${externalResult.length} MangaExternal for ${result.title}');
 
           processedCount++;
-        } on HttpException catch (e) {
-          // Test: HttpException should pass (expected API error)
-          expect(e, isA<HttpException>(), reason: 'ID $id: Should throw HttpException for API errors');
-          print('✓ ID $id: Expected HttpException - ${e.message}');
+        } on JikanException catch (e) {
+          // Test: JikanException should pass (expected API error)
+          expect(e, isA<JikanException>(), reason: 'ID $id: Should throw JikanException for API errors');
+          print('✓ ID $id: Expected JikanException - ${e.message}');
           processedCount++;
         } catch (e) {
           // Test: Any other exception should fail (parsing errors, etc.)

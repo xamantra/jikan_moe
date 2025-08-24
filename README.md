@@ -89,7 +89,56 @@ Future<AnimeSearchResponse> getAnimeSearch({
 
 # Manga
 
-Coming soon...
+✅ 14/14 endpoints are supported.
+
+```dart
+Future<MangaData> getMangaById(int id)
+
+Future<MangaFullData> getMangaFullById(int id)
+
+Future<List<MangaCharacter>> getMangaCharacters(int id)
+
+Future<MangaNews> getMangaNews(int id, {int page = 1})
+
+Future<List<MangaForumTopic>> getMangaTopics(int id, {String filter = "all"})
+
+Future<List<MangaImages>> getMangaPictures(int id)
+
+Future<MangaStatisticsData> getMangaStatistics(int id)
+
+Future<MangaMoreInfoData> getMangaMoreInfo(int id)
+
+Future<List<MangaRecommendation>> getMangaRecommendations(int id)
+
+Future<MangaUserUpdates> getMangaUserUpdates(int id, {int page = 1})
+
+Future<MangaReviews> getMangaReviews(int id, {int page = 1, bool preliminary = true, bool spoilers = false})
+
+Future<List<MangaRelation>> getMangaRelations(int id)
+
+Future<List<MangaExternal>> getMangaExternal(int id)
+
+Future<MangaSearchResponse> getMangaSearch({
+    bool unapproved = false,
+    int? page = 1,
+    int? limit = 25,
+    String? q,
+    String? type,
+    double? score,
+    double? minScore,
+    double? maxScore,
+    String? status,
+    bool? sfw = true,
+    String? genres,
+    String? genresExclude,
+    String? orderBy,
+    String? sort,
+    String? letter,
+    String? magazines,
+    String? startDate,
+    String? endDate,
+})
+```
 
 # Characters
 

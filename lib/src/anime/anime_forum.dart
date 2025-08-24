@@ -7,9 +7,7 @@ class AnimeForum {
 
   factory AnimeForum.fromJson(Map<String, dynamic> json) {
     return AnimeForum(
-      data: (json['data'] as List<dynamic>)
-          .map((topic) => AnimeForumTopic.fromJson(topic as Map<String, dynamic>))
-          .toList(),
+      data: (json['data'] as List<dynamic>).map((topic) => AnimeForumTopic.fromJson(topic as Map<String, dynamic>)).toList(),
     );
   }
 

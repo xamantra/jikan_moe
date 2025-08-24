@@ -1,4 +1,3 @@
-// TODO: add prefix to all model classes: "MangaSearch$EntityName$"
 class MangaSearchResponse {
   final MangaSearchPagination pagination;
   final List<MangaSearchData> data;

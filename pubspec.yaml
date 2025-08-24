@@ -1,6 +1,6 @@
 name: jikan_moe
-description: Dart/Flutter client for Jikan API (MyAnimeList).
-version: 1.0.0
+description: Jikan (時間) is an unofficial & open-source API for the “most active online anime + manga community and database” — MyAnimeList.
+version: 2.0.0
 repository: https://github.com/xamantra/jikan_moe
 
 environment:
