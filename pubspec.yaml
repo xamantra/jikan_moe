@@ -1,7 +1,7 @@
 name: jikan_moe
 description: Dart/Flutter client for Jikan API (MyAnimeList).
 version: 1.0.0
-# repository: https://github.com/my_org/my_repo
+repository: https://github.com/xamantra/jikan_moe
 
 environment:
   sdk: ^3.9.0
