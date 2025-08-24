@@ -173,3 +173,20 @@ Future<AnimeVideosEpisodes> getAnimeVideosEpisodes(JikanClient client, int id, {
     rethrow;
   }
 }
+
+Future<List<AnimePicturesData>> getAnimePictures(JikanClient client, int id) async {
+  try {
+    final response = await client.httpClient.get(Uri.parse('${client.jikanV4BaseUrl}/anime/$id/pictures'));
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      return AnimePicturesResponse.fromJson(jsonData as Map<String, dynamic>).data;
+    } else {
+      throw HttpException(response.body);
+    }
+  } catch (e, trace) {
+    if (e is! HttpException) {
+      print('$getAnimePictures: $trace');
+    }
+    rethrow;
+  }
+}
