@@ -2,6 +2,8 @@ import 'package:http/http.dart' as http;
 
 import 'anime/index.dart';
 import 'endpoints_anime.dart' as anime;
+import 'endpoints_manga.dart' as manga;
+import 'manga/index.dart';
 
 const String _jikanV4BaseUrl = 'https://api.jikan.moe/v4';
 
@@ -139,4 +141,7 @@ class JikanClient {
     startDate: startDate,
     endDate: endDate,
   );
+
+  /// https://docs.api.jikan.moe/#tag/manga/operation/getMangaFullById
+  Future<MangaFullData> getMangaFullById(int id) => manga.getMangaFullById(this, id);
 }
