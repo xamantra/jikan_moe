@@ -10,5 +10,6 @@ export "anime_pictures.dart";
 export "anime_recommendations.dart";
 export "anime_staff.dart";
 export "anime_statistics.dart";
+export "anime_user_updates.dart";
 export "anime_videos.dart";
 export "anime_videos_episodes.dart";

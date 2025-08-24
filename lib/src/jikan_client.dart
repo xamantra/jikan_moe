@@ -56,4 +56,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/anime/operation/getAnimeRecommendations
   Future<List<AnimeRecommendation>> getAnimeRecommendations(int id) => anime.getAnimeRecommendations(this, id);
+
+  /// https://docs.api.jikan.moe/#tag/anime/operation/getAnimeUserUpdates
+  Future<AnimeUserUpdates> getAnimeUserUpdates(int id, {int page = 1}) => anime.getAnimeUserUpdates(this, id, page: page);
 }

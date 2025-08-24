@@ -241,3 +241,20 @@ Future<List<AnimeRecommendation>> getAnimeRecommendations(JikanClient client, in
     rethrow;
   }
 }
+
+Future<AnimeUserUpdates> getAnimeUserUpdates(JikanClient client, int id, {int page = 1}) async {
+  try {
+    final response = await client.httpClient.get(Uri.parse('${client.jikanV4BaseUrl}/anime/$id/userupdates?page=$page'));
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      return AnimeUserUpdates.fromJson(jsonData as Map<String, dynamic>);
+    } else {
+      throw HttpException(response.body);
+    }
+  } catch (e, trace) {
+    if (e is! HttpException) {
+      print('$getAnimeUserUpdates: $trace');
+    }
+    rethrow;
+  }
+}
