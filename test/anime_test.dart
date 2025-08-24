@@ -99,6 +99,10 @@ void main() {
           expect(picturesResult, isA<List<AnimePicturesData>>(), reason: 'ID $id should return List<AnimePicturesData>');
           print('✓ ID $id: Successfully parsed ${picturesResult.length} AnimePicturesData for ${result.title}');
 
+          final statisticsResult = await queue.add(() => client.getAnimeStatistics(id));
+          expect(statisticsResult, isA<AnimeStatisticsData>(), reason: 'ID $id should return AnimeStatisticsData');
+          print('✓ ID $id: Successfully parsed $statisticsResult for ${result.title}');
+
           processedCount++;
         } on HttpException catch (e) {
           // Test: HttpException should pass (expected API error)

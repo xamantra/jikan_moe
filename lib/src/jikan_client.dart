@@ -47,4 +47,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/anime/operation/getAnimePictures
   Future<List<AnimePicturesData>> getAnimePictures(int id) => anime.getAnimePictures(this, id);
+
+  /// https://docs.api.jikan.moe/#tag/anime/operation/getAnimeStatistics
+  Future<AnimeStatisticsData> getAnimeStatistics(int id) => anime.getAnimeStatistics(this, id);
 }
