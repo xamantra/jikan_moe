@@ -50,4 +50,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/anime/operation/getAnimeStatistics
   Future<AnimeStatisticsData> getAnimeStatistics(int id) => anime.getAnimeStatistics(this, id);
+
+  /// https://docs.api.jikan.moe/#tag/anime/operation/getAnimeMoreInfo
+  Future<AnimeMoreInfoData> getAnimeMoreInfo(int id) => anime.getAnimeMoreInfo(this, id);
 }

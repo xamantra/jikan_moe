@@ -207,3 +207,20 @@ Future<AnimeStatisticsData> getAnimeStatistics(JikanClient client, int id) async
     rethrow;
   }
 }
+
+Future<AnimeMoreInfoData> getAnimeMoreInfo(JikanClient client, int id) async {
+  try {
+    final response = await client.httpClient.get(Uri.parse('${client.jikanV4BaseUrl}/anime/$id/moreinfo'));
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      return AnimeMoreInfo.fromJson(jsonData as Map<String, dynamic>).data;
+    } else {
+      throw HttpException(response.body);
+    }
+  } catch (e, trace) {
+    if (e is! HttpException) {
+      print('$getAnimeMoreInfo: $trace');
+    }
+    rethrow;
+  }
+}
