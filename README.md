@@ -186,7 +186,40 @@ Coming soon...
 
 # Seasons
 
-Coming soon...
+✅ 4/4 endpoints are supported.
+
+```dart
+Future<SeasonNowResponse> getSeasonNow({
+    String? filter,
+    bool? sfw,
+    bool? unapproved,
+    bool? continuing,
+    int page = 1,
+    int limit = 25,
+})
+
+Future<SeasonGetResponse> getSeason(
+    int year,
+    String season, {
+    String? filter,
+    bool? sfw,
+    bool? unapproved,
+    bool? continuing,
+    int page = 1,
+    int limit = 25,
+})
+
+Future<SeasonListResponse> getSeasonsList()
+
+Future<SeasonUpcomingResponse> getSeasonUpcoming({
+    String? filter,
+    bool? sfw,
+    bool? unapproved,
+    bool? continuing,
+    int page = 1,
+    int limit = 25,
+})
+```
 
 # Top
 
