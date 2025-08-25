@@ -3,7 +3,9 @@ import 'package:http/http.dart' as http;
 import 'anime/index.dart';
 import 'endpoints_anime.dart' as anime;
 import 'endpoints_manga.dart' as manga;
+import 'endpoints_seasons.dart' as seasons;
 import 'manga/index.dart';
+import 'seasons/index.dart';
 
 const String _jikanV4BaseUrl = 'https://api.jikan.moe/v4';
 
@@ -239,5 +241,28 @@ class JikanClient {
     magazines: magazines,
     startDate: startDate,
     endDate: endDate,
+  );
+
+  /// https://docs.api.jikan.moe/#tag/seasons/operation/getSeasonNow
+  ///
+  /// - _filter_ - "tv" "movie" "ova" "special" "ona" "music"
+  /// - _sfw_ - 'Safe For Work'. This is a flag. When supplied it will filter out entries according to the SFW Policy.
+  /// - _unapproved_ - This is a flag. When supplied it will include entries which are unapproved. Unapproved entries on MyAnimeList are those that are user submitted and have not yet been approved by MAL to show up on other pages. They will have their own specifc pages and are often removed resulting in a 404 error.
+  /// - _continuing_ - This is a flag. When supplied it will include entries which are continuing from previous seasons. MAL includes these items on the seasons view in the ″TV (continuing)″ section.
+  Future<SeasonNowResponse> getSeasonNow({
+    String? filter,
+    bool? sfw,
+    bool? unapproved,
+    bool? continuing,
+    int page = 1,
+    int limit = 25,
+  }) => seasons.getSeasonNow(
+    this,
+    filter: filter,
+    sfw: sfw,
+    unapproved: unapproved,
+    continuing: continuing,
+    page: page,
+    limit: limit,
   );
 }
