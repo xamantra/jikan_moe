@@ -39,3 +39,41 @@ Future<TopAnimeResponse> getTopAnime(
     rethrow;
   }
 }
+
+Future<TopMangaResponse> getTopManga(
+  JikanClient client, {
+  String? type,
+  String? filter,
+  bool? sfw,
+  int page = 1,
+  int limit = 25,
+}) async {
+  try {
+    final queryParams = <String, String>{};
+
+    if (type != null) queryParams['type'] = type;
+    if (filter != null) queryParams['filter'] = filter;
+    if (sfw != null) queryParams['sfw'] = sfw.toString();
+    queryParams['page'] = page.toString();
+    queryParams['limit'] = limit.toString();
+
+    final uri = Uri.parse('${client.jikanV4BaseUrl}/top/manga').replace(queryParameters: queryParams);
+    final response = await client.httpClient.get(uri);
+
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      return TopMangaResponse.fromJson(jsonData as Map<String, dynamic>);
+    } else {
+      throw JikanException(response.body);
+    }
+  } catch (e, trace) {
+    if (e is! JikanException) {
+      print('$getTopManga: $trace');
+    }
+    rethrow;
+  }
+}
+
+// getTopManga -> {{baseUrl}}/top/manga?type=manga&filter=publishing&page=1&limit=25
+// type ("manga" "novel" "lightnovel" "oneshot" "doujin" "manhwa" "manhua")
+// filter ("publishing" "upcoming" "bypopularity" "favorite")

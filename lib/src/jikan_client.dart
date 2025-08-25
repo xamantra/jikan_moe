@@ -347,4 +347,26 @@ class JikanClient {
     page: page,
     limit: limit,
   );
+
+  /// https://docs.api.jikan.moe/#tag/top/operation/getTopManga
+  ///
+  /// - _type_ - "manga" "novel" "lightnovel" "oneshot" "doujin" "manhwa" "manhua"
+  /// - _filter_ - "publishing" "upcoming" "bypopularity" "favorite"
+  /// - _sfw_ - Filter out Adult entries
+  /// - _page_ - Page number
+  /// - _limit_ - Number of results per page
+  Future<TopMangaResponse> getTopManga({
+    String? type,
+    String? filter,
+    bool? sfw,
+    int page = 1,
+    int limit = 25,
+  }) => top.getTopManga(
+    this,
+    type: type,
+    filter: filter,
+    sfw: sfw,
+    page: page,
+    limit: limit,
+  );
 }

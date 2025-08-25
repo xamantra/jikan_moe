@@ -4,7 +4,9 @@ Jikan (時間) is an unofficial & open-source API for the _“most active online
 anime + manga community and database”_ — MyAnimeList.
 [Official Docs here](https://docs.api.jikan.moe/)
 
-> NOTE: Not yet ready for production use.
+```txt
+NOTE: Not yet ready for production use.
+```
 
 # Dart / Flutter
 
