@@ -3,9 +3,11 @@ import 'package:http/http.dart' as http;
 import 'anime/index.dart';
 import 'endpoints_anime.dart' as anime;
 import 'endpoints_manga.dart' as manga;
+import 'endpoints_schedules.dart' as schedules;
 import 'endpoints_seasons.dart' as seasons;
 import 'endpoints_top.dart' as top;
 import 'manga/index.dart';
+import 'schedules/index.dart';
 import 'seasons/index.dart';
 import 'top/index.dart';
 
@@ -413,5 +415,30 @@ class JikanClient {
     preliminary: preliminary,
     spoilers: spoilers,
     page: page,
+  );
+
+  /// https://docs.api.jikan.moe/#tag/schedules/operation/getSchedules
+  ///
+  /// - _filter_ - "monday" "tuesday" "wednesday" "thursday" "friday" "saturday" "sunday" "unknown" "other"
+  /// - _kids_ - Filter results to only include kids content.
+  /// - _sfw_ - Filter results to only include safe for work content.
+  /// - _unapproved_ - This is a flag. When supplied it will include entries which are unapproved.
+  /// - _page_ - Page number.
+  /// - _limit_ - Number of results per page.
+  Future<SchedulesResponse> getSchedules({
+    String? filter,
+    bool? kids,
+    bool? sfw,
+    bool? unapproved,
+    int? page,
+    int? limit,
+  }) => schedules.getSchedules(
+    this,
+    filter: filter,
+    kids: kids,
+    sfw: sfw,
+    unapproved: unapproved,
+    page: page,
+    limit: limit,
   );
 }
