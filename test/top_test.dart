@@ -210,7 +210,61 @@ void main() {
         print('✓ Pagination: Successfully parsed pagination structure');
 
         print('✓ All top characters tests passed');
-        print('\n✓ All top anime, manga, people, and characters tests completed successfully');
+
+        // ===== TOP REVIEWS TESTS =====
+        print('\n--- Testing Top Reviews ---');
+
+        // Test basic top reviews request
+        final reviewsResult = await queue.add(() => client.getTopReviews());
+        expect(reviewsResult, isA<TopReviewsResponse>(), reason: 'should return TopReviewsResponse');
+        expect(reviewsResult.pagination, isA<TopReviewsPagination>(), reason: 'should have pagination');
+        expect(reviewsResult.data, isA<List<TopReviewData>>(), reason: 'should have data list');
+        print('✓ TopReviewsResponse: Successfully parsed ${reviewsResult.data.length} top reviews entries');
+
+        // Test with type filter (anime)
+        final animeReviewsResult = await queue.add(() => client.getTopReviews(type: 'anime'));
+        expect(animeReviewsResult, isA<TopReviewsResponse>(), reason: 'should return TopReviewsResponse for anime type');
+        print('✓ TopReviewsResponse: Successfully parsed ${animeReviewsResult.data.length} anime reviews entries');
+
+        // Test with type filter (manga)
+        final mangaReviewsResult = await queue.add(() => client.getTopReviews(type: 'manga'));
+        expect(mangaReviewsResult, isA<TopReviewsResponse>(), reason: 'should return TopReviewsResponse for manga type');
+        print('✓ TopReviewsResponse: Successfully parsed ${mangaReviewsResult.data.length} manga reviews entries');
+
+        // Test with preliminary filter
+        final preliminaryReviewsResult = await queue.add(() => client.getTopReviews(preliminary: true));
+        expect(preliminaryReviewsResult, isA<TopReviewsResponse>(), reason: 'should return TopReviewsResponse for preliminary filter');
+        print('✓ TopReviewsResponse: Successfully parsed ${preliminaryReviewsResult.data.length} preliminary reviews entries');
+
+        // Test with spoilers filter
+        final spoilersReviewsResult = await queue.add(() => client.getTopReviews(spoilers: true));
+        expect(spoilersReviewsResult, isA<TopReviewsResponse>(), reason: 'should return TopReviewsResponse for spoilers filter');
+        print('✓ TopReviewsResponse: Successfully parsed ${spoilersReviewsResult.data.length} spoiler reviews entries');
+
+        // Test with pagination
+        final pageReviewsResult = await queue.add(() => client.getTopReviews(page: 2));
+        expect(pageReviewsResult, isA<TopReviewsResponse>(), reason: 'should return TopReviewsResponse for page 2');
+        print('✓ TopReviewsResponse: Successfully parsed ${pageReviewsResult.data.length} reviews entries on page ${pageReviewsResult.pagination.lastVisiblePage}');
+
+        // Test with multiple parameters
+        final combinedReviewsResult = await queue.add(
+          () => client.getTopReviews(
+            type: 'anime',
+            preliminary: true,
+            spoilers: false,
+            page: 1,
+          ),
+        );
+        expect(combinedReviewsResult, isA<TopReviewsResponse>(), reason: 'should return TopReviewsResponse with combined parameters');
+        print('✓ TopReviewsResponse: Successfully parsed ${combinedReviewsResult.data.length} anime reviews entries with combined parameters');
+
+        // Test pagination structure
+        final paginationReviewsResult = await queue.add(() => client.getTopReviews(page: 1));
+        expect(paginationReviewsResult.pagination, isA<TopReviewsPagination>(), reason: 'should have pagination structure');
+        print('✓ Pagination: Successfully parsed pagination structure');
+
+        print('✓ All top reviews tests passed');
+        print('\n✓ All top anime, manga, people, characters, and reviews tests completed successfully');
       } on JikanException catch (e) {
         // Test: JikanException should pass (expected API error)
         expect(e, isA<JikanException>(), reason: 'Should throw JikanException for API errors');

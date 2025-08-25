@@ -395,4 +395,23 @@ class JikanClient {
     page: page,
     limit: limit,
   );
+
+  /// https://docs.api.jikan.moe/#tag/top/operation/getTopReviews
+  ///
+  /// - _type_ - "anime" "manga"
+  /// - _preliminary_ - Include preliminary reviews
+  /// - _spoilers_ - Include spoiler reviews
+  /// - _page_ - Page number
+  Future<TopReviewsResponse> getTopReviews({
+    String? type,
+    bool? preliminary,
+    bool? spoilers,
+    int page = 1,
+  }) => top.getTopReviews(
+    this,
+    type: type,
+    preliminary: preliminary,
+    spoilers: spoilers,
+    page: page,
+  );
 }

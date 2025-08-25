@@ -129,3 +129,35 @@ Future<TopCharactersResponse> getTopCharacters(
     rethrow;
   }
 }
+
+Future<TopReviewsResponse> getTopReviews(
+  JikanClient client, {
+  String? type,
+  bool? preliminary,
+  bool? spoilers,
+  int page = 1,
+}) async {
+  try {
+    final queryParams = <String, String>{};
+
+    if (type != null) queryParams['type'] = type;
+    if (preliminary != null) queryParams['preliminary'] = preliminary.toString();
+    if (spoilers != null) queryParams['spoilers'] = spoilers.toString();
+    queryParams['page'] = page.toString();
+
+    final uri = Uri.parse('${client.jikanV4BaseUrl}/top/reviews').replace(queryParameters: queryParams);
+    final response = await client.httpClient.get(uri);
+
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      return TopReviewsResponse.fromJson(jsonData as Map<String, dynamic>);
+    } else {
+      throw JikanException(response.body);
+    }
+  } catch (e, trace) {
+    if (e is! JikanException) {
+      print('$getTopReviews: $trace');
+    }
+    rethrow;
+  }
+}
