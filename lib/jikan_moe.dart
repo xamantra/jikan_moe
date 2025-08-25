@@ -7,3 +7,4 @@ export 'src/manga/index.dart';
 export 'src/seasons/index.dart';
 export 'src/top/index.dart';
 export 'src/schedules/index.dart';
+export 'src/genre/index.dart';

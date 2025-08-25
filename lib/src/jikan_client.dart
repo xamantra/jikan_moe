@@ -2,10 +2,12 @@ import 'package:http/http.dart' as http;
 
 import 'anime/index.dart';
 import 'endpoints_anime.dart' as anime;
+import 'endpoints_genre.dart' as genre;
 import 'endpoints_manga.dart' as manga;
 import 'endpoints_schedules.dart' as schedules;
 import 'endpoints_seasons.dart' as seasons;
 import 'endpoints_top.dart' as top;
+import 'genre/index.dart';
 import 'manga/index.dart';
 import 'schedules/index.dart';
 import 'seasons/index.dart';
@@ -440,5 +442,15 @@ class JikanClient {
     unapproved: unapproved,
     page: page,
     limit: limit,
+  );
+
+  /// https://docs.api.jikan.moe/#tag/genres/operation/getMangaGenres
+  ///
+  /// - _filter_ - "genres" "explicit_genres" "themes" "demographics"
+  Future<List<MangaGenreData>> getMangaGenres({
+    String? filter,
+  }) => genre.getMangaGenres(
+    this,
+    filter: filter,
   );
 }
