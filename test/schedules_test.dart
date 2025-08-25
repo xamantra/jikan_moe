@@ -41,13 +41,15 @@ void main() {
       expect(limit, isA<SchedulesResponse>(), reason: 'should return SchedulesResponse');
       print('✓ SchedulesResponse: Successfully parsed ${limit.data.length} schedules for <limit: 10>');
 
-      final combined = await queue.add(() => client.getSchedules(
-        filter: 'friday',
-        kids: false,
-        sfw: true,
-        page: 1,
-        limit: 5,
-      ));
+      final combined = await queue.add(
+        () => client.getSchedules(
+          filter: 'friday',
+          kids: false,
+          sfw: true,
+          page: 1,
+          limit: 5,
+        ),
+      );
       expect(combined, isA<SchedulesResponse>(), reason: 'should return SchedulesResponse');
       print('✓ SchedulesResponse: Successfully parsed ${combined.data.length} schedules for combined filters');
     });

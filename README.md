@@ -152,7 +152,17 @@ Coming soon...
 
 # Genres
 
-Coming soon...
+✅ 2/2 endpoints are supported.
+
+```dart
+Future<List<AnimeGenreData>> getAnimeGenres({
+    String? filter,
+})
+
+Future<List<MangaGenreData>> getMangaGenres({
+    String? filter,
+})
+```
 
 # Magazines
 
@@ -180,7 +190,18 @@ Coming soon...
 
 # Schedules
 
-Coming soon...
+✅ 1/1 endpoint is supported.
+
+```dart
+Future<SchedulesResponse> getSchedules({
+    String? filter,
+    bool? kids,
+    bool? sfw,
+    bool? unapproved,
+    int? page,
+    int? limit,
+})
+```
 
 # Users
 
@@ -225,7 +246,43 @@ Future<SeasonUpcomingResponse> getSeasonUpcoming({
 
 # Top
 
-Coming soon...
+✅ 5/5 endpoints are supported.
+
+```dart
+Future<TopAnimeResponse> getTopAnime({
+    String? type,
+    String? filter,
+    String? rating,
+    bool? sfw,
+    int page = 1,
+    int limit = 25,
+})
+
+Future<TopMangaResponse> getTopManga({
+    String? type,
+    String? filter,
+    bool? sfw,
+    int page = 1,
+    int limit = 25,
+})
+
+Future<TopPeopleResponse> getTopPeople({
+    int page = 1,
+    int limit = 25,
+})
+
+Future<TopCharactersResponse> getTopCharacters({
+    int page = 1,
+    int limit = 25,
+})
+
+Future<TopReviewsResponse> getTopReviews({
+    String? type,
+    bool? preliminary,
+    bool? spoilers,
+    int page = 1,
+})
+```
 
 # Watch
 

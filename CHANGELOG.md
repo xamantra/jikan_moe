@@ -1,3 +1,7 @@
+## 3.0.0
+
+- Seasons, Top, Schedules, Genre modules fully implemented.
+
 ## 2.0.0
 
 - Manga module fully implemented.

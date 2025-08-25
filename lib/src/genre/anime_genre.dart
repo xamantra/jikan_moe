@@ -39,11 +39,7 @@ class AnimeGenreData {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    return other is AnimeGenreData &&
-        other.malId == malId &&
-        other.name == name &&
-        other.url == url &&
-        other.count == count;
+    return other is AnimeGenreData && other.malId == malId && other.name == name && other.url == url && other.count == count;
   }
 
   @override
@@ -61,9 +57,7 @@ class AnimeGenresResponse {
 
   factory AnimeGenresResponse.fromJson(Map<String, dynamic> json) {
     return AnimeGenresResponse(
-      data: (json['data'] as List<dynamic>)
-          .map((item) => AnimeGenreData.fromJson(item as Map<String, dynamic>))
-          .toList(),
+      data: (json['data'] as List<dynamic>).map((item) => AnimeGenreData.fromJson(item as Map<String, dynamic>)).toList(),
     );
   }
 

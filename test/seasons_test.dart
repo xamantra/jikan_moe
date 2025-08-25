@@ -168,17 +168,17 @@ void main() {
       final seasonsList = await queue.add(() => client.getSeasonsList());
       expect(seasonsList, isA<SeasonListResponse>(), reason: 'should return SeasonListResponse');
       print('✓ SeasonListResponse: Successfully parsed ${seasonsList.data.length} anime seasons');
-      
+
       // Verify the structure of the response
       expect(seasonsList.pagination, isA<Pagination>(), reason: 'should have pagination');
       expect(seasonsList.data, isNotEmpty, reason: 'should have season data');
-      
+
       // Verify a sample year has the expected structure
       final sampleYear = seasonsList.data.first;
       expect(sampleYear.year, isA<int>(), reason: 'year should be an integer');
       expect(sampleYear.seasons, isA<List<String>>(), reason: 'seasons should be a list of strings');
       expect(sampleYear.seasons, isNotEmpty, reason: 'seasons should not be empty');
-      
+
       // Verify seasons contain valid values
       final validSeasons = ['winter', 'spring', 'summer', 'fall'];
       for (final season in sampleYear.seasons) {
