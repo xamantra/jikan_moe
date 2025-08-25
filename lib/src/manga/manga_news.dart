@@ -1,3 +1,5 @@
+import '../anime/index.dart';
+
 class MangaNews {
   final Pagination pagination;
   final List<MangaNewsItem> data;
@@ -115,34 +117,5 @@ class MangaNewsImageJpg {
     return {
       'image_url': imageUrl,
     };
-  }
-}
-
-class Pagination {
-  final int lastVisiblePage;
-  final bool hasNextPage;
-
-  const Pagination({
-    required this.lastVisiblePage,
-    required this.hasNextPage,
-  });
-
-  factory Pagination.fromJson(Map<String, dynamic> json) {
-    return Pagination(
-      lastVisiblePage: json['last_visible_page'] as int,
-      hasNextPage: json['has_next_page'] as bool,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'last_visible_page': lastVisiblePage,
-      'has_next_page': hasNextPage,
-    };
-  }
-
-  @override
-  String toString() {
-    return 'Pagination(lastVisiblePage: $lastVisiblePage, hasNextPage: $hasNextPage)';
   }
 }

@@ -1,4 +1,4 @@
-import 'index.dart';
+import '../anime/index.dart';
 
 class MangaReviews {
   final Pagination pagination;
@@ -84,54 +84,6 @@ class MangaReviewData {
       'is_preliminary': isPreliminary,
       'chapters_read': chaptersRead,
       'user': user.toJson(),
-    };
-  }
-}
-
-class Reactions {
-  final int overall;
-  final int nice;
-  final int loveIt;
-  final int funny;
-  final int confusing;
-  final int informative;
-  final int wellWritten;
-  final int creative;
-
-  const Reactions({
-    required this.overall,
-    required this.nice,
-    required this.loveIt,
-    required this.funny,
-    required this.confusing,
-    required this.informative,
-    required this.wellWritten,
-    required this.creative,
-  });
-
-  factory Reactions.fromJson(Map<String, dynamic> json) {
-    return Reactions(
-      overall: json['overall'],
-      nice: json['nice'],
-      loveIt: json['love_it'],
-      funny: json['funny'],
-      confusing: json['confusing'],
-      informative: json['informative'],
-      wellWritten: json['well_written'],
-      creative: json['creative'],
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'overall': overall,
-      'nice': nice,
-      'love_it': loveIt,
-      'funny': funny,
-      'confusing': confusing,
-      'informative': informative,
-      'well_written': wellWritten,
-      'creative': creative,
     };
   }
 }

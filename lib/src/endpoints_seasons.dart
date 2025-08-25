@@ -77,3 +77,25 @@ Future<SeasonGetResponse> getSeason(
     rethrow;
   }
 }
+
+// getSeasonsList -> {{baseUrl}}/seasons
+Future<SeasonListResponse> getSeasonsList(
+  JikanClient client,
+) async {
+  try {
+    final uri = Uri.parse('${client.jikanV4BaseUrl}/seasons');
+
+    final response = await client.httpClient.get(uri);
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      return SeasonListResponse.fromJson(jsonData as Map<String, dynamic>);
+    } else {
+      throw JikanException(response.body);
+    }
+  } catch (e, trace) {
+    if (e is! JikanException) {
+      print('$getSeasonsList: $trace');
+    }
+    rethrow;
+  }
+}

@@ -1,5 +1,4 @@
 import 'package:jikan_moe/jikan_moe.dart';
-import 'package:jikan_moe/src/manga/index.dart';
 import 'package:test/test.dart';
 
 import 'queue.dart';

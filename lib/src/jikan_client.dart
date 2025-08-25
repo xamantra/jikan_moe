@@ -294,4 +294,7 @@ class JikanClient {
     page: page,
     limit: limit,
   );
+
+  /// https://docs.api.jikan.moe/#tag/seasons/operation/getSeasonsList
+  Future<SeasonListResponse> getSeasonsList() => seasons.getSeasonsList(this);
 }
