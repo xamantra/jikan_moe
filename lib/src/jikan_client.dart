@@ -444,6 +444,16 @@ class JikanClient {
     limit: limit,
   );
 
+  /// https://docs.api.jikan.moe/#tag/genres/operation/getAnimeGenres
+  ///
+  /// - _filter_ - "genres" "explicit_genres" "themes" "demographics"
+  Future<List<AnimeGenreData>> getAnimeGenres({
+    String? filter,
+  }) => genre.getAnimeGenres(
+    this,
+    filter: filter,
+  );
+
   /// https://docs.api.jikan.moe/#tag/genres/operation/getMangaGenres
   ///
   /// - _filter_ - "genres" "explicit_genres" "themes" "demographics"
