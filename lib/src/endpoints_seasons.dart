@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'seasons/index.dart';
-import 'seasons/season_upcoming.dart';
 import 'jikan_client.dart';
 import 'lib_extras.dart';
 

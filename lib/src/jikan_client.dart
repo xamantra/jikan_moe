@@ -4,8 +4,10 @@ import 'anime/index.dart';
 import 'endpoints_anime.dart' as anime;
 import 'endpoints_manga.dart' as manga;
 import 'endpoints_seasons.dart' as seasons;
+import 'endpoints_top.dart' as top;
 import 'manga/index.dart';
 import 'seasons/index.dart';
+import 'top/index.dart';
 
 const String _jikanV4BaseUrl = 'https://api.jikan.moe/v4';
 
@@ -317,6 +319,31 @@ class JikanClient {
     sfw: sfw,
     unapproved: unapproved,
     continuing: continuing,
+    page: page,
+    limit: limit,
+  );
+
+  /// https://docs.api.jikan.moe/#tag/top/operation/getTopAnime
+  ///
+  /// - _type_ - "tv" "movie" "ova" "special" "ona" "music" "cm" "pv" "tv_special"
+  /// - _filter_ - "airing" "upcoming" "bypopularity" "favorite"
+  /// - _rating_ - "g" "pg" "pg13" "r17" "r" "rx"
+  /// - _sfw_ - Filter out Adult entries
+  /// - _page_ - Page number
+  /// - _limit_ - Number of results per page
+  Future<TopAnimeResponse> getTopAnime({
+    String? type,
+    String? filter,
+    String? rating,
+    bool? sfw,
+    int page = 1,
+    int limit = 25,
+  }) => top.getTopAnime(
+    this,
+    type: type,
+    filter: filter,
+    rating: rating,
+    sfw: sfw,
     page: page,
     limit: limit,
   );
