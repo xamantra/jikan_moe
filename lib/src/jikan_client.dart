@@ -265,4 +265,33 @@ class JikanClient {
     page: page,
     limit: limit,
   );
+
+  /// https://docs.api.jikan.moe/#tag/seasons/operation/getSeason
+  ///
+  /// - _year_ - Year of the season
+  /// - _season_ - Season name: "winter" "spring" "summer" "fall"
+  /// - _filter_ - "tv" "movie" "ova" "special" "ona" "music"
+  /// - _sfw_ - 'Safe For Work'. This is a flag. When supplied it will filter out entries according to the SFW Policy.
+  /// - _unapproved_ - This is a flag. When supplied it will include entries which are unapproved. Unapproved entries on MyAnimeList are those that are user submitted and have not yet been approved by MAL to show up on other pages. They will have their own specifc pages and are often removed resulting in a 404 error.
+  /// - _continuing_ - This is a flag. When supplied it will include entries which are continuing from previous seasons. MAL includes these items on the seasons view in the ″TV (continuing)″ section.
+  Future<SeasonGetResponse> getSeason(
+    int year,
+    String season, {
+    String? filter,
+    bool? sfw,
+    bool? unapproved,
+    bool? continuing,
+    int page = 1,
+    int limit = 25,
+  }) => seasons.getSeason(
+    this,
+    year,
+    season,
+    filter: filter,
+    sfw: sfw,
+    unapproved: unapproved,
+    continuing: continuing,
+    page: page,
+    limit: limit,
+  );
 }

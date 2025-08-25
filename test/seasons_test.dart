@@ -60,6 +60,66 @@ void main() {
       final limit10 = await queue.add(() => client.getSeasonNow(limit: 10));
       expect(limit10, isA<SeasonNowResponse>(), reason: 'should return SeasonNowResponse');
       print('✓ SeasonNowResponse: Successfully parsed ${limit10.data.length} anime for current season (limit 10)');
+
+      final summer2025 = await queue.add(() => client.getSeason(2025, 'summer'));
+      expect(summer2025, isA<SeasonGetResponse>(), reason: 'should return SeasonGetResponse');
+      print('✓ SeasonGetResponse: Successfully parsed ${summer2025.data.length} anime for summer 2025');
+
+      final winter2024 = await queue.add(() => client.getSeason(2024, 'winter'));
+      expect(winter2024, isA<SeasonGetResponse>(), reason: 'should return SeasonGetResponse');
+      print('✓ SeasonGetResponse: Successfully parsed ${winter2024.data.length} anime for winter 2024');
+
+      final spring2024 = await queue.add(() => client.getSeason(2024, 'spring'));
+      expect(spring2024, isA<SeasonGetResponse>(), reason: 'should return SeasonGetResponse');
+      print('✓ SeasonGetResponse: Successfully parsed ${spring2024.data.length} anime for spring 2024');
+
+      final fall2024 = await queue.add(() => client.getSeason(2024, 'fall'));
+      expect(fall2024, isA<SeasonGetResponse>(), reason: 'should return SeasonGetResponse');
+      print('✓ SeasonGetResponse: Successfully parsed ${fall2024.data.length} anime for fall 2024');
+
+      final tvFilterSeason = await queue.add(() => client.getSeason(2025, 'summer', filter: 'tv'));
+      expect(tvFilterSeason, isA<SeasonGetResponse>(), reason: 'should return SeasonGetResponse');
+      print('✓ SeasonGetResponse: Successfully parsed ${tvFilterSeason.data.length} TV anime for summer 2025');
+
+      final movieFilterSeason = await queue.add(() => client.getSeason(2025, 'summer', filter: 'movie'));
+      expect(movieFilterSeason, isA<SeasonGetResponse>(), reason: 'should return SeasonGetResponse');
+      print('✓ SeasonGetResponse: Successfully parsed ${movieFilterSeason.data.length} movie anime for summer 2025');
+
+      final ovaFilterSeason = await queue.add(() => client.getSeason(2025, 'summer', filter: 'ova'));
+      expect(ovaFilterSeason, isA<SeasonGetResponse>(), reason: 'should return SeasonGetResponse');
+      print('✓ SeasonGetResponse: Successfully parsed ${ovaFilterSeason.data.length} OVA anime for summer 2025');
+
+      final specialFilterSeason = await queue.add(() => client.getSeason(2025, 'summer', filter: 'special'));
+      expect(specialFilterSeason, isA<SeasonGetResponse>(), reason: 'should return SeasonGetResponse');
+      print('✓ SeasonGetResponse: Successfully parsed ${specialFilterSeason.data.length} special anime for summer 2025');
+
+      final onaFilterSeason = await queue.add(() => client.getSeason(2025, 'summer', filter: 'ona'));
+      expect(onaFilterSeason, isA<SeasonGetResponse>(), reason: 'should return SeasonGetResponse');
+      print('✓ SeasonGetResponse: Successfully parsed ${onaFilterSeason.data.length} ONA anime for summer 2025');
+
+      final musicFilterSeason = await queue.add(() => client.getSeason(2025, 'summer', filter: 'music'));
+      expect(musicFilterSeason, isA<SeasonGetResponse>(), reason: 'should return SeasonGetResponse');
+      print('✓ SeasonGetResponse: Successfully parsed ${musicFilterSeason.data.length} music anime for summer 2025');
+
+      final sfwSeason = await queue.add(() => client.getSeason(2025, 'summer', sfw: true));
+      expect(sfwSeason, isA<SeasonGetResponse>(), reason: 'should return SeasonGetResponse');
+      print('✓ SeasonGetResponse: Successfully parsed ${sfwSeason.data.length} SFW anime for summer 2025');
+
+      final continuingSeason = await queue.add(() => client.getSeason(2025, 'summer', continuing: true));
+      expect(continuingSeason, isA<SeasonGetResponse>(), reason: 'should return SeasonGetResponse');
+      print('✓ SeasonGetResponse: Successfully parsed ${continuingSeason.data.length} continuing anime for summer 2025');
+
+      final page2Season = await queue.add(() => client.getSeason(2025, 'summer', page: 2));
+      expect(page2Season, isA<SeasonGetResponse>(), reason: 'should return SeasonGetResponse');
+      print('✓ SeasonGetResponse: Successfully parsed ${page2Season.data.length} anime for summer 2025 (page 2)');
+
+      final limit10Season = await queue.add(() => client.getSeason(2025, 'summer', limit: 10));
+      expect(limit10Season, isA<SeasonGetResponse>(), reason: 'should return SeasonGetResponse');
+      print('✓ SeasonGetResponse: Successfully parsed ${limit10Season.data.length} anime for summer 2025 (limit 10)');
+
+      final fall2025 = await queue.add(() => client.getSeason(2025, 'fall'));
+      expect(fall2025, isA<SeasonGetResponse>(), reason: 'should return SeasonGetResponse');
+      print('✓ SeasonGetResponse: Successfully parsed ${fall2025.data.length} anime for fall 2025');
     });
-  });
+  }, timeout: Timeout(Duration(minutes: 5)));
 }
