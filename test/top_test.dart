@@ -136,7 +136,44 @@ void main() {
         print('✓ Pagination: Successfully parsed pagination structure');
 
         print('✓ All top manga tests passed');
-        print('\n✓ All top anime and manga tests completed successfully');
+
+        // ===== TOP PEOPLE TESTS =====
+        print('\n--- Testing Top People ---');
+
+        // Test basic top people request
+        final peopleResult = await queue.add(() => client.getTopPeople());
+        expect(peopleResult, isA<TopPeopleResponse>(), reason: 'should return TopPeopleResponse');
+        expect(peopleResult.pagination, isA<TopPeoplePagination>(), reason: 'should have pagination');
+        expect(peopleResult.data, isA<List<TopPeopleData>>(), reason: 'should have data list');
+        print('✓ TopPeopleResponse: Successfully parsed ${peopleResult.data.length} top people entries');
+
+        // Test with pagination
+        final pagePeopleResult = await queue.add(() => client.getTopPeople(page: 2));
+        expect(pagePeopleResult, isA<TopPeopleResponse>(), reason: 'should return TopPeopleResponse for page 2');
+        print('✓ TopPeopleResponse: Successfully parsed ${pagePeopleResult.data.length} people entries on page ${pagePeopleResult.pagination.currentPage}');
+
+        // Test with limit
+        final limitPeopleResult = await queue.add(() => client.getTopPeople(limit: 5));
+        expect(limitPeopleResult, isA<TopPeopleResponse>(), reason: 'should return TopPeopleResponse with limit 5');
+        print('✓ TopPeopleResponse: Successfully parsed ${limitPeopleResult.data.length} people entries with limit 5');
+
+        // Test with multiple parameters
+        final combinedPeopleResult = await queue.add(
+          () => client.getTopPeople(
+            page: 1,
+            limit: 3,
+          ),
+        );
+        expect(combinedPeopleResult, isA<TopPeopleResponse>(), reason: 'should return TopPeopleResponse with combined parameters');
+        print('✓ TopPeopleResponse: Successfully parsed ${combinedPeopleResult.data.length} people entries with combined parameters');
+
+        // Test pagination structure
+        final paginationPeopleResult = await queue.add(() => client.getTopPeople(page: 1, limit: 10));
+        expect(paginationPeopleResult.pagination, isA<TopPeoplePagination>(), reason: 'should have pagination structure');
+        print('✓ Pagination: Successfully parsed pagination structure');
+
+        print('✓ All top people tests passed');
+        print('\n✓ All top anime, manga, and people tests completed successfully');
       } on JikanException catch (e) {
         // Test: JikanException should pass (expected API error)
         expect(e, isA<JikanException>(), reason: 'Should throw JikanException for API errors');

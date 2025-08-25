@@ -74,6 +74,30 @@ Future<TopMangaResponse> getTopManga(
   }
 }
 
-// getTopManga -> {{baseUrl}}/top/manga?type=manga&filter=publishing&page=1&limit=25
-// type ("manga" "novel" "lightnovel" "oneshot" "doujin" "manhwa" "manhua")
-// filter ("publishing" "upcoming" "bypopularity" "favorite")
+Future<TopPeopleResponse> getTopPeople(
+  JikanClient client, {
+  int page = 1,
+  int limit = 25,
+}) async {
+  try {
+    final queryParams = <String, String>{};
+
+    queryParams['page'] = page.toString();
+    queryParams['limit'] = limit.toString();
+
+    final uri = Uri.parse('${client.jikanV4BaseUrl}/top/people').replace(queryParameters: queryParams);
+    final response = await client.httpClient.get(uri);
+
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      return TopPeopleResponse.fromJson(jsonData as Map<String, dynamic>);
+    } else {
+      throw JikanException(response.body);
+    }
+  } catch (e, trace) {
+    if (e is! JikanException) {
+      print('$getTopPeople: $trace');
+    }
+    rethrow;
+  }
+}

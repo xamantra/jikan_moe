@@ -369,4 +369,17 @@ class JikanClient {
     page: page,
     limit: limit,
   );
+
+  /// https://docs.api.jikan.moe/#tag/top/operation/getTopPeople
+  ///
+  /// - _page_ - Page number
+  /// - _limit_ - Number of results per page
+  Future<TopPeopleResponse> getTopPeople({
+    int page = 1,
+    int limit = 25,
+  }) => top.getTopPeople(
+    this,
+    page: page,
+    limit: limit,
+  );
 }
