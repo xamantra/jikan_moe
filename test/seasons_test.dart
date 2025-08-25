@@ -121,6 +121,50 @@ void main() {
       expect(fall2025, isA<SeasonGetResponse>(), reason: 'should return SeasonGetResponse');
       print('✓ SeasonGetResponse: Successfully parsed ${fall2025.data.length} anime for fall 2025');
 
+      final upcoming = await queue.add(() => client.getSeasonUpcoming());
+      expect(upcoming, isA<SeasonUpcomingResponse>(), reason: 'should return SeasonUpcomingResponse');
+      print('✓ SeasonUpcomingResponse: Successfully parsed ${upcoming.data.length} upcoming anime');
+
+      final tvFilterUpcoming = await queue.add(() => client.getSeasonUpcoming(filter: 'tv'));
+      expect(tvFilterUpcoming, isA<SeasonUpcomingResponse>(), reason: 'should return SeasonUpcomingResponse');
+      print('✓ SeasonUpcomingResponse: Successfully parsed ${tvFilterUpcoming.data.length} TV upcoming anime');
+
+      final movieFilterUpcoming = await queue.add(() => client.getSeasonUpcoming(filter: 'movie'));
+      expect(movieFilterUpcoming, isA<SeasonUpcomingResponse>(), reason: 'should return SeasonUpcomingResponse');
+      print('✓ SeasonUpcomingResponse: Successfully parsed ${movieFilterUpcoming.data.length} movie upcoming anime');
+
+      final ovaFilterUpcoming = await queue.add(() => client.getSeasonUpcoming(filter: 'ova'));
+      expect(ovaFilterUpcoming, isA<SeasonUpcomingResponse>(), reason: 'should return SeasonUpcomingResponse');
+      print('✓ SeasonUpcomingResponse: Successfully parsed ${ovaFilterUpcoming.data.length} OVA upcoming anime');
+
+      final specialFilterUpcoming = await queue.add(() => client.getSeasonUpcoming(filter: 'special'));
+      expect(specialFilterUpcoming, isA<SeasonUpcomingResponse>(), reason: 'should return SeasonUpcomingResponse');
+      print('✓ SeasonUpcomingResponse: Successfully parsed ${specialFilterUpcoming.data.length} special upcoming anime');
+
+      final onaFilterUpcoming = await queue.add(() => client.getSeasonUpcoming(filter: 'ona'));
+      expect(onaFilterUpcoming, isA<SeasonUpcomingResponse>(), reason: 'should return SeasonUpcomingResponse');
+      print('✓ SeasonUpcomingResponse: Successfully parsed ${onaFilterUpcoming.data.length} ONA upcoming anime');
+
+      final musicFilterUpcoming = await queue.add(() => client.getSeasonUpcoming(filter: 'music'));
+      expect(musicFilterUpcoming, isA<SeasonUpcomingResponse>(), reason: 'should return SeasonUpcomingResponse');
+      print('✓ SeasonUpcomingResponse: Successfully parsed ${musicFilterUpcoming.data.length} music upcoming anime');
+
+      final sfwUpcoming = await queue.add(() => client.getSeasonUpcoming(sfw: true));
+      expect(sfwUpcoming, isA<SeasonUpcomingResponse>(), reason: 'should return SeasonUpcomingResponse');
+      print('✓ SeasonUpcomingResponse: Successfully parsed ${sfwUpcoming.data.length} SFW upcoming anime');
+
+      final continuingUpcoming = await queue.add(() => client.getSeasonUpcoming(continuing: true));
+      expect(continuingUpcoming, isA<SeasonUpcomingResponse>(), reason: 'should return SeasonUpcomingResponse');
+      print('✓ SeasonUpcomingResponse: Successfully parsed ${continuingUpcoming.data.length} continuing upcoming anime');
+
+      final page2Upcoming = await queue.add(() => client.getSeasonUpcoming(page: 2));
+      expect(page2Upcoming, isA<SeasonUpcomingResponse>(), reason: 'should return SeasonUpcomingResponse');
+      print('✓ SeasonUpcomingResponse: Successfully parsed ${page2Upcoming.data.length} upcoming anime (page 2)');
+
+      final limit10Upcoming = await queue.add(() => client.getSeasonUpcoming(limit: 10));
+      expect(limit10Upcoming, isA<SeasonUpcomingResponse>(), reason: 'should return SeasonUpcomingResponse');
+      print('✓ SeasonUpcomingResponse: Successfully parsed ${limit10Upcoming.data.length} upcoming anime (limit 10)');
+
       final seasonsList = await queue.add(() => client.getSeasonsList());
       expect(seasonsList, isA<SeasonListResponse>(), reason: 'should return SeasonListResponse');
       print('✓ SeasonListResponse: Successfully parsed ${seasonsList.data.length} anime seasons');

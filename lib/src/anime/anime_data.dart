@@ -90,7 +90,7 @@ class AnimeData {
       titleEnglish: json['title_english'],
       titleJapanese: json['title_japanese'],
       titleSynonyms: List<String>.from(json['title_synonyms']),
-      type: json['type'],
+      type: json['type'] ?? 'unknown',
       source: json['source'],
       episodes: json['episodes'],
       status: json['status'],
