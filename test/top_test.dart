@@ -16,8 +16,8 @@ void main() {
       client.httpClient.close();
     });
 
-    test('should handle all top anime and manga requests with queue-based rate limiting', () async {
-      print('Testing top anime and manga functionality');
+    test('should handle all top anime, manga, people, and characters requests with queue-based rate limiting', () async {
+      print('Testing top anime, manga, people, and characters functionality');
       print('Using queue-based rate limiting: 1 request per second');
 
       try {
@@ -173,7 +173,44 @@ void main() {
         print('✓ Pagination: Successfully parsed pagination structure');
 
         print('✓ All top people tests passed');
-        print('\n✓ All top anime, manga, and people tests completed successfully');
+
+        // ===== TOP CHARACTERS TESTS =====
+        print('\n--- Testing Top Characters ---');
+
+        // Test basic top characters request
+        final charactersResult = await queue.add(() => client.getTopCharacters());
+        expect(charactersResult, isA<TopCharactersResponse>(), reason: 'should return TopCharactersResponse');
+        expect(charactersResult.pagination, isA<TopCharactersPagination>(), reason: 'should have pagination');
+        expect(charactersResult.data, isA<List<TopCharacterData>>(), reason: 'should have data list');
+        print('✓ TopCharactersResponse: Successfully parsed ${charactersResult.data.length} top characters entries');
+
+        // Test with pagination
+        final pageCharactersResult = await queue.add(() => client.getTopCharacters(page: 2));
+        expect(pageCharactersResult, isA<TopCharactersResponse>(), reason: 'should return TopCharactersResponse for page 2');
+        print('✓ TopCharactersResponse: Successfully parsed ${pageCharactersResult.data.length} characters entries on page ${pageCharactersResult.pagination.currentPage}');
+
+        // Test with limit
+        final limitCharactersResult = await queue.add(() => client.getTopCharacters(limit: 5));
+        expect(limitCharactersResult, isA<TopCharactersResponse>(), reason: 'should return TopCharactersResponse with limit 5');
+        print('✓ TopCharactersResponse: Successfully parsed ${limitCharactersResult.data.length} characters entries with limit 5');
+
+        // Test with multiple parameters
+        final combinedCharactersResult = await queue.add(
+          () => client.getTopCharacters(
+            page: 1,
+            limit: 3,
+          ),
+        );
+        expect(combinedCharactersResult, isA<TopCharactersResponse>(), reason: 'should return TopCharactersResponse with combined parameters');
+        print('✓ TopCharactersResponse: Successfully parsed ${combinedCharactersResult.data.length} characters entries with combined parameters');
+
+        // Test pagination structure
+        final paginationCharactersResult = await queue.add(() => client.getTopCharacters(page: 1, limit: 10));
+        expect(paginationCharactersResult.pagination, isA<TopCharactersPagination>(), reason: 'should have pagination structure');
+        print('✓ Pagination: Successfully parsed pagination structure');
+
+        print('✓ All top characters tests passed');
+        print('\n✓ All top anime, manga, people, and characters tests completed successfully');
       } on JikanException catch (e) {
         // Test: JikanException should pass (expected API error)
         expect(e, isA<JikanException>(), reason: 'Should throw JikanException for API errors');

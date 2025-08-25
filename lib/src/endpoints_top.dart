@@ -101,3 +101,31 @@ Future<TopPeopleResponse> getTopPeople(
     rethrow;
   }
 }
+
+Future<TopCharactersResponse> getTopCharacters(
+  JikanClient client, {
+  int page = 1,
+  int limit = 25,
+}) async {
+  try {
+    final queryParams = <String, String>{};
+
+    queryParams['page'] = page.toString();
+    queryParams['limit'] = limit.toString();
+
+    final uri = Uri.parse('${client.jikanV4BaseUrl}/top/characters').replace(queryParameters: queryParams);
+    final response = await client.httpClient.get(uri);
+
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      return TopCharactersResponse.fromJson(jsonData as Map<String, dynamic>);
+    } else {
+      throw JikanException(response.body);
+    }
+  } catch (e, trace) {
+    if (e is! JikanException) {
+      print('$getTopCharacters: $trace');
+    }
+    rethrow;
+  }
+}
