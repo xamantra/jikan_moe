@@ -16,13 +16,16 @@ void main() {
       client.httpClient.close();
     });
 
-    test('should handle watch recent episodes', () async {
-      final result = await queue.add(
-        () => client.getWatchRecentEpisodes(),
-      );
-      
-      expect(result, isA<WatchRecentEpisodesResponse>(), reason: 'should return WatchRecentEpisodesResponse');
-      print('✓ WatchRecentEpisodesResponse: Successfully parsed ${result.data.length} recent episodes');
+    test('should handle watch endpoints', () async {
+      // Test recent episodes
+      final recentResult = await queue.add(() => client.getWatchRecentEpisodes());
+      expect(recentResult, isA<WatchEpisodesResponse>(), reason: 'should return WatchEpisodesResponse');
+      print('✓ WatchEpisodesResponse: Successfully parsed ${recentResult.data.length} recent episodes');
+
+      // Test popular episodes
+      final popularResult = await queue.add(() => client.getWatchPopularEpisodes());
+      expect(popularResult, isA<WatchEpisodesResponse>(), reason: 'should return WatchEpisodesResponse');
+      print('✓ WatchEpisodesResponse: Successfully parsed ${popularResult.data.length} popular episodes');
     });
   });
 }

@@ -1,16 +1,16 @@
-class WatchRecentEpisodesResponse {
+class WatchEpisodesResponse {
   final WatchPagination pagination;
-  final List<WatchRecentEpisodeData> data;
+  final List<WatchEpisodeData> data;
 
-  WatchRecentEpisodesResponse({
+  WatchEpisodesResponse({
     required this.pagination,
     required this.data,
   });
 
-  factory WatchRecentEpisodesResponse.fromJson(Map<String, dynamic> json) {
-    return WatchRecentEpisodesResponse(
+  factory WatchEpisodesResponse.fromJson(Map<String, dynamic> json) {
+    return WatchEpisodesResponse(
       pagination: WatchPagination.fromJson(json['pagination']),
-      data: (json['data'] as List).map((item) => WatchRecentEpisodeData.fromJson(item)).toList(),
+      data: (json['data'] as List).map((item) => WatchEpisodeData.fromJson(item)).toList(),
     );
   }
 
@@ -46,19 +46,19 @@ class WatchPagination {
   }
 }
 
-class WatchRecentEpisodeData {
+class WatchEpisodeData {
   final WatchAnimeEntry entry;
   final List<WatchEpisode> episodes;
   final bool regionLocked;
 
-  WatchRecentEpisodeData({
+  WatchEpisodeData({
     required this.entry,
     required this.episodes,
     required this.regionLocked,
   });
 
-  factory WatchRecentEpisodeData.fromJson(Map<String, dynamic> json) {
-    return WatchRecentEpisodeData(
+  factory WatchEpisodeData.fromJson(Map<String, dynamic> json) {
+    return WatchEpisodeData(
       entry: WatchAnimeEntry.fromJson(json['entry']),
       episodes: (json['episodes'] as List).map((item) => WatchEpisode.fromJson(item)).toList(),
       regionLocked: json['region_locked'],

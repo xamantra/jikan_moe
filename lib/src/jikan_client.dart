@@ -467,5 +467,8 @@ class JikanClient {
   );
 
   /// https://docs.api.jikan.moe/#tag/watch/operation/getWatchRecentEpisodes
-  Future<WatchRecentEpisodesResponse> getWatchRecentEpisodes() => watch.getWatchRecentEpisodes(this);
+  Future<WatchEpisodesResponse> getWatchRecentEpisodes() => watch.getWatchRecentEpisodes(this);
+
+  /// https://docs.api.jikan.moe/#tag/watch/operation/getWatchPopularEpisodes
+  Future<WatchEpisodesResponse> getWatchPopularEpisodes() => watch.getWatchPopularEpisodes(this);
 }
