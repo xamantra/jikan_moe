@@ -286,4 +286,14 @@ Future<TopReviewsResponse> getTopReviews({
 
 # Watch
 
-Coming soon...
+✅ 4/4 endpoints are supported.
+
+```dart
+Future<WatchEpisodesResponse> getWatchRecentEpisodes()
+
+Future<WatchEpisodesResponse> getWatchPopularEpisodes()
+
+Future<WatchPromosResponse> getWatchRecentPromos({int page = 1})
+
+Future<WatchPopularPromosResponse> getWatchPopularPromos()
+```
