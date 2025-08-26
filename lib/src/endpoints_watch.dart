@@ -42,4 +42,15 @@ Future<WatchPromosResponse> getWatchRecentPromos(JikanClient client, {int page =
   }
 }
 
-// getWatchPopularPromos -> {{baseUrl}}/watch/promos/popular
+Future<WatchPopularPromosResponse> getWatchPopularPromos(JikanClient client) async {
+  final response = await client.httpClient.get(
+    Uri.parse('${client.jikanV4BaseUrl}/watch/promos/popular'),
+  );
+
+  if (response.statusCode == 200) {
+    final json = jsonDecode(response.body) as Map<String, dynamic>;
+    return WatchPopularPromosResponse.fromJson(json);
+  } else {
+    throw Exception('Failed to load watch popular promos: ${response.statusCode}');
+  }
+}

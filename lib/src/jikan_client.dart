@@ -474,4 +474,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/watch/operation/getWatchRecentPromos
   Future<WatchPromosResponse> getWatchRecentPromos({int page = 1}) => watch.getWatchRecentPromos(this, page: page);
+
+  /// https://docs.api.jikan.moe/#tag/watch/operation/getWatchPopularPromos
+  Future<WatchPopularPromosResponse> getWatchPopularPromos() => watch.getWatchPopularPromos(this);
 }
