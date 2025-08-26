@@ -7,11 +7,13 @@ import 'endpoints_manga.dart' as manga;
 import 'endpoints_schedules.dart' as schedules;
 import 'endpoints_seasons.dart' as seasons;
 import 'endpoints_top.dart' as top;
+import 'endpoints_watch.dart' as watch;
 import 'genre/index.dart';
 import 'manga/index.dart';
 import 'schedules/index.dart';
 import 'seasons/index.dart';
 import 'top/index.dart';
+import 'watch/index.dart';
 
 const String _jikanV4BaseUrl = 'https://api.jikan.moe/v4';
 
@@ -463,4 +465,7 @@ class JikanClient {
     this,
     filter: filter,
   );
+
+  /// https://docs.api.jikan.moe/#tag/watch/operation/getWatchRecentEpisodes
+  Future<WatchRecentEpisodesResponse> getWatchRecentEpisodes() => watch.getWatchRecentEpisodes(this);
 }
