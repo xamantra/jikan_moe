@@ -471,4 +471,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/watch/operation/getWatchPopularEpisodes
   Future<WatchEpisodesResponse> getWatchPopularEpisodes() => watch.getWatchPopularEpisodes(this);
+
+  /// https://docs.api.jikan.moe/#tag/watch/operation/getWatchRecentPromos
+  Future<WatchPromosResponse> getWatchRecentPromos({int page = 1}) => watch.getWatchRecentPromos(this, page: page);
 }

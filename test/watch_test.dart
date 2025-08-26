@@ -26,6 +26,11 @@ void main() {
       final popularResult = await queue.add(() => client.getWatchPopularEpisodes());
       expect(popularResult, isA<WatchEpisodesResponse>(), reason: 'should return WatchEpisodesResponse');
       print('✓ WatchEpisodesResponse: Successfully parsed ${popularResult.data.length} popular episodes');
+
+      // Test recent promos
+      final promosResult = await queue.add(() => client.getWatchRecentPromos());
+      expect(promosResult, isA<WatchPromosResponse>(), reason: 'should return WatchPromosResponse');
+      print('✓ WatchPromosResponse: Successfully parsed ${promosResult.data.length} recent promos');
     });
   });
 }
