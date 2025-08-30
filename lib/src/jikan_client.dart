@@ -494,4 +494,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/characters/operation/getCharacterVoices
   Future<List<CharacterVoiceData>> getCharacterVoices(int id) => characters.getCharacterVoices(this, id);
+
+  /// https://docs.api.jikan.moe/#tag/characters/operation/getCharacterPictures
+  Future<List<CharacterPicturesData>> getCharacterPictures(int id) => characters.getCharacterPictures(this, id);
 }

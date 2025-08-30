@@ -76,6 +76,14 @@ void main() {
             print('  - First voice actor: ${voicesResult.first.person.name} (${voicesResult.first.language})');
           }
 
+          // Test getCharacterPictures endpoint
+          final picturesResult = await queue.add(() => client.getCharacterPictures(id));
+          expect(picturesResult, isA<List<CharacterPicturesData>>(), reason: 'ID $id should return List<CharacterPicturesData>');
+          print('✓ ID $id: Successfully parsed character pictures (${picturesResult.length} entries)');
+          if (picturesResult.isNotEmpty) {
+            print('  - First picture: ${picturesResult.first.jpg.imageUrl}');
+          }
+
           processedCount++;
         } on JikanException catch (e) {
           // Test: JikanException should pass (expected API error)
