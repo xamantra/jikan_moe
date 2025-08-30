@@ -603,4 +603,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/people/operation/getPersonAnime
   Future<List<PersonAnimeEntry>> getPersonAnime(int id) => people.getPersonAnime(this, id);
+
+  /// https://docs.api.jikan.moe/#tag/people/operation/getPersonManga
+  Future<List<PersonMangaEntry>> getPersonManga(int id) => people.getPersonManga(this, id);
 }
