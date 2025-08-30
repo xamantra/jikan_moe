@@ -34,6 +34,24 @@ void main() {
       final page2 = await queue.add(() => client.getRecentAnimeReviews(page: 2));
       expect(page2, isA<ReviewsRecentAnimeResponse>(), reason: 'should return ReviewsRecentAnimeResponse');
       print('✓ ReviewsRecentAnimeResponse: Successfully parsed ${page2.data.length} reviews from page 2');
+
+      final mangaResult = await queue.add(
+        () => client.getRecentMangaReviews(),
+      );
+      expect(mangaResult, isA<ReviewsRecentMangaResponse>(), reason: 'should return ReviewsRecentMangaResponse');
+      print('✓ ReviewsRecentMangaResponse: Successfully parsed ${mangaResult.data.length} manga reviews');
+
+      final mangaWithPreliminary = await queue.add(() => client.getRecentMangaReviews(preliminary: true));
+      expect(mangaWithPreliminary, isA<ReviewsRecentMangaResponse>(), reason: 'should return ReviewsRecentMangaResponse');
+      print('✓ ReviewsRecentMangaResponse: Successfully parsed ${mangaWithPreliminary.data.length} manga reviews with preliminary=true');
+
+      final mangaWithSpoilers = await queue.add(() => client.getRecentMangaReviews(spoilers: true));
+      expect(mangaWithSpoilers, isA<ReviewsRecentMangaResponse>(), reason: 'should return ReviewsRecentMangaResponse');
+      print('✓ ReviewsRecentMangaResponse: Successfully parsed ${mangaWithSpoilers.data.length} manga reviews with spoilers=true');
+
+      final mangaPage2 = await queue.add(() => client.getRecentMangaReviews(page: 2));
+      expect(mangaPage2, isA<ReviewsRecentMangaResponse>(), reason: 'should return ReviewsRecentMangaResponse');
+      print('✓ ReviewsRecentMangaResponse: Successfully parsed ${mangaPage2.data.length} manga reviews from page 2');
     });
   }, timeout: const Timeout(Duration(minutes: 10)));
 }

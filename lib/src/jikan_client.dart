@@ -580,4 +580,16 @@ class JikanClient {
     preliminary: preliminary,
     spoilers: spoilers,
   );
+
+  /// https://docs.api.jikan.moe/#tag/reviews/operation/getRecentMangaReviews
+  Future<ReviewsRecentMangaResponse> getRecentMangaReviews({
+    int page = 1,
+    bool preliminary = true,
+    bool spoilers = false,
+  }) => reviews.getRecentMangaReviews(
+    this,
+    page: page,
+    preliminary: preliminary,
+    spoilers: spoilers,
+  );
 }
