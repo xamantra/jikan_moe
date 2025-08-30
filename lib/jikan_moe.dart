@@ -12,3 +12,4 @@ export 'src/genre/index.dart';
 export 'src/watch/index.dart';
 export 'src/producers/index.dart';
 export 'src/recommendations/index.dart';
+export 'src/reviews/index.dart';

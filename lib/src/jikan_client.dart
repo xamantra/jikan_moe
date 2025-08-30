@@ -12,10 +12,12 @@ import 'endpoints_top.dart' as top;
 import 'endpoints_watch.dart' as watch;
 import 'endpoints_producers.dart' as producers;
 import 'endpoints_recommendations.dart' as recommendations;
+import 'endpoints_reviews.dart' as reviews;
 import 'genre/index.dart';
 import 'manga/index.dart';
 import 'producers/index.dart';
 import 'recommendations/index.dart';
+import 'reviews/index.dart';
 import 'schedules/index.dart';
 import 'seasons/index.dart';
 import 'top/index.dart';
@@ -566,4 +568,16 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/recommendations/operation/getRecentMangaRecommendations
   Future<RecommendationsRecentMangaResponse> getRecentMangaRecommendations({int page = 1}) => recommendations.getRecentMangaRecommendations(this, page: page);
+
+  /// https://docs.api.jikan.moe/#tag/reviews/operation/getRecentAnimeReviews
+  Future<ReviewsRecentAnimeResponse> getRecentAnimeReviews({
+    int page = 1,
+    bool preliminary = true,
+    bool spoilers = false,
+  }) => reviews.getRecentAnimeReviews(
+    this,
+    page: page,
+    preliminary: preliminary,
+    spoilers: spoilers,
+  );
 }
