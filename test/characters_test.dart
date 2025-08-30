@@ -68,6 +68,14 @@ void main() {
             print('  - First manga: ${mangaResult.first.manga.title} (${mangaResult.first.role})');
           }
 
+          // Test getCharacterVoices endpoint
+          final voicesResult = await queue.add(() => client.getCharacterVoices(id));
+          expect(voicesResult, isA<List<CharacterVoiceData>>(), reason: 'ID $id should return List<CharacterVoiceData>');
+          print('✓ ID $id: Successfully parsed voice actors (${voicesResult.length} entries)');
+          if (voicesResult.isNotEmpty) {
+            print('  - First voice actor: ${voicesResult.first.person.name} (${voicesResult.first.language})');
+          }
+
           processedCount++;
         } on JikanException catch (e) {
           // Test: JikanException should pass (expected API error)
