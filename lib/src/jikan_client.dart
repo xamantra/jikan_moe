@@ -563,4 +563,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/recommendations/operation/getRecentAnimeRecommendations
   Future<RecommendationsRecentAnimeResponse> getRecentAnimeRecommendations({int page = 1}) => recommendations.getRecentAnimeRecommendations(this, page: page);
+
+  /// https://docs.api.jikan.moe/#tag/recommendations/operation/getRecentMangaRecommendations
+  Future<RecommendationsRecentMangaResponse> getRecentMangaRecommendations({int page = 1}) => recommendations.getRecentMangaRecommendations(this, page: page);
 }

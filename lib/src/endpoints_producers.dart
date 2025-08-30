@@ -76,7 +76,7 @@ Future<ProducersResponse> getProducers(
 
     final uri = Uri.parse('${client.jikanV4BaseUrl}/producers').replace(queryParameters: queryParams.isNotEmpty ? queryParams : null);
     final response = await client.httpClient.get(uri);
-    
+
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
       return ProducersResponse.fromJson(jsonData);
@@ -97,4 +97,4 @@ Future<ProducersResponse> getProducers(
 // q
 // order_by ("mal_id" "count" "favorites" "established")
 // sort ("desc" "asc")
-// letter -> Return entries starting with the given letter 
+// letter -> Return entries starting with the given letter

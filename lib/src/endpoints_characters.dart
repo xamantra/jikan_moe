@@ -130,7 +130,7 @@ Future<CharacterSearchResponse> getCharactersSearch(
 
     final uri = Uri.parse('${client.jikanV4BaseUrl}/characters').replace(queryParameters: queryParams.isNotEmpty ? queryParams : null);
     final response = await client.httpClient.get(uri);
-    
+
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
       return CharacterSearchResponse.fromJson(jsonData);

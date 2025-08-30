@@ -143,7 +143,6 @@ void main() {
         if (searchResult4.data.isNotEmpty) {
           print('  - First result: ${searchResult4.data.first.name} (Favorites: ${searchResult4.data.first.favorites})');
         }
-
       } on JikanException catch (e) {
         // Test: JikanException should pass (expected API error)
         expect(e, isA<JikanException>(), reason: 'Should throw JikanException for API errors');

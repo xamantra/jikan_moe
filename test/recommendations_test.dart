@@ -24,6 +24,14 @@ void main() {
       final page2 = await queue.add(() => client.getRecentAnimeRecommendations(page: 2));
       expect(page2, isA<RecommendationsRecentAnimeResponse>(), reason: 'should return RecommendationsRecentAnimeResponse');
       print('✓ RecommendationsRecentAnimeResponse: Successfully parsed ${page2.data.length} recommendations for page 2');
+
+      final mangaResult = await queue.add(() => client.getRecentMangaRecommendations());
+      expect(mangaResult, isA<RecommendationsRecentMangaResponse>(), reason: 'should return RecommendationsRecentMangaResponse');
+      print('✓ RecommendationsRecentMangaResponse: Successfully parsed ${mangaResult.data.length} manga recommendations');
+
+      final mangaPage2 = await queue.add(() => client.getRecentMangaRecommendations(page: 2));
+      expect(mangaPage2, isA<RecommendationsRecentMangaResponse>(), reason: 'should return RecommendationsRecentMangaResponse');
+      print('✓ RecommendationsRecentMangaResponse: Successfully parsed ${mangaPage2.data.length} manga recommendations for page 2');
     });
   });
 }

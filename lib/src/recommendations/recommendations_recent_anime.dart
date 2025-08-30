@@ -12,9 +12,7 @@ class RecommendationsRecentAnimeResponse {
   factory RecommendationsRecentAnimeResponse.fromJson(Map<String, dynamic> json) {
     return RecommendationsRecentAnimeResponse(
       pagination: Pagination.fromJson(json['pagination'] as Map<String, dynamic>),
-      data: (json['data'] as List<dynamic>)
-          .map((item) => RecommendationData.fromJson(item as Map<String, dynamic>))
-          .toList(),
+      data: (json['data'] as List<dynamic>).map((item) => RecommendationData.fromJson(item as Map<String, dynamic>)).toList(),
     );
   }
 }
@@ -37,9 +35,7 @@ class RecommendationData {
   factory RecommendationData.fromJson(Map<String, dynamic> json) {
     return RecommendationData(
       malId: json['mal_id'] as String,
-      entry: (json['entry'] as List<dynamic>)
-          .map((item) => RecommendationEntry.fromJson(item as Map<String, dynamic>))
-          .toList(),
+      entry: (json['entry'] as List<dynamic>).map((item) => RecommendationEntry.fromJson(item as Map<String, dynamic>)).toList(),
       content: json['content'] as String,
       date: DateTime.parse(json['date'] as String),
       user: RecommendationUser.fromJson(json['user'] as Map<String, dynamic>),

@@ -5,9 +5,7 @@ class CharacterVoicesResponse {
 
   factory CharacterVoicesResponse.fromJson(Map<String, dynamic> json) {
     return CharacterVoicesResponse(
-      data: (json['data'] as List<dynamic>)
-          .map((item) => CharacterVoiceData.fromJson(item as Map<String, dynamic>))
-          .toList(),
+      data: (json['data'] as List<dynamic>).map((item) => CharacterVoiceData.fromJson(item as Map<String, dynamic>)).toList(),
     );
   }
 }
