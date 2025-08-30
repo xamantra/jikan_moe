@@ -29,6 +29,10 @@ void main() {
         final randomCharacters = await queue.add(() => client.getRandomCharacters());
         expect(randomCharacters, isA<CharacterData>(), reason: 'should return CharacterData');
         print('✓ RandomCharacters $i: Successfully parsed ${randomCharacters.name}');
+
+        final randomPeople = await queue.add(() => client.getRandomPeople());
+        expect(randomPeople, isA<PersonData>(), reason: 'should return PersonData');
+        print('✓ RandomPeople $i: Successfully parsed ${randomPeople.name}');
       }
     });
   }, timeout: Timeout(Duration(minutes: 60)));

@@ -3,9 +3,11 @@ import 'jikan_client.dart';
 import 'random/random_anime.dart';
 import 'random/random_manga.dart';
 import 'random/random_characters.dart';
+import 'random/random_people.dart';
 import 'anime/anime_data.dart';
 import 'manga/manga_data.dart';
 import 'characters/character_data.dart';
+import 'people/person_data.dart';
 
 Future<AnimeData> getRandomAnime(JikanClient client) async {
   final response = await client.httpClient.get(
@@ -49,4 +51,16 @@ Future<CharacterData> getRandomCharacters(JikanClient client) async {
   }
 }
 
-// getRandomCharacters -> {{baseUrl}}/random/characters
+Future<PersonData> getRandomPeople(JikanClient client) async {
+  final response = await client.httpClient.get(
+    Uri.parse('${client.jikanV4BaseUrl}/random/people'),
+  );
+
+  if (response.statusCode == 200) {
+    final json = jsonDecode(response.body) as Map<String, dynamic>;
+    final randomPeopleData = RandomPeopleData.fromJson(json);
+    return randomPeopleData.data;
+  } else {
+    throw Exception('Failed to load random people: ${response.statusCode}');
+  }
+}
