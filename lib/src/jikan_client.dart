@@ -481,8 +481,11 @@ class JikanClient {
   Future<WatchPopularPromosResponse> getWatchPopularPromos() => watch.getWatchPopularPromos(this);
 
   /// https://docs.api.jikan.moe/#tag/characters/operation/getCharacterFullById
-  Future<CharactersFullData> getCharacterFullById(int id) => characters.getCharacterFullById(this, id);
+  Future<CharacterFullData> getCharacterFullById(int id) => characters.getCharacterFullById(this, id);
 
   /// https://docs.api.jikan.moe/#tag/characters/operation/getCharacterById
-  Future<CharactersData> getCharacterById(int id) => characters.getCharacterById(this, id);
+  Future<CharacterData> getCharacterById(int id) => characters.getCharacterById(this, id);
+
+  /// https://docs.api.jikan.moe/#tag/characters/operation/getCharacterAnime
+  Future<List<CharacterAnimeData>> getCharacterAnime(int id) => characters.getCharacterAnime(this, id);
 }

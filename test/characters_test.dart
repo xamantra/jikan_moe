@@ -37,7 +37,7 @@ void main() {
         try {
           // Test getCharacterFullById endpoint
           final fullResult = await queue.add(() => client.getCharacterFullById(id));
-          expect(fullResult, isA<CharactersFullData>(), reason: 'ID $id should return CharactersFullData');
+          expect(fullResult, isA<CharacterFullData>(), reason: 'ID $id should return CharactersFullData');
           print('✓ ID $id: Successfully parsed ${fullResult.name} (full data)');
           print('  - Favorites: ${fullResult.favorites}');
           print('  - Anime appearances: ${fullResult.anime.length}');
@@ -46,11 +46,19 @@ void main() {
 
           // Test getCharacterById endpoint
           final basicResult = await queue.add(() => client.getCharacterById(id));
-          expect(basicResult, isA<CharactersData>(), reason: 'ID $id should return CharactersData');
+          expect(basicResult, isA<CharacterData>(), reason: 'ID $id should return CharactersData');
           print('✓ ID $id: Successfully parsed ${basicResult.name} (basic data)');
           print('  - Favorites: ${basicResult.favorites}');
           print('  - Nicknames: ${basicResult.nicknames.length}');
           print('  - About: ${basicResult.about != null ? "Available" : "Not available"}');
+
+          // Test getCharacterAnime endpoint
+          final animeResult = await queue.add(() => client.getCharacterAnime(id));
+          expect(animeResult, isA<List<CharacterAnimeData>>(), reason: 'ID $id should return List<CharacterAnimeData>');
+          print('✓ ID $id: Successfully parsed anime appearances (${animeResult.length} entries)');
+          if (animeResult.isNotEmpty) {
+            print('  - First anime: ${animeResult.first.anime.title} (${animeResult.first.role})');
+          }
 
           processedCount++;
         } on JikanException catch (e) {

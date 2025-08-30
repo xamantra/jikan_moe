@@ -1,5 +1,5 @@
 // Main character data model
-class CharactersFullData {
+class CharacterFullData {
   final int malId;
   final String url;
   final CharacterImages images;
@@ -12,7 +12,7 @@ class CharactersFullData {
   final List<CharacterManga> manga;
   final List<CharacterVoice> voices;
 
-  CharactersFullData({
+  CharacterFullData({
     required this.malId,
     required this.url,
     required this.images,
@@ -26,8 +26,8 @@ class CharactersFullData {
     required this.voices,
   });
 
-  factory CharactersFullData.fromJson(Map<String, dynamic> json) {
-    return CharactersFullData(
+  factory CharacterFullData.fromJson(Map<String, dynamic> json) {
+    return CharacterFullData(
       malId: json['mal_id'],
       url: json['url'],
       images: CharacterImages.fromJson(json['images']),
@@ -351,14 +351,14 @@ class CharacterPersonImageUrls {
 }
 
 // Root response model (for consistency with other endpoints)
-class CharactersFullResponse {
-  final CharactersFullData data;
+class CharacterFullResponse {
+  final CharacterFullData data;
 
-  CharactersFullResponse({required this.data});
+  CharacterFullResponse({required this.data});
 
-  factory CharactersFullResponse.fromJson(Map<String, dynamic> json) {
-    return CharactersFullResponse(
-      data: CharactersFullData.fromJson(json['data']),
+  factory CharacterFullResponse.fromJson(Map<String, dynamic> json) {
+    return CharacterFullResponse(
+      data: CharacterFullData.fromJson(json['data']),
     );
   }
 

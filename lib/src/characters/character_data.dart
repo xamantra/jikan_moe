@@ -1,7 +1,7 @@
-import 'characters_full.dart';
+import 'character_full.dart';
 
 // Basic character data model
-class CharactersData {
+class CharacterData {
   final int malId;
   final String url;
   final CharacterImages images;
@@ -11,7 +11,7 @@ class CharactersData {
   final int favorites;
   final String? about;
 
-  CharactersData({
+  CharacterData({
     required this.malId,
     required this.url,
     required this.images,
@@ -22,8 +22,8 @@ class CharactersData {
     this.about,
   });
 
-  factory CharactersData.fromJson(Map<String, dynamic> json) {
-    return CharactersData(
+  factory CharacterData.fromJson(Map<String, dynamic> json) {
+    return CharacterData(
       malId: json['mal_id'],
       url: json['url'],
       images: CharacterImages.fromJson(json['images']),
@@ -50,14 +50,14 @@ class CharactersData {
 }
 
 // Root response model (for consistency with other endpoints)
-class CharactersDataResponse {
-  final CharactersData data;
+class CharacterDataResponse {
+  final CharacterData data;
 
-  CharactersDataResponse({required this.data});
+  CharacterDataResponse({required this.data});
 
-  factory CharactersDataResponse.fromJson(Map<String, dynamic> json) {
-    return CharactersDataResponse(
-      data: CharactersData.fromJson(json['data']),
+  factory CharacterDataResponse.fromJson(Map<String, dynamic> json) {
+    return CharacterDataResponse(
+      data: CharacterData.fromJson(json['data']),
     );
   }
 
