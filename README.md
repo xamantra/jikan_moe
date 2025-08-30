@@ -222,11 +222,31 @@ Coming soon...
 
 # Recommendations
 
-Coming soon...
+✅ 2/2 endpoints are supported.
+
+```dart
+Future<RecommendationsRecentAnimeResponse> getRecentAnimeRecommendations({int page = 1})
+
+Future<RecommendationsRecentMangaResponse> getRecentMangaRecommendations({int page = 1})
+```
 
 # Reviews
 
-Coming soon...
+✅ 2/2 endpoints are supported.
+
+```dart
+Future<ReviewsRecentAnimeResponse> getRecentAnimeReviews({
+    int page = 1,
+    bool preliminary = true,
+    bool spoilers = false,
+})
+
+Future<ReviewsRecentMangaResponse> getRecentMangaReviews({
+    int page = 1,
+    bool preliminary = true,
+    bool spoilers = false,
+})
+```
 
 # Schedules
 

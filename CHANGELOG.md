@@ -1,3 +1,7 @@
+## 4.0.0
+
+- Watch, Characters, Producers, Recommendations, Reviews modules fully implemented.
+
 ## 3.0.0
 
 - Seasons, Top, Schedules, Genre modules fully implemented.
