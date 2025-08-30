@@ -152,5 +152,30 @@ void main() {
         fail('Unexpected error type: ${e.runtimeType} - $e');
       }
     });
+
+    test('should handle random characters endpoint with queue-based rate limiting', () async {
+      print('Testing random characters endpoint');
+      print('Using queue-based rate limiting: 1 request per second');
+
+      try {
+        // Test getRandomCharacters endpoint
+        final randomResult = await queue.add(() => client.getRandomCharacters());
+        expect(randomResult, isA<CharacterData>(), reason: 'Should return CharacterData');
+        print('✓ Successfully parsed random character');
+        print('  - Name: ${randomResult.name}');
+        print('  - ID: ${randomResult.malId}');
+        print('  - Favorites: ${randomResult.favorites}');
+        print('  - Nicknames: ${randomResult.nicknames.length}');
+        print('  - About: ${randomResult.about != null ? "Available" : "Not available"}');
+        print('  - Image URL: ${randomResult.images.jpg.imageUrl}');
+      } on JikanException catch (e) {
+        // Test: JikanException should pass (expected API error)
+        expect(e, isA<JikanException>(), reason: 'Should throw JikanException for API errors');
+        print('✓ Expected JikanException - ${e.message}');
+      } catch (e) {
+        // Test: Any other exception should fail (parsing errors, etc.)
+        fail('Unexpected error type: ${e.runtimeType} - $e');
+      }
+    });
   }, timeout: const Timeout(Duration(minutes: 30)));
 }

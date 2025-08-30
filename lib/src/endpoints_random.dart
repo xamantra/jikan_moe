@@ -2,8 +2,10 @@ import 'dart:convert';
 import 'jikan_client.dart';
 import 'random/random_anime.dart';
 import 'random/random_manga.dart';
+import 'random/random_characters.dart';
 import 'anime/anime_data.dart';
 import 'manga/manga_data.dart';
+import 'characters/character_data.dart';
 
 Future<AnimeData> getRandomAnime(JikanClient client) async {
   final response = await client.httpClient.get(
@@ -32,3 +34,19 @@ Future<MangaData> getRandomManga(JikanClient client) async {
     throw Exception('Failed to load random manga: ${response.statusCode}');
   }
 }
+
+Future<CharacterData> getRandomCharacters(JikanClient client) async {
+  final response = await client.httpClient.get(
+    Uri.parse('${client.jikanV4BaseUrl}/random/characters'),
+  );
+
+  if (response.statusCode == 200) {
+    final json = jsonDecode(response.body) as Map<String, dynamic>;
+    final randomCharactersData = RandomCharactersData.fromJson(json);
+    return randomCharactersData.data;
+  } else {
+    throw Exception('Failed to load random characters: ${response.statusCode}');
+  }
+}
+
+// getRandomCharacters -> {{baseUrl}}/random/characters

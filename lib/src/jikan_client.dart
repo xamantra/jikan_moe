@@ -671,4 +671,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/random/operation/getRandomManga
   Future<MangaData> getRandomManga() => random.getRandomManga(this);
+
+  /// https://docs.api.jikan.moe/#tag/random/operation/getRandomCharacters
+  Future<CharacterData> getRandomCharacters() => random.getRandomCharacters(this);
 }
