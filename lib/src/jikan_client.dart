@@ -13,11 +13,13 @@ import 'endpoints_watch.dart' as watch;
 import 'endpoints_producers.dart' as producers;
 import 'endpoints_recommendations.dart' as recommendations;
 import 'endpoints_reviews.dart' as reviews;
+import 'endpoints_people.dart' as people;
 import 'genre/index.dart';
 import 'manga/index.dart';
 import 'producers/index.dart';
 import 'recommendations/index.dart';
 import 'reviews/index.dart';
+import 'people/index.dart';
 import 'schedules/index.dart';
 import 'seasons/index.dart';
 import 'top/index.dart';
@@ -592,4 +594,7 @@ class JikanClient {
     preliminary: preliminary,
     spoilers: spoilers,
   );
+
+  /// https://docs.api.jikan.moe/#tag/people/operation/getPersonFullById
+  Future<PersonFullData> getPersonFullById(int id) => people.getPersonFullById(this, id);
 }
