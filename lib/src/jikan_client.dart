@@ -600,4 +600,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/people/operation/getPersonById
   Future<PersonData> getPersonById(int id) => people.getPersonById(this, id);
+
+  /// https://docs.api.jikan.moe/#tag/people/operation/getPersonAnime
+  Future<List<PersonAnimeEntry>> getPersonAnime(int id) => people.getPersonAnime(this, id);
 }

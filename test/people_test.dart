@@ -43,10 +43,13 @@ void main() {
           expect(result, isA<PersonFullData>(), reason: 'ID $id should return PersonFullData');
           print('✓ ID $id: Successfully parsed ${result.name}');
 
-          // Test getPersonById
           final personData = await queue.add(() => client.getPersonById(id));
           expect(personData, isA<PersonData>(), reason: 'ID $id should return PersonData');
           print('✓ ID $id: Successfully parsed basic data for ${personData.name}');
+
+          final personAnime = await queue.add(() => client.getPersonAnime(id));
+          expect(personAnime, isA<List<PersonAnimeEntry>>(), reason: 'ID $id should return List<PersonAnimeEntry>');
+          print('✓ ID $id: Successfully parsed anime data with ${personAnime.length} entries');
 
           processedCount++;
         } on JikanException catch (e) {

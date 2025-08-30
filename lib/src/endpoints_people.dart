@@ -4,7 +4,6 @@ import 'people/index.dart';
 import 'jikan_client.dart';
 import 'lib_extras.dart';
 
-// getPersonFullById -> {{baseUrl}}/people/:id/full
 Future<PersonFullData> getPersonFullById(JikanClient client, int id) async {
   try {
     final response = await client.httpClient.get(Uri.parse('${client.jikanV4BaseUrl}/people/$id/full'));
@@ -22,7 +21,6 @@ Future<PersonFullData> getPersonFullById(JikanClient client, int id) async {
   }
 }
 
-// getPersonById -> {{baseUrl}}/people/:id
 Future<PersonData> getPersonById(JikanClient client, int id) async {
   try {
     final response = await client.httpClient.get(Uri.parse('${client.jikanV4BaseUrl}/people/$id'));
@@ -35,6 +33,24 @@ Future<PersonData> getPersonById(JikanClient client, int id) async {
   } catch (e, trace) {
     if (e is! JikanException) {
       print('$getPersonById: $trace');
+    }
+    rethrow;
+  }
+}
+
+Future<List<PersonAnimeEntry>> getPersonAnime(JikanClient client, int id) async {
+  try {
+    final response = await client.httpClient.get(Uri.parse('${client.jikanV4BaseUrl}/people/$id/anime'));
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      final personAnimeResponse = PersonAnimeResponse.fromJson(jsonData);
+      return personAnimeResponse.data;
+    } else {
+      throw JikanException(response.body);
+    }
+  } catch (e, trace) {
+    if (e is! JikanException) {
+      print('$getPersonAnime: $trace');
     }
     rethrow;
   }
