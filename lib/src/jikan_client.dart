@@ -533,4 +533,29 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/producers/operation/getProducerExternal
   Future<List<ProducerExternal>> getProducerExternal(int id) => producers.getProducerExternal(this, id);
+
+  /// https://docs.api.jikan.moe/#tag/producers/operation/getProducers
+  ///
+  /// - _page_ - Page number
+  /// - _limit_ - Number of results per page (max 25)
+  /// - _q_ - Search query
+  /// - _orderBy_ - "mal_id" "count" "favorites" "established"
+  /// - _sort_ - "desc" "asc"
+  /// - _letter_ - Return entries starting with the given letter
+  Future<ProducersResponse> getProducers({
+    int? page,
+    int? limit,
+    String? q,
+    String? orderBy,
+    String? sort,
+    String? letter,
+  }) => producers.getProducers(
+    this,
+    page: page,
+    limit: limit,
+    q: q,
+    orderBy: orderBy,
+    sort: sort,
+    letter: letter,
+  );
 }

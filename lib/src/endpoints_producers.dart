@@ -55,3 +55,46 @@ Future<List<ProducerExternal>> getProducerExternal(JikanClient client, int id) a
     rethrow;
   }
 }
+
+Future<ProducersResponse> getProducers(
+  JikanClient client, {
+  int? page,
+  int? limit,
+  String? q,
+  String? orderBy,
+  String? sort,
+  String? letter,
+}) async {
+  try {
+    final queryParams = <String, String>{};
+    if (page != null) queryParams['page'] = page.toString();
+    if (limit != null) queryParams['limit'] = limit.toString();
+    if (q != null) queryParams['q'] = q;
+    if (orderBy != null) queryParams['order_by'] = orderBy;
+    if (sort != null) queryParams['sort'] = sort;
+    if (letter != null) queryParams['letter'] = letter;
+
+    final uri = Uri.parse('${client.jikanV4BaseUrl}/producers').replace(queryParameters: queryParams.isNotEmpty ? queryParams : null);
+    final response = await client.httpClient.get(uri);
+    
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      return ProducersResponse.fromJson(jsonData);
+    } else {
+      throw JikanException(response.body);
+    }
+  } catch (e, trace) {
+    if (e is! JikanException) {
+      print('$getProducers: $trace');
+    }
+    rethrow;
+  }
+}
+
+// getProducers -> {{baseUrl}}/producers
+// page
+// limit (max 25)
+// q
+// order_by ("mal_id" "count" "favorites" "established")
+// sort ("desc" "asc")
+// letter -> Return entries starting with the given letter 
