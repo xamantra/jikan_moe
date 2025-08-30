@@ -189,7 +189,18 @@ Future<List<MangaGenreData>> getMangaGenres({
 
 # Magazines
 
-Coming soon...
+✅ 1/1 endpoint is supported.
+
+```dart
+Future<MagazinesResponse> getMagazines({
+    int? page,
+    int? limit,
+    String? q,
+    String? orderBy,
+    String? sort,
+    String? letter,
+})
+```
 
 # People
 

@@ -14,12 +14,14 @@ import 'endpoints_producers.dart' as producers;
 import 'endpoints_recommendations.dart' as recommendations;
 import 'endpoints_reviews.dart' as reviews;
 import 'endpoints_people.dart' as people;
+import 'endpoints_magazines.dart' as magazines;
 import 'genre/index.dart';
 import 'manga/index.dart';
 import 'producers/index.dart';
 import 'recommendations/index.dart';
 import 'reviews/index.dart';
 import 'people/index.dart';
+import 'magazines/index.dart';
 import 'schedules/index.dart';
 import 'seasons/index.dart';
 import 'top/index.dart';
@@ -629,6 +631,31 @@ class JikanClient {
     String? sort,
     String? letter,
   }) => people.getPeopleSearch(
+    this,
+    page: page,
+    limit: limit,
+    q: q,
+    orderBy: orderBy,
+    sort: sort,
+    letter: letter,
+  );
+
+  /// https://docs.api.jikan.moe/#tag/magazines/operation/getMagazines
+  ///
+  /// - _page_ - Page number
+  /// - _limit_ - Number of results per page (max 25)
+  /// - _q_ - Search query
+  /// - _orderBy_ - "mal_id" "name" "count"
+  /// - _sort_ - "desc" "asc"
+  /// - _letter_ - Return entries starting with the given letter
+  Future<MagazinesResponse> getMagazines({
+    int? page,
+    int? limit,
+    String? q,
+    String? orderBy,
+    String? sort,
+    String? letter,
+  }) => magazines.getMagazines(
     this,
     page: page,
     limit: limit,
