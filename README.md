@@ -1,4 +1,4 @@
-# [Jikan API](https://jikan.moe/)
+# [Jikan API](https://jikan.moe/) v4
 
 Jikan (時間) is an unofficial & open-source API for the _“most active online
 anime + manga community and database”_ — MyAnimeList.
