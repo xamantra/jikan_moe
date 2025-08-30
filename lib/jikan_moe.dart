@@ -10,3 +10,4 @@ export 'src/top/index.dart';
 export 'src/schedules/index.dart';
 export 'src/genre/index.dart';
 export 'src/watch/index.dart';
+export 'src/producers/index.dart';

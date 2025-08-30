@@ -10,8 +10,10 @@ import 'endpoints_schedules.dart' as schedules;
 import 'endpoints_seasons.dart' as seasons;
 import 'endpoints_top.dart' as top;
 import 'endpoints_watch.dart' as watch;
+import 'endpoints_producers.dart' as producers;
 import 'genre/index.dart';
 import 'manga/index.dart';
+import 'producers/index.dart';
 import 'schedules/index.dart';
 import 'seasons/index.dart';
 import 'top/index.dart';
@@ -522,4 +524,7 @@ class JikanClient {
     sort: sort,
     letter: letter,
   );
+
+  /// https://docs.api.jikan.moe/#tag/producers/operation/getProducerFullById
+  Future<ProducerFullData> getProducerFullById(int id) => producers.getProducerFullById(this, id);
 }
