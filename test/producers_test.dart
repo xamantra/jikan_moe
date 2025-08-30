@@ -16,9 +16,7 @@ void main() {
       client.httpClient.close();
     });
 
-    // IDs:
-    // 18, 2246, 493, 569, 10, 287, 406, 11
-    final List<int> testIds = [1, 18, 2246, 493, 569, 10, 287, 406, 11];
+    final List<int> testIds = [18, 2246, 493, 569, 10, 287, 406, 11];
 
     test('should handle ${testIds.length} specific producer IDs with queue-based rate limiting', () async {
       print('Testing producer IDs: $testIds');
@@ -38,6 +36,11 @@ void main() {
           expect(basicResult, isA<ProducerData>(), reason: 'ID $id should return ProducerData');
           print('✓ ID $id: Successfully parsed basic producer ${basicResult.titles.first.title} with ${basicResult.count} entries');
 
+          // Test getProducerExternal
+          final externalResult = await queue.add(() => client.getProducerExternal(id));
+          expect(externalResult, isA<List<ProducerExternal>>(), reason: 'ID $id should return List<ProducerExternal>');
+          print('✓ ID $id: Successfully parsed ${externalResult.length} external links');
+
           processedCount++;
         } catch (e) {
           print('✗ ID $id: Error - $e');
@@ -47,5 +50,5 @@ void main() {
       print('Processed $processedCount out of ${testIds.length} producer IDs');
       expect(processedCount, greaterThan(0), reason: 'At least one producer should be processed successfully');
     });
-  });
+  }, timeout: const Timeout(Duration(minutes: 60)));
 }

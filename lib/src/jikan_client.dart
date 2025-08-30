@@ -530,4 +530,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/producers/operation/getProducerById
   Future<ProducerData> getProducerById(int id) => producers.getProducerById(this, id);
+
+  /// https://docs.api.jikan.moe/#tag/producers/operation/getProducerExternal
+  Future<List<ProducerExternal>> getProducerExternal(int id) => producers.getProducerExternal(this, id);
 }
