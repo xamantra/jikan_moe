@@ -128,6 +128,51 @@ class AnimeFullData {
       streaming: (json['streaming'] as List).map((streaming) => AnimeStreaming.fromJson(streaming)).toList(),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'mal_id': malId,
+      'url': url,
+      'images': images.toJson(),
+      'trailer': trailer.toJson(),
+      'approved': approved,
+      'titles': titles.map((title) => title.toJson()).toList(),
+      'title': title,
+      'title_english': titleEnglish,
+      'title_japanese': titleJapanese,
+      'title_synonyms': titleSynonyms,
+      'type': type,
+      'source': source,
+      'episodes': episodes,
+      'status': status,
+      'airing': airing,
+      'aired': aired.toJson(),
+      'duration': duration,
+      'rating': rating,
+      'score': score,
+      'scored_by': scoredBy,
+      'rank': rank,
+      'popularity': popularity,
+      'members': members,
+      'favorites': favorites,
+      'synopsis': synopsis,
+      'background': background,
+      'season': season,
+      'year': year,
+      'broadcast': broadcast?.toJson(),
+      'producers': producers.map((producer) => producer.toJson()).toList(),
+      'licensors': licensors.map((licensor) => licensor.toJson()).toList(),
+      'studios': studios.map((studio) => studio.toJson()).toList(),
+      'genres': genres.map((genre) => genre.toJson()).toList(),
+      'explicit_genres': explicitGenres.map((genre) => genre.toJson()).toList(),
+      'themes': themes.map((theme) => theme.toJson()).toList(),
+      'demographics': demographics.map((demographic) => demographic.toJson()).toList(),
+      'relations': relations.map((relation) => relation.toJson()).toList(),
+      'theme': theme.toJson(),
+      'external': external.map((external) => external.toJson()).toList(),
+      'streaming': streaming.map((streaming) => streaming.toJson()).toList(),
+    };
+  }
 }
 
 // Images model
@@ -415,6 +460,13 @@ class AnimeTheme {
 
   factory AnimeTheme.fromJson(Map<String, dynamic> json) {
     return AnimeTheme(openings: List<String>.from(json['openings']), endings: List<String>.from(json['endings']));
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'openings': openings,
+      'endings': endings,
+    };
   }
 }
 

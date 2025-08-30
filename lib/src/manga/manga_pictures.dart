@@ -11,4 +11,10 @@ class MangaPicturesResponse {
       data: (json['data'] as List).map((item) => MangaImages.fromJson(item)).toList(),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'data': data.map((item) => item.toJson()).toList(),
+    };
+  }
 }

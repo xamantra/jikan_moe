@@ -11,6 +11,12 @@ class AnimePicturesResponse {
       data: (json['data'] as List).map((item) => AnimePicturesData.fromJson(item)).toList(),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'data': data.map((item) => item.toJson()).toList(),
+    };
+  }
 }
 
 // Individual anime picture data model
@@ -25,5 +31,12 @@ class AnimePicturesData {
       jpg: AnimeImageUrls.fromJson(json['jpg']),
       webp: AnimeImageUrls.fromJson(json['webp']),
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'jpg': jpg.toJson(),
+      'webp': webp.toJson(),
+    };
   }
 }

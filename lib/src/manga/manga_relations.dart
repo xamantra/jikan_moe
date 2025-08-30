@@ -10,4 +10,10 @@ class MangaRelationsResponse {
       data: (json['data'] as List<dynamic>).map((item) => MangaRelation.fromJson(item as Map<String, dynamic>)).toList(),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'data': data.map((item) => item.toJson()).toList(),
+    };
+  }
 }
