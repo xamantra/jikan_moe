@@ -15,6 +15,7 @@ import 'endpoints_recommendations.dart' as recommendations;
 import 'endpoints_reviews.dart' as reviews;
 import 'endpoints_people.dart' as people;
 import 'endpoints_magazines.dart' as magazines;
+import 'endpoints_random.dart' as random;
 import 'genre/index.dart';
 import 'manga/index.dart';
 import 'producers/index.dart';
@@ -664,4 +665,7 @@ class JikanClient {
     sort: sort,
     letter: letter,
   );
+
+  /// https://docs.api.jikan.moe/#tag/random/operation/getRandomAnime
+  Future<AnimeData> getRandomAnime() => random.getRandomAnime(this);
 }
