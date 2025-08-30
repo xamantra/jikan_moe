@@ -43,6 +43,11 @@ void main() {
           expect(result, isA<PersonFullData>(), reason: 'ID $id should return PersonFullData');
           print('✓ ID $id: Successfully parsed ${result.name}');
 
+          // Test getPersonById
+          final personData = await queue.add(() => client.getPersonById(id));
+          expect(personData, isA<PersonData>(), reason: 'ID $id should return PersonData');
+          print('✓ ID $id: Successfully parsed basic data for ${personData.name}');
+
           processedCount++;
         } on JikanException catch (e) {
           // Test: JikanException should pass (expected API error)

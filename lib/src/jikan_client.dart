@@ -597,4 +597,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/people/operation/getPersonFullById
   Future<PersonFullData> getPersonFullById(int id) => people.getPersonFullById(this, id);
+
+  /// https://docs.api.jikan.moe/#tag/people/operation/getPersonById
+  Future<PersonData> getPersonById(int id) => people.getPersonById(this, id);
 }
