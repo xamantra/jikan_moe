@@ -35,16 +35,22 @@ void main() {
       // Process requests sequentially using the queue
       for (final id in testIds) {
         try {
-          final result = await queue.add(() => client.getCharacterFullById(id));
+          // Test getCharacterFullById endpoint
+          final fullResult = await queue.add(() => client.getCharacterFullById(id));
+          expect(fullResult, isA<CharactersFullData>(), reason: 'ID $id should return CharactersFullData');
+          print('✓ ID $id: Successfully parsed ${fullResult.name} (full data)');
+          print('  - Favorites: ${fullResult.favorites}');
+          print('  - Anime appearances: ${fullResult.anime.length}');
+          print('  - Manga appearances: ${fullResult.manga.length}');
+          print('  - Voice actors: ${fullResult.voices.length}');
 
-          // Test: Should return CharactersFullData type
-          expect(result, isA<CharactersFullData>(), reason: 'ID $id should return CharactersFullData');
-
-          print('✓ ID $id: Successfully parsed ${result.name}');
-          print('  - Favorites: ${result.favorites}');
-          print('  - Anime appearances: ${result.anime.length}');
-          print('  - Manga appearances: ${result.manga.length}');
-          print('  - Voice actors: ${result.voices.length}');
+          // Test getCharacterById endpoint
+          final basicResult = await queue.add(() => client.getCharacterById(id));
+          expect(basicResult, isA<CharactersData>(), reason: 'ID $id should return CharactersData');
+          print('✓ ID $id: Successfully parsed ${basicResult.name} (basic data)');
+          print('  - Favorites: ${basicResult.favorites}');
+          print('  - Nicknames: ${basicResult.nicknames.length}');
+          print('  - About: ${basicResult.about != null ? "Available" : "Not available"}');
 
           processedCount++;
         } on JikanException catch (e) {

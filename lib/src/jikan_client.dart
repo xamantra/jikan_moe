@@ -482,4 +482,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/characters/operation/getCharacterFullById
   Future<CharactersFullData> getCharacterFullById(int id) => characters.getCharacterFullById(this, id);
+
+  /// https://docs.api.jikan.moe/#tag/characters/operation/getCharacterById
+  Future<CharactersData> getCharacterById(int id) => characters.getCharacterById(this, id);
 }
