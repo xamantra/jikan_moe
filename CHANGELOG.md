@@ -1,3 +1,7 @@
+## 4.1.0
+
+- People module fully implemented.
+
 ## 4.0.0
 
 - Watch, Characters, Producers, Recommendations, Reviews modules fully implemented.

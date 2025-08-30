@@ -193,7 +193,30 @@ Coming soon...
 
 # People
 
-Coming soon...
+✅ 7/7 endpoints are supported.
+
+```dart
+Future<PersonData> getPersonById(int id)
+
+Future<PersonFullData> getPersonFullById(int id)
+
+Future<List<PersonAnimeEntry>> getPersonAnime(int id)
+
+Future<List<PersonMangaEntry>> getPersonManga(int id)
+
+Future<List<PersonVoiceEntry>> getPersonVoices(int id)
+
+Future<List<PersonPicturesData>> getPersonPictures(int id)
+
+Future<PeopleSearchResponse> getPeopleSearch({
+    int? page = 1,
+    int? limit = 25,
+    String? q,
+    String? orderBy,
+    String? sort,
+    String? letter,
+})
+```
 
 # Producers
 
