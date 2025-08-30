@@ -55,7 +55,9 @@ void main() {
           expect(personManga, isA<List<PersonMangaEntry>>(), reason: 'ID $id should return List<PersonMangaEntry>');
           print('✓ ID $id: Successfully parsed manga data with ${personManga.length} entries');
 
-          // getPersonVoices test should be here
+          final personVoices = await queue.add(() => client.getPersonVoices(id));
+          expect(personVoices, isA<List<PersonVoiceEntry>>(), reason: 'ID $id should return List<PersonVoiceEntry>');
+          print('✓ ID $id: Successfully parsed voices data with ${personVoices.length} entries');
 
           processedCount++;
         } on JikanException catch (e) {

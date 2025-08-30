@@ -73,3 +73,21 @@ Future<List<PersonMangaEntry>> getPersonManga(JikanClient client, int id) async 
     rethrow;
   }
 }
+
+Future<List<PersonVoiceEntry>> getPersonVoices(JikanClient client, int id) async {
+  try {
+    final response = await client.httpClient.get(Uri.parse('${client.jikanV4BaseUrl}/people/$id/voices'));
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      final personVoicesResponse = PersonVoicesResponse.fromJson(jsonData);
+      return personVoicesResponse.data;
+    } else {
+      throw JikanException(response.body);
+    }
+  } catch (e, trace) {
+    if (e is! JikanException) {
+      print('$getPersonVoices: $trace');
+    }
+    rethrow;
+  }
+}
