@@ -47,9 +47,7 @@ class PersonPicturesResponse {
 
   factory PersonPicturesResponse.fromJson(Map<String, dynamic> json) {
     return PersonPicturesResponse(
-      data: (json['data'] as List<dynamic>)
-          .map((item) => PersonPicturesData.fromJson(item as Map<String, dynamic>))
-          .toList(),
+      data: (json['data'] as List<dynamic>).map((item) => PersonPicturesData.fromJson(item as Map<String, dynamic>)).toList(),
     );
   }
 

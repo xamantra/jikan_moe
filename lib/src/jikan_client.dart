@@ -612,4 +612,29 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/people/operation/getPersonPictures
   Future<List<PersonPicturesData>> getPersonPictures(int id) => people.getPersonPictures(this, id);
+
+  /// https://docs.api.jikan.moe/#tag/people/operation/getPeopleSearch
+  ///
+  /// - _page_ - Page number
+  /// - _limit_ - Number of results per page (max 25)
+  /// - _q_ - Search query
+  /// - _orderBy_ - "mal_id" "birthday" "favorites"
+  /// - _sort_ - "desc" "asc"
+  /// - _letter_ - Return entries starting with the given letter
+  Future<PeopleSearchResponse> getPeopleSearch({
+    int? page,
+    int? limit,
+    String? q,
+    String? orderBy,
+    String? sort,
+    String? letter,
+  }) => people.getPeopleSearch(
+    this,
+    page: page,
+    limit: limit,
+    q: q,
+    orderBy: orderBy,
+    sort: sort,
+    letter: letter,
+  );
 }

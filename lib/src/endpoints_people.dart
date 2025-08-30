@@ -109,3 +109,38 @@ Future<List<PersonPicturesData>> getPersonPictures(JikanClient client, int id) a
     rethrow;
   }
 }
+
+Future<PeopleSearchResponse> getPeopleSearch(
+  JikanClient client, {
+  int? page,
+  int? limit,
+  String? q,
+  String? orderBy,
+  String? sort,
+  String? letter,
+}) async {
+  try {
+    final queryParams = <String, String>{};
+    if (page != null) queryParams['page'] = page.toString();
+    if (limit != null) queryParams['limit'] = limit.toString();
+    if (q != null) queryParams['q'] = q;
+    if (orderBy != null) queryParams['order_by'] = orderBy;
+    if (sort != null) queryParams['sort'] = sort;
+    if (letter != null) queryParams['letter'] = letter;
+
+    final uri = Uri.parse('${client.jikanV4BaseUrl}/people').replace(queryParameters: queryParams.isNotEmpty ? queryParams : null);
+    final response = await client.httpClient.get(uri);
+
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      return PeopleSearchResponse.fromJson(jsonData);
+    } else {
+      throw JikanException(response.body);
+    }
+  } catch (e, trace) {
+    if (e is! JikanException) {
+      print('$getPeopleSearch: $trace');
+    }
+    rethrow;
+  }
+}

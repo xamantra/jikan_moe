@@ -18,21 +18,49 @@ void main() {
 
     final List<int> testIds = [
       1117, // Makoto Shinkai
-      1,    // Tomokazu Sugita
-      2,    // Mamoru Miyano
-      3,    // Kana Hanazawa
-      4,    // Hiroshi Kamiya
-      5,    // Daisuke Ono
-      6,    // Yuki Kaji
-      7,    // Rie Kugimiya
-      8,    // Aki Toyosaki
-      9,    // Yui Horie
-      10,   // Nana Mizuki
+      1, // Tomokazu Sugita
+      2, // Mamoru Miyano
+      3, // Kana Hanazawa
+      4, // Hiroshi Kamiya
+      5, // Daisuke Ono
+      6, // Yuki Kaji
+      7, // Rie Kugimiya
+      8, // Aki Toyosaki
+      9, // Yui Horie
+      10, // Nana Mizuki
     ];
 
     test('should handle ${testIds.length} specific people IDs with queue-based rate limiting', () async {
       print('Testing people IDs: $testIds');
       print('Using queue-based rate limiting: 1 request per second');
+
+      try {
+        final searchResult = await queue.add(() => client.getPeopleSearch(q: 'Akira'));
+        expect(searchResult, isA<PeopleSearchResponse>(), reason: 'Should return PeopleSearchResponse');
+        expect(searchResult.data, isA<List<PersonSearchData>>(), reason: 'Should have data list');
+        expect(searchResult.pagination, isA<PeoplePagination>(), reason: 'Should have pagination');
+        print('✓ Successfully parsed people search with ${searchResult.data.length} results');
+
+        // Test with additional parameters
+        final searchWithParams = await queue.add(
+          () => client.getPeopleSearch(
+            q: 'Makoto',
+            page: 1,
+            limit: 5,
+            orderBy: 'mal_id',
+            sort: 'asc',
+          ),
+        );
+        expect(searchWithParams, isA<PeopleSearchResponse>(), reason: 'Should return PeopleSearchResponse with params');
+        print('✓ Successfully parsed people search with parameters: ${searchWithParams.data.length} results');
+      } on JikanException catch (e) {
+        // Test: JikanException should pass (expected API error)
+        expect(e, isA<JikanException>(), reason: 'Should throw JikanException for API errors');
+        print('✓ Expected JikanException - ${e.message}');
+      } catch (e) {
+        // Test: Any other exception should fail (parsing errors, etc.)
+        fail('Unexpected error type: ${e.runtimeType} - $e');
+      }
 
       int processedCount = 0;
 
