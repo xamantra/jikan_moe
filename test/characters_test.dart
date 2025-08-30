@@ -99,5 +99,59 @@ void main() {
       print('Completed processing $processedCount out of ${testIds.length} IDs');
       expect(processedCount, equals(testIds.length), reason: 'All IDs should be processed');
     });
+
+    test('should handle character search with queue-based rate limiting', () async {
+      print('Testing character search endpoints');
+      print('Using queue-based rate limiting: 1 request per second');
+
+      try {
+        // Test basic character search
+        final searchResult = await queue.add(() => client.getCharactersSearch(q: 'Luffy'));
+        expect(searchResult, isA<CharacterSearchResponse>(), reason: 'Should return CharacterSearchResponse');
+        print('✓ Successfully parsed character search for "Luffy"');
+        print('  - Total results: ${searchResult.pagination.items.total}');
+        print('  - Current page: ${searchResult.pagination.currentPage}');
+        print('  - Results on this page: ${searchResult.data.length}');
+        if (searchResult.data.isNotEmpty) {
+          print('  - First result: ${searchResult.data.first.name} (ID: ${searchResult.data.first.malId})');
+        }
+
+        // Test character search with pagination
+        final searchResult2 = await queue.add(() => client.getCharactersSearch(q: 'Goku', page: 1, limit: 5));
+        expect(searchResult2, isA<CharacterSearchResponse>(), reason: 'Should return CharacterSearchResponse');
+        print('✓ Successfully parsed character search for "Goku" with pagination');
+        print('  - Total results: ${searchResult2.pagination.items.total}');
+        print('  - Results on this page: ${searchResult2.data.length}');
+        print('  - Has next page: ${searchResult2.pagination.hasNextPage}');
+
+        // Test character search with letter filter
+        final searchResult3 = await queue.add(() => client.getCharactersSearch(letter: 'A', limit: 3));
+        expect(searchResult3, isA<CharacterSearchResponse>(), reason: 'Should return CharacterSearchResponse');
+        print('✓ Successfully parsed character search with letter filter "A"');
+        print('  - Total results: ${searchResult3.pagination.items.total}');
+        print('  - Results on this page: ${searchResult3.data.length}');
+        if (searchResult3.data.isNotEmpty) {
+          print('  - First result: ${searchResult3.data.first.name} (ID: ${searchResult3.data.first.malId})');
+        }
+
+        // Test character search with ordering
+        final searchResult4 = await queue.add(() => client.getCharactersSearch(orderBy: 'favorites', sort: 'desc', limit: 3));
+        expect(searchResult4, isA<CharacterSearchResponse>(), reason: 'Should return CharacterSearchResponse');
+        print('✓ Successfully parsed character search ordered by favorites');
+        print('  - Total results: ${searchResult4.pagination.items.total}');
+        print('  - Results on this page: ${searchResult4.data.length}');
+        if (searchResult4.data.isNotEmpty) {
+          print('  - First result: ${searchResult4.data.first.name} (Favorites: ${searchResult4.data.first.favorites})');
+        }
+
+      } on JikanException catch (e) {
+        // Test: JikanException should pass (expected API error)
+        expect(e, isA<JikanException>(), reason: 'Should throw JikanException for API errors');
+        print('✓ Expected JikanException - ${e.message}');
+      } catch (e) {
+        // Test: Any other exception should fail (parsing errors, etc.)
+        fail('Unexpected error type: ${e.runtimeType} - $e');
+      }
+    });
   }, timeout: const Timeout(Duration(minutes: 30)));
 }

@@ -497,4 +497,29 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/characters/operation/getCharacterPictures
   Future<List<CharacterPicturesData>> getCharacterPictures(int id) => characters.getCharacterPictures(this, id);
+
+  /// https://docs.api.jikan.moe/#tag/characters/operation/getCharactersSearch
+  ///
+  /// - _page_ - Page number
+  /// - _limit_ - Number of results per page (max 25)
+  /// - _q_ - Search query
+  /// - _orderBy_ - "mal_id" "name" "favorites"
+  /// - _sort_ - "desc" "asc"
+  /// - _letter_ - Return entries starting with the given letter
+  Future<CharacterSearchResponse> getCharactersSearch({
+    int? page,
+    int? limit,
+    String? q,
+    String? orderBy,
+    String? sort,
+    String? letter,
+  }) => characters.getCharactersSearch(
+    this,
+    page: page,
+    limit: limit,
+    q: q,
+    orderBy: orderBy,
+    sort: sort,
+    letter: letter,
+  );
 }
