@@ -1,7 +1,9 @@
 import 'package:http/http.dart' as http;
 
 import 'anime/index.dart';
+import 'characters/index.dart';
 import 'endpoints_anime.dart' as anime;
+import 'endpoints_characters.dart' as characters;
 import 'endpoints_genre.dart' as genre;
 import 'endpoints_manga.dart' as manga;
 import 'endpoints_schedules.dart' as schedules;
@@ -477,4 +479,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/watch/operation/getWatchPopularPromos
   Future<WatchPopularPromosResponse> getWatchPopularPromos() => watch.getWatchPopularPromos(this);
+
+  /// https://docs.api.jikan.moe/#tag/characters/operation/getCharacterFullById
+  Future<CharactersFullData> getCharacterFullById(int id) => characters.getCharacterFullById(this, id);
 }
