@@ -21,7 +21,6 @@ Future<CharacterFullData> getCharacterFullById(JikanClient client, int id) async
   }
 }
 
-// getCharacterById -> {{baseUrl}}/characters/:id
 Future<CharacterData> getCharacterById(JikanClient client, int id) async {
   try {
     final response = await client.httpClient.get(Uri.parse('${client.jikanV4BaseUrl}/characters/$id'));
@@ -39,7 +38,6 @@ Future<CharacterData> getCharacterById(JikanClient client, int id) async {
   }
 }
 
-// getCharacterAnime -> {{baseUrl}}/characters/:id/anime
 Future<List<CharacterAnimeData>> getCharacterAnime(JikanClient client, int id) async {
   try {
     final response = await client.httpClient.get(Uri.parse('${client.jikanV4BaseUrl}/characters/$id/anime'));
@@ -53,6 +51,24 @@ Future<List<CharacterAnimeData>> getCharacterAnime(JikanClient client, int id) a
   } catch (e, trace) {
     if (e is! JikanException) {
       print('$getCharacterAnime: $trace');
+    }
+    rethrow;
+  }
+}
+
+Future<List<CharacterMangaData>> getCharacterManga(JikanClient client, int id) async {
+  try {
+    final response = await client.httpClient.get(Uri.parse('${client.jikanV4BaseUrl}/characters/$id/manga'));
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      final responseData = CharacterMangaResponse.fromJson(jsonData);
+      return responseData.data;
+    } else {
+      throw JikanException(response.body);
+    }
+  } catch (e, trace) {
+    if (e is! JikanException) {
+      print('$getCharacterManga: $trace');
     }
     rethrow;
   }

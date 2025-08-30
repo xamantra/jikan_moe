@@ -488,4 +488,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/characters/operation/getCharacterAnime
   Future<List<CharacterAnimeData>> getCharacterAnime(int id) => characters.getCharacterAnime(this, id);
+
+  /// https://docs.api.jikan.moe/#tag/characters/operation/getCharacterManga
+  Future<List<CharacterMangaData>> getCharacterManga(int id) => characters.getCharacterManga(this, id);
 }

@@ -60,6 +60,14 @@ void main() {
             print('  - First anime: ${animeResult.first.anime.title} (${animeResult.first.role})');
           }
 
+          // Test getCharacterManga endpoint
+          final mangaResult = await queue.add(() => client.getCharacterManga(id));
+          expect(mangaResult, isA<List<CharacterMangaData>>(), reason: 'ID $id should return List<CharacterMangaData>');
+          print('✓ ID $id: Successfully parsed manga appearances (${mangaResult.length} entries)');
+          if (mangaResult.isNotEmpty) {
+            print('  - First manga: ${mangaResult.first.manga.title} (${mangaResult.first.role})');
+          }
+
           processedCount++;
         } on JikanException catch (e) {
           // Test: JikanException should pass (expected API error)
