@@ -4,6 +4,7 @@ import 'random/random_anime.dart';
 import 'random/random_manga.dart';
 import 'random/random_characters.dart';
 import 'random/random_people.dart';
+import 'random/random_users.dart';
 import 'anime/anime_data.dart';
 import 'manga/manga_data.dart';
 import 'characters/character_data.dart';
@@ -62,5 +63,19 @@ Future<PersonData> getRandomPeople(JikanClient client) async {
     return randomPeopleData.data;
   } else {
     throw Exception('Failed to load random people: ${response.statusCode}');
+  }
+}
+
+Future<RandomUserData> getRandomUsers(JikanClient client) async {
+  final response = await client.httpClient.get(
+    Uri.parse('${client.jikanV4BaseUrl}/random/users'),
+  );
+
+  if (response.statusCode == 200) {
+    final json = jsonDecode(response.body) as Map<String, dynamic>;
+    final randomUsersData = RandomUsersData.fromJson(json);
+    return randomUsersData.data;
+  } else {
+    throw Exception('Failed to load random users: ${response.statusCode}');
   }
 }

@@ -27,6 +27,7 @@ import 'schedules/index.dart';
 import 'seasons/index.dart';
 import 'top/index.dart';
 import 'watch/index.dart';
+import 'random/index.dart';
 
 const String _jikanV4BaseUrl = 'https://api.jikan.moe/v4';
 
@@ -677,4 +678,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/random/operation/getRandomPeople
   Future<PersonData> getRandomPeople() => random.getRandomPeople(this);
+
+  /// https://docs.api.jikan.moe/#tag/random/operation/getRandomUsers
+  Future<RandomUserData> getRandomUsers() => random.getRandomUsers(this);
 }
