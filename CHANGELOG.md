@@ -1,6 +1,6 @@
 ## 4.2.0
 
-- Magazines module fully implemented.
+- Magazines, Random module fully implemented.
 
 ## 4.1.0
 

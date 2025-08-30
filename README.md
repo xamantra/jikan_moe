@@ -252,7 +252,19 @@ Future<ProducersResponse> getProducers({
 
 # Random
 
-Coming soon...
+✅ 5/5 endpoints are supported.
+
+```dart
+Future<AnimeData> getRandomAnime()
+
+Future<MangaData> getRandomManga()
+
+Future<CharacterData> getRandomCharacters()
+
+Future<PersonData> getRandomPeople()
+
+Future<RandomUserData> getRandomUsers()
+```
 
 # Recommendations
 
