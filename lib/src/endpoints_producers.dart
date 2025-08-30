@@ -21,3 +21,21 @@ Future<ProducerFullData> getProducerFullById(JikanClient client, int id) async {
     rethrow;
   }
 }
+
+// getProducerById -> {{baseUrl}}/producers/:id
+Future<ProducerData> getProducerById(JikanClient client, int id) async {
+  try {
+    final response = await client.httpClient.get(Uri.parse('${client.jikanV4BaseUrl}/producers/$id'));
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      return ProducerData.fromJson(jsonData['data'] as Map<String, dynamic>);
+    } else {
+      throw JikanException(response.body);
+    }
+  } catch (e, trace) {
+    if (e is! JikanException) {
+      print('$getProducerById: $trace');
+    }
+    rethrow;
+  }
+}

@@ -30,11 +30,13 @@ void main() {
       for (final id in testIds) {
         try {
           final result = await queue.add(() => client.getProducerFullById(id));
-
-          // Test: Should return ProducerFullData type
           expect(result, isA<ProducerFullData>(), reason: 'ID $id should return ProducerFullData');
-
           print('✓ ID $id: Successfully parsed ${result.titles.first.title} with ${result.favorites} favorites');
+
+          // Test getProducerById
+          final basicResult = await queue.add(() => client.getProducerById(id));
+          expect(basicResult, isA<ProducerData>(), reason: 'ID $id should return ProducerData');
+          print('✓ ID $id: Successfully parsed basic producer ${basicResult.titles.first.title} with ${basicResult.count} entries');
 
           processedCount++;
         } catch (e) {
