@@ -144,7 +144,30 @@ Future<MangaSearchResponse> getMangaSearch({
 
 # Characters
 
-Coming soon...
+✅ 7/7 endpoints are supported.
+
+```dart
+Future<CharacterData> getCharacterById(int id)
+
+Future<CharacterFullData> getCharacterFullById(int id)
+
+Future<List<CharacterAnimeData>> getCharacterAnime(int id)
+
+Future<List<CharacterMangaData>> getCharacterManga(int id)
+
+Future<List<CharacterVoiceData>> getCharacterVoices(int id)
+
+Future<List<CharacterPicturesData>> getCharacterPictures(int id)
+
+Future<CharacterSearchResponse> getCharactersSearch({
+    int? page = 1,
+    int? limit = 25,
+    String? q,
+    String? orderBy,
+    String? sort,
+    String? letter,
+})
+```
 
 # Clubs
 
@@ -174,7 +197,24 @@ Coming soon...
 
 # Producers
 
-Coming soon...
+✅ 4/4 endpoints are supported.
+
+```dart
+Future<ProducerData> getProducerById(int id)
+
+Future<ProducerFullData> getProducerFullById(int id)
+
+Future<List<ProducerExternal>> getProducerExternal(int id)
+
+Future<ProducersResponse> getProducers({
+    int? page = 1,
+    int? limit = 25,
+    String? q,
+    String? orderBy,
+    String? sort,
+    String? letter,
+})
+```
 
 # Random
 
