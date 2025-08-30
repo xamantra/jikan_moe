@@ -91,3 +91,21 @@ Future<List<PersonVoiceEntry>> getPersonVoices(JikanClient client, int id) async
     rethrow;
   }
 }
+
+Future<List<PersonPicturesData>> getPersonPictures(JikanClient client, int id) async {
+  try {
+    final response = await client.httpClient.get(Uri.parse('${client.jikanV4BaseUrl}/people/$id/pictures'));
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      final personPicturesResponse = PersonPicturesResponse.fromJson(jsonData);
+      return personPicturesResponse.data;
+    } else {
+      throw JikanException(response.body);
+    }
+  } catch (e, trace) {
+    if (e is! JikanException) {
+      print('$getPersonPictures: $trace');
+    }
+    rethrow;
+  }
+}

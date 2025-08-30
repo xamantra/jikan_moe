@@ -59,6 +59,10 @@ void main() {
           expect(personVoices, isA<List<PersonVoiceEntry>>(), reason: 'ID $id should return List<PersonVoiceEntry>');
           print('✓ ID $id: Successfully parsed voices data with ${personVoices.length} entries');
 
+          final personPictures = await queue.add(() => client.getPersonPictures(id));
+          expect(personPictures, isA<List<PersonPicturesData>>(), reason: 'ID $id should return List<PersonPicturesData>');
+          print('✓ ID $id: Successfully parsed pictures data with ${personPictures.length} entries');
+
           processedCount++;
         } on JikanException catch (e) {
           // Test: JikanException should pass (expected API error)

@@ -609,4 +609,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/people/operation/getPersonVoices
   Future<List<PersonVoiceEntry>> getPersonVoices(int id) => people.getPersonVoices(this, id);
+
+  /// https://docs.api.jikan.moe/#tag/people/operation/getPersonPictures
+  Future<List<PersonPicturesData>> getPersonPictures(int id) => people.getPersonPictures(this, id);
 }
