@@ -668,4 +668,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/random/operation/getRandomAnime
   Future<AnimeData> getRandomAnime() => random.getRandomAnime(this);
+
+  /// https://docs.api.jikan.moe/#tag/random/operation/getRandomManga
+  Future<MangaData> getRandomManga() => random.getRandomManga(this);
 }

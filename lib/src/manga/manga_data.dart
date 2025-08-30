@@ -34,13 +34,13 @@ class MangaData {
   final String status;
   final bool publishing;
   final MangaPublished published;
-  final double score;
-  final double scored;
-  final int scoredBy;
-  final int rank;
-  final int popularity;
-  final int members;
-  final int favorites;
+  final double? score;
+  final double? scored;
+  final int? scoredBy;
+  final int? rank;
+  final int? popularity;
+  final int? members;
+  final int? favorites;
   final String? synopsis;
   final String? background;
   final List<MangaAuthor> authors;
@@ -66,13 +66,13 @@ class MangaData {
     required this.status,
     required this.publishing,
     required this.published,
-    required this.score,
-    required this.scored,
-    required this.scoredBy,
-    required this.rank,
-    required this.popularity,
-    required this.members,
-    required this.favorites,
+    this.score,
+    this.scored,
+    this.scoredBy,
+    this.rank,
+    this.popularity,
+    this.members,
+    this.favorites,
     this.synopsis,
     this.background,
     required this.authors,
@@ -100,8 +100,8 @@ class MangaData {
       status: json['status'],
       publishing: json['publishing'],
       published: MangaPublished.fromJson(json['published']),
-      score: json['score'].toDouble(),
-      scored: json['scored'].toDouble(),
+      score: json['score']?.toDouble(),
+      scored: json['scored']?.toDouble(),
       scoredBy: json['scored_by'],
       rank: json['rank'],
       popularity: json['popularity'],

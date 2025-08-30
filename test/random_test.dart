@@ -16,11 +16,15 @@ void main() {
       client.httpClient.close();
     });
 
-    test('should handle random anime', () async {
+    test('should handle random anime and manga', () async {
       for (int i = 1; i <= 10; i++) {
-        final random = await queue.add(() => client.getRandomAnime());
-        expect(random, isA<AnimeData>(), reason: 'should return AnimeData');
-        print('✓ RandomAnime $i: Successfully parsed ${random.title}');
+        final randomAnime = await queue.add(() => client.getRandomAnime());
+        expect(randomAnime, isA<AnimeData>(), reason: 'should return AnimeData');
+        print('✓ RandomAnime $i: Successfully parsed ${randomAnime.title}');
+
+        final randomManga = await queue.add(() => client.getRandomManga());
+        expect(randomManga, isA<MangaData>(), reason: 'should return MangaData');
+        print('✓ RandomManga $i: Successfully parsed ${randomManga.title}');
       }
     });
   }, timeout: Timeout(Duration(minutes: 60)));
