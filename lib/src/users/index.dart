@@ -1,5 +1,6 @@
 export "users_about.dart";
 export "users_clubs.dart";
+export "users_external.dart";
 export "users_favorites.dart";
 export "users_friends.dart";
 export "users_full.dart";

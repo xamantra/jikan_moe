@@ -127,6 +127,10 @@ void main() {
         final userClubsWithPage = await queue.add(() => client.getUserClubs(randomUser.username, page: 1));
         expect(userClubsWithPage, isA<UsersClubsResponse>(), reason: 'should return UsersClubsResponse');
         print('✓ UsersClubsResponse: Successfully parsed ${userClubsWithPage.data.length} clubs for user <${randomUser.username}> with page 1');
+
+        final userExternal = await queue.add(() => client.getUserExternal(randomUser.username));
+        expect(userExternal, isA<UsersExternalResponse>(), reason: 'should return UsersExternalResponse');
+        print('✓ UsersExternalResponse: Successfully parsed ${userExternal.data.length} external links for user <${randomUser.username}>');
       }
     });
   }, timeout: const Timeout(Duration(minutes: 60)));
