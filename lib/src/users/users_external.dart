@@ -7,9 +7,7 @@ class UsersExternalResponse {
 
   factory UsersExternalResponse.fromJson(Map<String, dynamic> json) {
     return UsersExternalResponse(
-      data: (json['data'] as List<dynamic>)
-          .map((item) => UsersExternalData.fromJson(item as Map<String, dynamic>))
-          .toList(),
+      data: (json['data'] as List<dynamic>).map((item) => UsersExternalData.fromJson(item as Map<String, dynamic>)).toList(),
     );
   }
 }

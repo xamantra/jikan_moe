@@ -23,12 +23,8 @@ class UsersUpdatesData {
 
   factory UsersUpdatesData.fromJson(Map<String, dynamic> json) {
     return UsersUpdatesData(
-      anime: (json['anime'] as List<dynamic>)
-          .map((item) => UsersUpdatesAnime.fromJson(item as Map<String, dynamic>))
-          .toList(),
-      manga: (json['manga'] as List<dynamic>)
-          .map((item) => UsersUpdatesManga.fromJson(item as Map<String, dynamic>))
-          .toList(),
+      anime: (json['anime'] as List<dynamic>).map((item) => UsersUpdatesAnime.fromJson(item as Map<String, dynamic>)).toList(),
+      manga: (json['manga'] as List<dynamic>).map((item) => UsersUpdatesManga.fromJson(item as Map<String, dynamic>)).toList(),
     );
   }
 }

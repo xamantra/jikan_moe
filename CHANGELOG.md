@@ -1,3 +1,7 @@
+## 4.3.0
+
+- Users module fully implemented.
+
 ## 4.2.0
 
 - Magazines, Random module fully implemented.

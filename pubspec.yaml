@@ -1,6 +1,6 @@
 name: jikan_moe
 description: Jikan (時間) is an unofficial & open-source API for the “most active online anime + manga community and database” — MyAnimeList.
-version: 4.2.0
+version: 4.3.0
 repository: https://github.com/xamantra/jikan_moe
 
 environment:

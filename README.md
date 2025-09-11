@@ -311,7 +311,45 @@ Future<SchedulesResponse> getSchedules({
 
 # Users
 
-Coming soon...
+✅ 13/13 endpoints are supported.
+
+```dart
+Future<UsersSearchResponse> getUsersSearch({
+    int? page = 1,
+    int? limit = 25,
+    String? q,
+    String? gender,
+    String? location,
+    int? maxAge,
+    int? minAge,
+})
+
+Future<UsersFullResponse> getUserFullProfile(String username)
+
+Future<UsersIdResponse> getUserById(int id)
+
+Future<UsersProfileResponse> getUserProfile(String username)
+
+Future<UsersStatisticsResponse> getUserStatistics(String username)
+
+Future<UsersFavoritesResponse> getUserFavorites(String username)
+
+Future<UsersUpdatesResponse> getUserUpdates(String username)
+
+Future<UsersAboutResponse> getUserAbout(String username)
+
+Future<UsersHistoryResponse> getUserHistory(String username, {String? type})
+
+Future<UsersFriendsResponse> getUserFriends(String username, {int? page})
+
+Future<UsersReviewsResponse> getUserReviews(String username, {int? page})
+
+Future<UsersRecommendationsResponse> getUserRecommendations(String username, {int? page})
+
+Future<UsersClubsResponse> getUserClubs(String username, {int? page})
+
+Future<UsersExternalResponse> getUserExternal(String username)
+```
 
 # Seasons
 

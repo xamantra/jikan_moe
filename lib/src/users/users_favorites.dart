@@ -27,18 +27,10 @@ class UsersFavoritesData {
 
   factory UsersFavoritesData.fromJson(Map<String, dynamic> json) {
     return UsersFavoritesData(
-      anime: (json['anime'] as List<dynamic>)
-          .map((item) => UsersFavoritesAnime.fromJson(item as Map<String, dynamic>))
-          .toList(),
-      manga: (json['manga'] as List<dynamic>)
-          .map((item) => UsersFavoritesManga.fromJson(item as Map<String, dynamic>))
-          .toList(),
-      characters: (json['characters'] as List<dynamic>)
-          .map((item) => UsersFavoritesCharacter.fromJson(item as Map<String, dynamic>))
-          .toList(),
-      people: (json['people'] as List<dynamic>)
-          .map((item) => UsersFavoritesPerson.fromJson(item as Map<String, dynamic>))
-          .toList(),
+      anime: (json['anime'] as List<dynamic>).map((item) => UsersFavoritesAnime.fromJson(item as Map<String, dynamic>)).toList(),
+      manga: (json['manga'] as List<dynamic>).map((item) => UsersFavoritesManga.fromJson(item as Map<String, dynamic>)).toList(),
+      characters: (json['characters'] as List<dynamic>).map((item) => UsersFavoritesCharacter.fromJson(item as Map<String, dynamic>)).toList(),
+      people: (json['people'] as List<dynamic>).map((item) => UsersFavoritesPerson.fromJson(item as Map<String, dynamic>)).toList(),
     );
   }
 }
