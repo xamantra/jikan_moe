@@ -327,17 +327,17 @@ class UsersFullFavoritePerson {
 
 class UsersFullFavoriteImages {
   final UsersFullFavoriteImageFormat jpg;
-  final UsersFullFavoriteImageFormat webp;
+  final UsersFullFavoriteImageFormat? webp;
 
   UsersFullFavoriteImages({
     required this.jpg,
-    required this.webp,
+    this.webp,
   });
 
   factory UsersFullFavoriteImages.fromJson(Map<String, dynamic> json) {
     return UsersFullFavoriteImages(
       jpg: UsersFullFavoriteImageFormat.fromJson(json['jpg'] as Map<String, dynamic>),
-      webp: UsersFullFavoriteImageFormat.fromJson(json['webp'] as Map<String, dynamic>),
+      webp: json['webp'] != null ? UsersFullFavoriteImageFormat.fromJson(json['webp'] as Map<String, dynamic>) : null,
     );
   }
 }

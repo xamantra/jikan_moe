@@ -717,4 +717,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/users/operation/getUserById
   Future<UsersIdResponse> getUserById(int id) => users.getUserById(this, id);
+
+  /// https://docs.api.jikan.moe/#tag/users/operation/getUserProfile
+  Future<UsersProfileResponse> getUserProfile(String username) => users.getUserProfile(this, username);
 }
