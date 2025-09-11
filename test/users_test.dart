@@ -95,7 +95,15 @@ void main() {
         final userHistoryManga = await queue.add(() => client.getUserHistory(randomUser.username, type: 'manga'));
         expect(userHistoryManga, isA<UsersHistoryResponse>(), reason: 'should return UsersHistoryResponse');
         print('✓ UsersHistoryResponse: Successfully parsed ${userHistoryManga.data.length} manga history entries for user <${randomUser.username}>');
+
+        final userFriends = await queue.add(() => client.getUserFriends(randomUser.username));
+        expect(userFriends, isA<UsersFriendsResponse>(), reason: 'should return UsersFriendsResponse');
+        print('✓ UsersFriendsResponse: Successfully parsed ${userFriends.data.length} friends for user <${randomUser.username}>');
+
+        final userFriendsWithPage = await queue.add(() => client.getUserFriends(randomUser.username, page: 1));
+        expect(userFriendsWithPage, isA<UsersFriendsResponse>(), reason: 'should return UsersFriendsResponse');
+        print('✓ UsersFriendsResponse: Successfully parsed ${userFriendsWithPage.data.length} friends for user <${randomUser.username}> with page 1');
       }
     });
-  }, timeout: const Timeout(Duration(minutes: 5)));
+  }, timeout: const Timeout(Duration(minutes: 60)));
 }
