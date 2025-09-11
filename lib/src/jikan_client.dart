@@ -738,4 +738,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/users/operation/getUserFriends
   Future<UsersFriendsResponse> getUserFriends(String username, {int? page}) => users.getUserFriends(this, username, page: page);
+
+  /// https://docs.api.jikan.moe/#tag/users/operation/getUserReviews
+  Future<UsersReviewsResponse> getUserReviews(String username, {int? page}) => users.getUserReviews(this, username, page: page);
 }
