@@ -1,3 +1,4 @@
+export "users_about.dart";
 export "users_favorites.dart";
 export "users_full.dart";
 export "users_id.dart";

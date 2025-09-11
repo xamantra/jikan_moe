@@ -729,4 +729,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/users/operation/getUserUpdates
   Future<UsersUpdatesResponse> getUserUpdates(String username) => users.getUserUpdates(this, username);
+
+  /// https://docs.api.jikan.moe/#tag/users/operation/getUserAbout
+  Future<UsersAboutResponse> getUserAbout(String username) => users.getUserAbout(this, username);
 }
