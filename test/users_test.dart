@@ -18,6 +18,7 @@ void main() {
 
     final List<String> randomUserQuery = [
       'purplemon',
+      'stark',
       'naruto',
       'anime',
       'manga',
@@ -70,6 +71,10 @@ void main() {
         final userStatistics = await queue.add(() => client.getUserStatistics(randomUser.username));
         expect(userStatistics, isA<UsersStatisticsResponse>(), reason: 'should return UsersStatisticsResponse');
         print('✓ UsersStatisticsResponse: Successfully parsed statistics for user <${randomUser.username}>');
+
+        final userFavorites = await queue.add(() => client.getUserFavorites(randomUser.username));
+        expect(userFavorites, isA<UsersFavoritesResponse>(), reason: 'should return UsersFavoritesResponse');
+        print('✓ UsersFavoritesResponse: Successfully parsed favorites for user <${randomUser.username}>');
       }
     });
   }, timeout: const Timeout(Duration(minutes: 5)));

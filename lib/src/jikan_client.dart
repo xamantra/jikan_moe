@@ -723,4 +723,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/users/operation/getUserStatistics
   Future<UsersStatisticsResponse> getUserStatistics(String username) => users.getUserStatistics(this, username);
+
+  /// https://docs.api.jikan.moe/#tag/users/operation/getUserFavorites
+  Future<UsersFavoritesResponse> getUserFavorites(String username) => users.getUserFavorites(this, username);
 }
