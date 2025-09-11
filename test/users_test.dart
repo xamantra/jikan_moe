@@ -83,6 +83,18 @@ void main() {
         final userAbout = await queue.add(() => client.getUserAbout(randomUser.username));
         expect(userAbout, isA<UsersAboutResponse>(), reason: 'should return UsersAboutResponse');
         print('✓ UsersAboutResponse: Successfully parsed about content for user <${randomUser.username}>');
+
+        final userHistory = await queue.add(() => client.getUserHistory(randomUser.username));
+        expect(userHistory, isA<UsersHistoryResponse>(), reason: 'should return UsersHistoryResponse');
+        print('✓ UsersHistoryResponse: Successfully parsed ${userHistory.data.length} history entries for user <${randomUser.username}>');
+
+        final userHistoryAnime = await queue.add(() => client.getUserHistory(randomUser.username, type: 'anime'));
+        expect(userHistoryAnime, isA<UsersHistoryResponse>(), reason: 'should return UsersHistoryResponse');
+        print('✓ UsersHistoryResponse: Successfully parsed ${userHistoryAnime.data.length} anime history entries for user <${randomUser.username}>');
+
+        final userHistoryManga = await queue.add(() => client.getUserHistory(randomUser.username, type: 'manga'));
+        expect(userHistoryManga, isA<UsersHistoryResponse>(), reason: 'should return UsersHistoryResponse');
+        print('✓ UsersHistoryResponse: Successfully parsed ${userHistoryManga.data.length} manga history entries for user <${randomUser.username}>');
       }
     });
   }, timeout: const Timeout(Duration(minutes: 5)));

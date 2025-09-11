@@ -1,6 +1,7 @@
 export "users_about.dart";
 export "users_favorites.dart";
 export "users_full.dart";
+export "users_history.dart";
 export "users_id.dart";
 export "users_profile.dart";
 export "users_search.dart";

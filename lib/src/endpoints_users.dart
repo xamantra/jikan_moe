@@ -179,3 +179,28 @@ Future<UsersAboutResponse> getUserAbout(
     rethrow;
   }
 }
+
+Future<UsersHistoryResponse> getUserHistory(
+  JikanClient client,
+  String username, {
+  String? type,
+}) async {
+  try {
+    final queryParams = <String, String>{
+      if (type != null) 'type': type,
+    };
+    final encodedQueryParams = Uri(queryParameters: queryParams).query;
+    final response = await client.httpClient.get(Uri.parse('${client.jikanV4BaseUrl}/users/$username/history?$encodedQueryParams'));
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      return UsersHistoryResponse.fromJson(jsonData as Map<String, dynamic>);
+    } else {
+      throw JikanException(response.body);
+    }
+  } catch (e, trace) {
+    if (e is! JikanException) {
+      print('$getUserHistory: $trace');
+    }
+    rethrow;
+  }
+}
