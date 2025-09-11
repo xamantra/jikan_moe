@@ -711,4 +711,7 @@ class JikanClient {
     maxAge: maxAge,
     minAge: minAge,
   );
+
+  /// https://docs.api.jikan.moe/#tag/users/operation/getUserFullProfile
+  Future<UsersFullResponse> getUserFullProfile(String username) => users.getUserFullProfile(this, username);
 }

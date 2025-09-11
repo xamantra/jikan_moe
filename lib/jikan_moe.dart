@@ -16,4 +16,4 @@ export 'src/reviews/index.dart';
 export 'src/people/index.dart';
 export 'src/magazines/index.dart';
 export 'src/random/index.dart';
-export 'src/users/users_search.dart';
+export 'src/users/index.dart';

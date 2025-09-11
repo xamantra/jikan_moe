@@ -50,6 +50,14 @@ void main() {
       final withAgeRange = await queue.add(() => client.getUsersSearch(q: selectedQuery, minAge: 18, maxAge: 30));
       expect(withAgeRange, isA<UsersSearchResponse>(), reason: 'should return UsersSearchResponse');
       print('✓ UsersSearchResponse: Successfully parsed ${withAgeRange.data.length} UsersSearchData for <q: $selectedQuery, minAge: 18, maxAge: 30>');
+
+      // pick one random user from the result
+      if (result.data.isNotEmpty) {
+        final randomUser = result.data.first;
+        final fullProfile = await queue.add(() => client.getUserFullProfile(randomUser.username));
+        expect(fullProfile, isA<UsersFullResponse>(), reason: 'should return UsersFullResponse');
+        print('✓ UsersFullResponse: Successfully parsed full profile for user <${randomUser.username}>');
+      }
     });
   }, timeout: const Timeout(Duration(minutes: 5)));
 }
