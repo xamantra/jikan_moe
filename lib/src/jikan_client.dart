@@ -720,4 +720,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/users/operation/getUserProfile
   Future<UsersProfileResponse> getUserProfile(String username) => users.getUserProfile(this, username);
+
+  /// https://docs.api.jikan.moe/#tag/users/operation/getUserStatistics
+  Future<UsersStatisticsResponse> getUserStatistics(String username) => users.getUserStatistics(this, username);
 }

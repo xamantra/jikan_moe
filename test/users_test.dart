@@ -59,15 +59,17 @@ void main() {
         expect(fullProfile, isA<UsersFullResponse>(), reason: 'should return UsersFullResponse');
         print('✓ UsersFullResponse: Successfully parsed full profile for user <${randomUser.username}>');
 
-        // test getUserById here
         final userById = await queue.add(() => client.getUserById(fullProfile.data.malId));
         expect(userById, isA<UsersIdResponse>(), reason: 'should return UsersIdResponse');
         print('✓ UsersIdResponse: Successfully parsed user by ID <${fullProfile.data.malId}>');
 
-        // test getUserProfile here
         final userProfile = await queue.add(() => client.getUserProfile(randomUser.username));
         expect(userProfile, isA<UsersProfileResponse>(), reason: 'should return UsersProfileResponse');
         print('✓ UsersProfileResponse: Successfully parsed profile for user <${randomUser.username}>');
+
+        final userStatistics = await queue.add(() => client.getUserStatistics(randomUser.username));
+        expect(userStatistics, isA<UsersStatisticsResponse>(), reason: 'should return UsersStatisticsResponse');
+        print('✓ UsersStatisticsResponse: Successfully parsed statistics for user <${randomUser.username}>');
       }
     });
   }, timeout: const Timeout(Duration(minutes: 5)));

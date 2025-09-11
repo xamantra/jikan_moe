@@ -99,3 +99,23 @@ Future<UsersProfileResponse> getUserProfile(
     rethrow;
   }
 }
+
+Future<UsersStatisticsResponse> getUserStatistics(
+  JikanClient client,
+  String username,
+) async {
+  try {
+    final response = await client.httpClient.get(Uri.parse('${client.jikanV4BaseUrl}/users/$username/statistics'));
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      return UsersStatisticsResponse.fromJson(jsonData as Map<String, dynamic>);
+    } else {
+      throw JikanException(response.body);
+    }
+  } catch (e, trace) {
+    if (e is! JikanException) {
+      print('$getUserStatistics: $trace');
+    }
+    rethrow;
+  }
+}
