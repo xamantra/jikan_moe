@@ -16,6 +16,7 @@ import 'endpoints_reviews.dart' as reviews;
 import 'endpoints_people.dart' as people;
 import 'endpoints_magazines.dart' as magazines;
 import 'endpoints_random.dart' as random;
+import 'endpoints_users.dart' as users;
 import 'genre/index.dart';
 import 'manga/index.dart';
 import 'producers/index.dart';
@@ -28,6 +29,7 @@ import 'seasons/index.dart';
 import 'top/index.dart';
 import 'watch/index.dart';
 import 'random/index.dart';
+import 'users/index.dart';
 
 const String _jikanV4BaseUrl = 'https://api.jikan.moe/v4';
 
@@ -681,4 +683,32 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/random/operation/getRandomUsers
   Future<RandomUserData> getRandomUsers() => random.getRandomUsers(this);
+
+  /// https://docs.api.jikan.moe/#tag/users/operation/getUsersSearch
+  ///
+  /// - _page_ - Page number
+  /// - _limit_ - Number of results per page (max 25)
+  /// - _q_ - Search query
+  /// - _gender_ - "any" "male" "female" "nonbinary"
+  /// - _location_ - Location filter
+  /// - _maxAge_ - Maximum age filter
+  /// - _minAge_ - Minimum age filter
+  Future<UsersSearchResponse> getUsersSearch({
+    int? page,
+    int? limit,
+    String? q,
+    String? gender,
+    String? location,
+    int? maxAge,
+    int? minAge,
+  }) => users.getUsersSearch(
+    this,
+    page: page,
+    limit: limit,
+    q: q,
+    gender: gender,
+    location: location,
+    maxAge: maxAge,
+    minAge: minAge,
+  );
 }
