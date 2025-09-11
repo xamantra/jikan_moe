@@ -4,3 +4,4 @@ export "users_id.dart";
 export "users_profile.dart";
 export "users_search.dart";
 export "users_statistics.dart";
+export "users_updates.dart";

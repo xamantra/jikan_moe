@@ -75,6 +75,10 @@ void main() {
         final userFavorites = await queue.add(() => client.getUserFavorites(randomUser.username));
         expect(userFavorites, isA<UsersFavoritesResponse>(), reason: 'should return UsersFavoritesResponse');
         print('✓ UsersFavoritesResponse: Successfully parsed favorites for user <${randomUser.username}>');
+
+        final userUpdates = await queue.add(() => client.getUserUpdates(randomUser.username));
+        expect(userUpdates, isA<UsersUpdatesResponse>(), reason: 'should return UsersUpdatesResponse');
+        print('✓ UsersUpdatesResponse: Successfully parsed ${userUpdates.data.anime.length} anime updates and ${userUpdates.data.manga.length} manga updates for user <${randomUser.username}>');
       }
     });
   }, timeout: const Timeout(Duration(minutes: 5)));
