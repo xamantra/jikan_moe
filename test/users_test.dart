@@ -54,9 +54,15 @@ void main() {
       // pick one random user from the result
       if (result.data.isNotEmpty) {
         final randomUser = result.data.first;
+        print('checking full profile for user <${randomUser.username}>');
         final fullProfile = await queue.add(() => client.getUserFullProfile(randomUser.username));
         expect(fullProfile, isA<UsersFullResponse>(), reason: 'should return UsersFullResponse');
         print('✓ UsersFullResponse: Successfully parsed full profile for user <${randomUser.username}>');
+
+        // test getUserById here
+        final userById = await queue.add(() => client.getUserById(fullProfile.data.malId));
+        expect(userById, isA<UsersIdResponse>(), reason: 'should return UsersIdResponse');
+        print('✓ UsersIdResponse: Successfully parsed user by ID <${fullProfile.data.malId}>');
       }
     });
   }, timeout: const Timeout(Duration(minutes: 5)));

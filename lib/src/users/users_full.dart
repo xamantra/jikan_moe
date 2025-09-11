@@ -24,7 +24,7 @@ class UsersFullData {
   final DateTime joined;
   final UsersFullStatistics statistics;
   final UsersFullFavorites favorites;
-  final String? updates;
+  final UsersFullUpdates? updates;
   final String? about;
   final List<UsersFullExternal>? external;
 
@@ -58,7 +58,7 @@ class UsersFullData {
       joined: DateTime.parse(json['joined'] as String),
       statistics: UsersFullStatistics.fromJson(json['statistics'] as Map<String, dynamic>),
       favorites: UsersFullFavorites.fromJson(json['favorites'] as Map<String, dynamic>),
-      updates: json['updates'] as String?,
+      updates: json['updates'] != null ? UsersFullUpdates.fromJson(json['updates'] as Map<String, dynamic>) : null,
       about: json['about'] as String?,
       external: json['external'] != null ? (json['external'] as List<dynamic>).map((item) => UsersFullExternal.fromJson(item as Map<String, dynamic>)).toList() : null,
     );
@@ -375,6 +375,133 @@ class UsersFullExternal {
     return UsersFullExternal(
       name: json['name'] as String,
       url: json['url'] as String,
+    );
+  }
+}
+
+class UsersFullUpdates {
+  final List<UsersFullAnimeUpdate> anime;
+  final List<UsersFullMangaUpdate> manga;
+
+  UsersFullUpdates({
+    required this.anime,
+    required this.manga,
+  });
+
+  factory UsersFullUpdates.fromJson(Map<String, dynamic> json) {
+    return UsersFullUpdates(
+      anime: (json['anime'] as List<dynamic>).map((item) => UsersFullAnimeUpdate.fromJson(item as Map<String, dynamic>)).toList(),
+      manga: (json['manga'] as List<dynamic>).map((item) => UsersFullMangaUpdate.fromJson(item as Map<String, dynamic>)).toList(),
+    );
+  }
+}
+
+class UsersFullAnimeUpdate {
+  final UsersFullAnimeUpdateEntry entry;
+  final int? score;
+  final String status;
+  final int? episodesSeen;
+  final int? episodesTotal;
+  final DateTime date;
+
+  UsersFullAnimeUpdate({
+    required this.entry,
+    this.score,
+    required this.status,
+    this.episodesSeen,
+    this.episodesTotal,
+    required this.date,
+  });
+
+  factory UsersFullAnimeUpdate.fromJson(Map<String, dynamic> json) {
+    return UsersFullAnimeUpdate(
+      entry: UsersFullAnimeUpdateEntry.fromJson(json['entry'] as Map<String, dynamic>),
+      score: json['score'] as int?,
+      status: json['status'] as String,
+      episodesSeen: json['episodes_seen'] as int?,
+      episodesTotal: json['episodes_total'] as int?,
+      date: DateTime.parse(json['date'] as String),
+    );
+  }
+}
+
+class UsersFullMangaUpdate {
+  final UsersFullMangaUpdateEntry entry;
+  final int? score;
+  final String status;
+  final int? volumesRead;
+  final int? volumesTotal;
+  final int? chaptersRead;
+  final int? chaptersTotal;
+  final DateTime date;
+
+  UsersFullMangaUpdate({
+    required this.entry,
+    this.score,
+    required this.status,
+    this.volumesRead,
+    this.volumesTotal,
+    this.chaptersRead,
+    this.chaptersTotal,
+    required this.date,
+  });
+
+  factory UsersFullMangaUpdate.fromJson(Map<String, dynamic> json) {
+    return UsersFullMangaUpdate(
+      entry: UsersFullMangaUpdateEntry.fromJson(json['entry'] as Map<String, dynamic>),
+      score: json['score'] as int?,
+      status: json['status'] as String,
+      volumesRead: json['volumes_read'] as int?,
+      volumesTotal: json['volumes_total'] as int?,
+      chaptersRead: json['chapters_read'] as int?,
+      chaptersTotal: json['chapters_total'] as int?,
+      date: DateTime.parse(json['date'] as String),
+    );
+  }
+}
+
+class UsersFullAnimeUpdateEntry {
+  final int malId;
+  final String url;
+  final UsersFullFavoriteImages images;
+  final String title;
+
+  UsersFullAnimeUpdateEntry({
+    required this.malId,
+    required this.url,
+    required this.images,
+    required this.title,
+  });
+
+  factory UsersFullAnimeUpdateEntry.fromJson(Map<String, dynamic> json) {
+    return UsersFullAnimeUpdateEntry(
+      malId: json['mal_id'] as int,
+      url: json['url'] as String,
+      images: UsersFullFavoriteImages.fromJson(json['images'] as Map<String, dynamic>),
+      title: json['title'] as String,
+    );
+  }
+}
+
+class UsersFullMangaUpdateEntry {
+  final int malId;
+  final String url;
+  final UsersFullFavoriteImages images;
+  final String title;
+
+  UsersFullMangaUpdateEntry({
+    required this.malId,
+    required this.url,
+    required this.images,
+    required this.title,
+  });
+
+  factory UsersFullMangaUpdateEntry.fromJson(Map<String, dynamic> json) {
+    return UsersFullMangaUpdateEntry(
+      malId: json['mal_id'] as int,
+      url: json['url'] as String,
+      images: UsersFullFavoriteImages.fromJson(json['images'] as Map<String, dynamic>),
+      title: json['title'] as String,
     );
   }
 }

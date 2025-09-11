@@ -714,4 +714,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/users/operation/getUserFullProfile
   Future<UsersFullResponse> getUserFullProfile(String username) => users.getUserFullProfile(this, username);
+
+  /// https://docs.api.jikan.moe/#tag/users/operation/getUserById
+  Future<UsersIdResponse> getUserById(int id) => users.getUserById(this, id);
 }
