@@ -254,3 +254,28 @@ Future<UsersReviewsResponse> getUserReviews(
     rethrow;
   }
 }
+
+Future<UsersRecommendationsResponse> getUserRecommendations(
+  JikanClient client,
+  String username, {
+  int? page,
+}) async {
+  try {
+    final queryParams = <String, String>{
+      if (page != null) 'page': page.toString(),
+    };
+    final encodedQueryParams = Uri(queryParameters: queryParams).query;
+    final response = await client.httpClient.get(Uri.parse('${client.jikanV4BaseUrl}/users/$username/recommendations?$encodedQueryParams'));
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      return UsersRecommendationsResponse.fromJson(jsonData as Map<String, dynamic>);
+    } else {
+      throw JikanException(response.body);
+    }
+  } catch (e, trace) {
+    if (e is! JikanException) {
+      print('$getUserRecommendations: $trace');
+    }
+    rethrow;
+  }
+}
