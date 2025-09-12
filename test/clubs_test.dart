@@ -46,6 +46,14 @@ void main() {
       final pageLimit = await queue.add(() => client.getClubsSearch(page: 1, limit: 10));
       expect(pageLimit, isA<ClubsSearchResponse>(), reason: 'should return ClubsSearchResponse');
       print('✓ ClubsSearchResponse: Successfully parsed ${pageLimit.data.length} ClubsSearch for <page: 1, limit: 10>');
+
+      // pick random club item from result above
+      final randomClub = result.data.isNotEmpty ? (result.data..shuffle()).first : null;
+      if (randomClub != null) {
+        final clubById = await queue.add(() => client.getClubsById(randomClub.malId));
+        expect(clubById, isA<ClubsDataResponse>(), reason: 'should return ClubsDataResponse');
+        print('✓ ClubsDataResponse: Successfully parsed club data for ID ${randomClub.malId}');
+      }
     });
   });
 }

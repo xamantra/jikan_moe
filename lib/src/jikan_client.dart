@@ -774,4 +774,7 @@ class JikanClient {
         sort: sort,
         letter: letter,
       );
+
+  /// https://docs.api.jikan.moe/#tag/clubs/operation/getClubsById
+  Future<ClubsDataResponse> getClubsById(int id) => clubs.getClubsById(this, id);
 }
