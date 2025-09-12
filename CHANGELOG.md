@@ -1,3 +1,7 @@
+## 4.4.0
+
+- Clubs module fully implemented.
+
 ## 4.3.0
 
 - Users module fully implemented.
@@ -12,7 +16,8 @@
 
 ## 4.0.0
 
-- Watch, Characters, Producers, Recommendations, Reviews modules fully implemented.
+- Watch, Characters, Producers, Recommendations, Reviews modules fully
+  implemented.
 
 ## 3.0.0
 

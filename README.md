@@ -171,7 +171,28 @@ Future<CharacterSearchResponse> getCharactersSearch({
 
 # Clubs
 
-Coming soon...
+✅ 5/5 endpoints are supported.
+
+```dart
+Future<ClubsSearchResponse> getClubsSearch({
+    int? page,
+    int? limit,
+    String? q,
+    String? type,
+    String? category,
+    String? orderBy,
+    String? sort,
+    String? letter,
+})
+
+Future<ClubsDataResponse> getClubsById(int id)
+
+Future<ClubsMembersResponse> getClubMembers(int id, {int? page})
+
+Future<ClubsStaffResponse> getClubStaff(int id)
+
+Future<ClubsRelationsResponse> getClubRelations(int id)
+```
 
 # Genres
 
