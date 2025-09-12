@@ -764,16 +764,16 @@ class JikanClient {
     String? sort,
     String? letter,
   }) => clubs.getClubsSearch(
-        this,
-        page: page,
-        limit: limit,
-        q: q,
-        type: type,
-        category: category,
-        orderBy: orderBy,
-        sort: sort,
-        letter: letter,
-      );
+    this,
+    page: page,
+    limit: limit,
+    q: q,
+    type: type,
+    category: category,
+    orderBy: orderBy,
+    sort: sort,
+    letter: letter,
+  );
 
   /// https://docs.api.jikan.moe/#tag/clubs/operation/getClubsById
   Future<ClubsDataResponse> getClubsById(int id) => clubs.getClubsById(this, id);

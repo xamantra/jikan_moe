@@ -1,3 +1,7 @@
+## 4.4.1
+
+- Dart formatting fix.
+
 ## 4.4.0
 
 - Clubs module fully implemented.
