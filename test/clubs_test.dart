@@ -64,6 +64,10 @@ void main() {
           final clubStaff = await queue.add(() => client.getClubStaff(randomClub.malId));
           expect(clubStaff, isA<ClubsStaffResponse>(), reason: 'should return ClubsStaffResponse');
           print('✓ ClubsStaffResponse: Successfully parsed ${clubStaff.data.length} club staff for ID ${randomClub.malId}');
+
+          final clubRelations = await queue.add(() => client.getClubRelations(randomClub.malId));
+          expect(clubRelations, isA<ClubsRelationsResponse>(), reason: 'should return ClubsRelationsResponse');
+          print('✓ ClubsRelationsResponse: Successfully parsed club relations for ID ${randomClub.malId}');
         }
       } catch (e) {
         print('randomClub: ${randomClub?.malId}');
