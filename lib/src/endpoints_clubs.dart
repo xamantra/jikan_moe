@@ -61,3 +61,28 @@ Future<ClubsDataResponse> getClubsById(
     rethrow;
   }
 }
+
+Future<ClubsMembersResponse> getClubMembers(
+  JikanClient client,
+  int id, {
+  int? page,
+}) async {
+  try {
+    final queryParams = <String, String>{
+      if (page != null) 'page': page.toString(),
+    };
+    final encodedQueryParams = Uri(queryParameters: queryParams).query;
+    final response = await client.httpClient.get(Uri.parse('${client.jikanV4BaseUrl}/clubs/$id/members?$encodedQueryParams'));
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      return ClubsMembersResponse.fromJson(jsonData as Map<String, dynamic>);
+    } else {
+      throw JikanException(response.body);
+    }
+  } catch (e, trace) {
+    if (e is! JikanException) {
+      print('$getClubMembers: $trace');
+    }
+    rethrow;
+  }
+}

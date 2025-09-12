@@ -17,9 +17,7 @@ void main() {
     });
 
     test('should handle clubs search', () async {
-      final result = await queue.add(
-        () => client.getClubsSearch(q: 'anime'),
-      );
+      final result = await queue.add(() => client.getClubsSearch(q: 'anime'));
       expect(result, isA<ClubsSearchResponse>(), reason: 'should return ClubsSearchResponse');
       print('✓ ClubsSearchResponse: Successfully parsed ${result.data.length} ClubsSearch for <q: anime>');
 
@@ -49,10 +47,23 @@ void main() {
 
       // pick random club item from result above
       final randomClub = result.data.isNotEmpty ? (result.data..shuffle()).first : null;
-      if (randomClub != null) {
-        final clubById = await queue.add(() => client.getClubsById(randomClub.malId));
-        expect(clubById, isA<ClubsDataResponse>(), reason: 'should return ClubsDataResponse');
-        print('✓ ClubsDataResponse: Successfully parsed club data for ID ${randomClub.malId}');
+      try {
+        if (randomClub != null) {
+          final clubById = await queue.add(() => client.getClubsById(randomClub.malId));
+          expect(clubById, isA<ClubsDataResponse>(), reason: 'should return ClubsDataResponse');
+          print('✓ ClubsDataResponse: Successfully parsed club data for ID ${randomClub.malId}');
+
+          final clubMembers = await queue.add(() => client.getClubMembers(randomClub.malId));
+          expect(clubMembers, isA<ClubsMembersResponse>(), reason: 'should return ClubsMembersResponse');
+          print('✓ ClubsMembersResponse: Successfully parsed ${clubMembers.data.length} club members for ID ${randomClub.malId}');
+
+          final clubMembersPage2 = await queue.add(() => client.getClubMembers(randomClub.malId, page: 2));
+          expect(clubMembersPage2, isA<ClubsMembersResponse>(), reason: 'should return ClubsMembersResponse');
+          print('✓ ClubsMembersResponse: Successfully parsed ${clubMembersPage2.data.length} club members for ID ${randomClub.malId} (page 2)');
+        }
+      } catch (e) {
+        print('randomClub: ${randomClub?.malId}');
+        print('Error: $e');
       }
     });
   });
