@@ -17,3 +17,4 @@ export 'src/people/index.dart';
 export 'src/magazines/index.dart';
 export 'src/random/index.dart';
 export 'src/users/index.dart';
+export 'src/clubs/index.dart';

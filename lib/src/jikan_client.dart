@@ -2,8 +2,10 @@ import 'package:http/http.dart' as http;
 
 import 'anime/index.dart';
 import 'characters/index.dart';
+import 'clubs/index.dart';
 import 'endpoints_anime.dart' as anime;
 import 'endpoints_characters.dart' as characters;
+import 'endpoints_clubs.dart' as clubs;
 import 'endpoints_genre.dart' as genre;
 import 'endpoints_manga.dart' as manga;
 import 'endpoints_schedules.dart' as schedules;
@@ -750,4 +752,26 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/users/operation/getUserExternal
   Future<UsersExternalResponse> getUserExternal(String username) => users.getUserExternal(this, username);
+
+  /// https://docs.api.jikan.moe/#tag/clubs/operation/getClubsSearch
+  Future<ClubsSearchResponse> getClubsSearch({
+    int? page,
+    int? limit,
+    String? q,
+    String? type,
+    String? category,
+    String? orderBy,
+    String? sort,
+    String? letter,
+  }) => clubs.getClubsSearch(
+        this,
+        page: page,
+        limit: limit,
+        q: q,
+        type: type,
+        category: category,
+        orderBy: orderBy,
+        sort: sort,
+        letter: letter,
+      );
 }
