@@ -780,4 +780,7 @@ class JikanClient {
 
   /// https://docs.api.jikan.moe/#tag/clubs/operation/getClubMembers
   Future<ClubsMembersResponse> getClubMembers(int id, {int? page}) => clubs.getClubMembers(this, id, page: page);
+
+  /// https://docs.api.jikan.moe/#tag/clubs/operation/getClubStaff
+  Future<ClubsStaffResponse> getClubStaff(int id) => clubs.getClubStaff(this, id);
 }
